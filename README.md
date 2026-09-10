@@ -78,7 +78,7 @@ python3 verify.py                       # 自检，应 24 项全过
 
 ### 关于体积
 
-仓库本身约 **3 MB**（不含 `vendor/office-layer/.venv/`，已在 `.gitignore` 排除）。
+仓库本身约 **3.7 MB**（不含 `vendor/office-layer/.venv/`，已在 `.gitignore` 排除）。
 装完依赖后本地约 **111 MB**，其中 venv 占 105 MB。
 
 依赖里 `matplotlib` + `numpy` 占约 39 MB，确有用途（`paper-to-slides` 重绘论文图表、
