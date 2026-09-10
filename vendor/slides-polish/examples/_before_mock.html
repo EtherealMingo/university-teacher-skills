@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+  Faithful mock of what a python-pptx-only slide looks like after Keynote/Google Slides
+  exports it: hard offset-rect "shadows" that look like ghost borders, a plain green
+  line where a connector arrow was meant to be (because connector arrowheads don't
+  render in Keynote / Google Slides), generic shapes for icons, system sans for text.
+
+  This is rendered alongside example_body.html for the README hero image.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Example — raw python-pptx output (mock)</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #FDFDFD; }
+  body { font-family: Calibri, 'Helvetica Neue', Arial, sans-serif; color: #1F1F1F; }
+  .wrap {
+    width: 2200px; height: 1000px;
+    padding: 30px 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+  }
+
+  .card {
+    flex: 1;
+    background: #ECF3FC;
+    border-radius: 14px;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 22px;
+    position: relative;
+  }
+  /* Fake "drop shadow" — an offset rect underneath. This is the python-pptx hack;
+     in real exports it reads as a misaligned ghost border, not a soft shadow. */
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 12px -12px -12px 12px;
+    background: #CFD6E2;
+    border-radius: 14px;
+    z-index: -1;
+  }
+  .kicker {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #3D82D0;
+  }
+  .icon-circle {
+    /* Generic shape — no real iconography */
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #B8C7DC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    color: #B8C7DC;
+  }
+  .title {
+    font-size: 58px;
+    font-weight: 700;
+    color: #1F1F1F;
+  }
+  .gloss {
+    color: #5C6B80;
+    font-size: 26px;
+  }
+
+  /* "Arrow" between cards — connector(2, ...) in python-pptx is *meant* to be an
+     arrow, but in Keynote / Google Slides it renders as a plain line with no
+     arrowhead. Reproduced here as just a line. */
+  .arrow-col {
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .arrow-line {
+    width: 240px;
+    height: 6px;
+    background: #79DF4D;
+    /* No arrowhead. That's the point. */
+  }
+  .arrow-label {
+    font-size: 18px;
+    color: #4DA82A;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="card">
+    <div class="kicker">VOCAB</div>
+    <div class="icon-circle">▦</div>
+    <div class="title">perro</div>
+    <div class="gloss">(dog)</div>
+  </div>
+
+  <div class="arrow-col">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">composes into</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">UNIT</div>
+    <div class="icon-circle">◎</div>
+    <div class="title">Ordering food</div>
+    <div class="gloss">a real-world ability</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Example slide body — polished version</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+  :root {
+    --bg: #FDFDFD;
+    --ink: #1B2B4A;
+    --graphite: #5C6B80;
+    --blue: #70B4FF;
+    --blue-deep: #3D82D0;
+    --pale-blue: #ECF3FC;
+    --green: #79DF4D;
+    --green-deep: #4DA82A;
+    --shadow: rgba(27, 43, 74, 0.10);
+  }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--ink); }
+  .wrap {
+    width: 2200px; height: 1000px;
+    padding: 30px 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+  .card {
+    flex: 1;
+    background: white;
+    border-radius: 26px;
+    padding: 60px 50px;
+    box-shadow: 0 10px 32px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 22px;
+  }
+  .card.left { background: var(--pale-blue); }
+  .kicker {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--blue-deep);
+  }
+  .icon-circle {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 4px 16px rgba(61, 130, 208, 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card.left .icon-circle { background: white; }
+  .title {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 64px;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .gloss {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    color: var(--graphite);
+    font-size: 30px;
+  }
+
+  .arrow-col {
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+  .arrow-label {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--green-deep);
+    text-align: center;
+    line-height: 1.3;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="card left">
+    <div class="kicker">VOCAB</div>
+    <div class="icon-circle">
+      <svg width="76" height="76" viewBox="0 0 64 64" fill="none">
+        <rect x="10" y="14" width="44" height="38" rx="4"
+              stroke="#3D82D0" stroke-width="3" fill="#ECF3FC"/>
+        <line x1="32" y1="14" x2="32" y2="52" stroke="#3D82D0" stroke-width="2"/>
+        <line x1="16" y1="24" x2="28" y2="24" stroke="#3D82D0" stroke-width="2"/>
+        <line x1="16" y1="32" x2="28" y2="32" stroke="#3D82D0" stroke-width="2"/>
+        <line x1="36" y1="24" x2="48" y2="24" stroke="#3D82D0" stroke-width="2"/>
+        <line x1="36" y1="32" x2="48" y2="32" stroke="#3D82D0" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="title">perro</div>
+    <div class="gloss">(dog)</div>
+  </div>
+
+  <div class="arrow-col">
+    <svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="arrowShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+          <feOffset dx="0" dy="4"/>
+          <feComponentTransfer><feFuncA type="linear" slope="0.22"/></feComponentTransfer>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <g filter="url(#arrowShadow)">
+        <polygon points="0,30 170,30 170,8 240,40 170,72 170,50 0,50" fill="#79DF4D"/>
+      </g>
+    </svg>
+    <div class="arrow-label">composes into</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">UNIT</div>
+    <div class="icon-circle">
+      <svg width="76" height="76" viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="22" stroke="#3D82D0" stroke-width="3" fill="#ECF3FC"/>
+        <circle cx="32" cy="32" r="6" fill="#79DF4D"/>
+        <line x1="32" y1="10" x2="32" y2="22" stroke="#3D82D0" stroke-width="2"/>
+        <line x1="32" y1="42" x2="32" y2="54" stroke="#3D82D0" stroke-width="2"/>
+        <line x1="10" y1="32" x2="22" y2="32" stroke="#3D82D0" stroke-width="2"/>
+        <line x1="42" y1="32" x2="54" y2="32" stroke="#3D82D0" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="title">Ordering food</div>
+    <div class="gloss">a real-world ability</div>
+  </div>
+
+</div>
+</body>
+</html>
