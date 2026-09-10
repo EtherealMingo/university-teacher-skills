@@ -9,17 +9,74 @@
 
 ## 目录
 
+- [技能速查](#技能速查) ← **找技能名看这里**
 - [安装](#安装)
   - [让 Agent 自己装](#让-agent-自己装)
   - [手动安装](#手动安装)
+  - [关于体积](#关于体积)
 - [场景全景](#场景全景)
   - [一条学期时间轴](#一条学期时间轴)
   - [按角色看](#按角色看)
-- [14 个子技能详解](#14-个子技能详解)
+- [22 个子技能详解](#22-个子技能详解)
+  - [教学](#教学) · [科研](#科研) · [指导](#指导含学生工作) · [行政事务](#行政事务) · [考核与对外](#考核与对外)
 - [文件产出层](#文件产出层)
 - [三条铁律](#三条铁律)
 - [敏感数据](#敏感数据)
 - [许可证](#许可证)
+
+---
+
+## 技能速查
+
+> 按 `Ctrl/⌘ + F` 直接搜技能名，或点表格里的技能名跳到详解。
+> 每个技能的完整工作流、红线、产出物都在对应小节里。
+
+**教学**
+
+| 技能 | 做什么 | 教师会说 |
+|---|---|---|
+| [`lesson-plan`](#lesson-plan--教案与教学设计) | 教案 · 教学设计 · 教学大纲 | 写个教案 / 这节课怎么设计 |
+| [`lecture-slides`](#lecture-slides--日常课件) | 日常课件（16:9，带演讲者备注） | 做课件 / 把这章做成 PPT |
+| [`quiz-generator`](#quiz-generator--出题与测评) | 出题 · 测评 · A/B 卷 · 双向细目表 | 出一套题 / 编几道练习题 |
+| [`exam-pipeline`](#exam-pipeline--期末试卷后半程) | 审卷 · 评分细则 · 成绩分析 · 归档 | 审核试卷 / 考后成绩分析 |
+| [`classroom-live`](#classroom-live--课堂互动与平时分) | 随堂投票 · 提问链 · 平时分 | 随堂投票题 / 算平时分 |
+| [`teaching-contest`](#teaching-contest--教学竞赛与示范课) | 教学竞赛 · 示范课 · 评委视角自评 | 准备教学竞赛 / 设计示范课 |
+
+**科研**
+
+| 技能 | 做什么 | 教师会说 |
+|---|---|---|
+| [`research-assistant`](#research-assistant--实证研究辅助) | 研究设计 · 文献综述 · 实证审计 | 实证研究怎么做 / 数据分析 |
+| [`grant-proposal`](#grant-proposal--项目申报全流程) | 项目申报全流程（查重→匹配→撰写→模拟评审） | 写本子 / 选题查重 / 模拟评审 |
+| [`paper-to-slides`](#paper-to-slides--论文转汇报) | 论文 → 组会与学术汇报 PPT | 把论文做成汇报 PPT |
+| [`peer-review`](#peer-review--期刊审稿意见) | 期刊审稿意见（含给编辑的保密意见） | 写审稿意见 / 这稿子能不能收 |
+
+**指导（含学生工作）**
+
+| 技能 | 做什么 | 教师会说 |
+|---|---|---|
+| [`thesis-supervisor`](#thesis-supervisor--毕业论文全流程) | 毕业论文全流程（**批注直接写进学生 Word**） | 看开题报告 / 批改论文 / 答辩预案 |
+| [`lab-meeting`](#lab-meeting--研究生组会管理) | 组会轮值 · 文献派工 · 纪要与进度 | 安排组会轮值 / 生成组会纪要 |
+| [`student-competition`](#student-competition--学生竞赛与双创指导) | 大创 · 挑战杯 · 互联网+ 团队指导 | 指导学生做大创 / 挑战杯怎么带 |
+| [`student-affairs`](#student-affairs--学生事务与谈心谈话) | 学业预警 · 谈心谈话 · 危机转介 | 学生挂科太多怎么帮 / 谈心谈话记录 |
+| [`internship-practice`](#internship-practice--实习实训与实践教学) | 实习基地 · 协议 · 安全管理 · 考核归档 | 联系实习基地 / 排实习安排表 |
+
+**行政事务**
+
+| 技能 | 做什么 | 教师会说 |
+|---|---|---|
+| [`admin-reporting`](#admin-reporting--行政填报与迎检材料) | 工作量统计 · 专业认证 · 达成度 · 迎检归档 | 统计教学工作量 / 专业认证材料 |
+| [`meeting-notices`](#meeting-notices--会议纪要与通知公文) | 会议纪要（决议提取）· 通知 · 总结计划 | 写个教研会纪要 / 起草调课通知 |
+| [`teaching-ops`](#teaching-ops--教学运行事务) | 调课 · 监考 · 考试排期 · 教材（含冲突检测） | 写个调课申请 / 安排监考表 |
+| [`academic-correspondence`](#academic-correspondence--学术通信与对外联络) | 审稿邀约 · 会议组织 · 合作洽谈 · 中英邮件 | 回复审稿邀请 / 怎么婉拒审稿 |
+| [`student-recommendation`](#student-recommendation--推荐信与证明材料) | 推荐信 · 证明 · 邀请函（防套话与雷同） | 写封保研推荐信 / 留学推荐信 |
+
+**考核与对外**
+
+| 技能 | 做什么 | 教师会说 |
+|---|---|---|
+| [`annual-review`](#annual-review--年度考核与职称材料) | 年度述职 · 职称材料 · 成果归表去重 | 写年度述职 / 整理职称材料 |
+| [`science-outreach`](#science-outreach--科普与对外讲座) | 科普讲座 · 公众版叙事重构 | 做个科普 PPT / 给中学生讲研究 |
 
 ---
 
@@ -72,14 +129,14 @@ bash install.sh --uninstall                # 卸载（只删软链与安装目�
 git clone --depth 1 https://github.com/EtherealMingo/university-teacher-skills.git
 cd university-teacher-skills
 bash vendor/office-layer/bootstrap.sh   # 建 venv、装依赖
-python3 verify.py                       # 自检，应 24 项全过
+python3 verify.py                       # 自检，应 33 项全过
 ```
 
 在支持 Agent Skills 的客户端里，把本目录加入技能搜索路径即可。入口是根目录的 `SKILL.md`。
 
 ### 关于体积
 
-仓库本身约 **3.7 MB**（不含 `vendor/office-layer/.venv/`，已在 `.gitignore` 排除）。
+仓库本身约 **4.1 MB**（不含 `vendor/office-layer/.venv/`，已在 `.gitignore` 排除）。
 装完依赖后本地约 **111 MB**，其中 venv 占 105 MB。
 
 依赖里 `matplotlib` + `numpy` 占约 39 MB，确有用途（`paper-to-slides` 重绘论文图表、
@@ -398,7 +455,7 @@ D≥0.4 优良 / 0.3–0.39 良好 / 0.2–0.29 尚可需修改 / <0.2 应淘汰
 
 ---
 
-### 指导
+### 指导（含学生工作）
 
 #### `thesis-supervisor` — 毕业论文全流程
 
