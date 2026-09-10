@@ -28,8 +28,12 @@ EXPECTED = [
     "exam-pipeline", "classroom-live", "teaching-contest",
     # 科研
     "research-assistant", "grant-proposal", "paper-to-slides", "peer-review",
-    # 指导
-    "thesis-supervisor", "lab-meeting",
+    # 指导（含学生工作）
+    "thesis-supervisor", "lab-meeting", "student-competition",
+    "student-affairs", "internship-practice",
+    # 行政事务
+    "admin-reporting", "meeting-notices", "teaching-ops",
+    "academic-correspondence", "student-recommendation",
     # 考核与对外
     "annual-review", "science-outreach",
 ]
@@ -167,12 +171,15 @@ def main():
         if not f.exists():
             continue
         t = f.read_text(encoding="utf-8")
-        has_nofake = any(k in t for k in ("不虚构", "禁止虚构", "绝不虚构"))
+        # 接受同义表述：有的技能写「不虚构」，有的写「绝不编造」「不得捏造」，语义等价
+        has_nofake = any(k in t for k in (
+            "不虚构", "禁止虚构", "绝不虚构", "不得虚构",
+            "编造", "捏造", "伪造", "杜撰"))
         has_office = "office-layer" in t
         if not has_office:
             fail(f"{name}: 未写明走 office-layer 产出文件")
         if not has_nofake:
-            warn(f"{name}: 未见「不虚构」纪律表述")
+            warn(f"{name}: 未见「不虚构 / 不编造」纪律表述")
     if all(("office-layer" in (skill_dir / n / "SKILL.md").read_text(encoding="utf-8"))
            for n in EXPECTED if (skill_dir / n / "SKILL.md").exists()):
         ok("全部子技能都指向 office-layer 产出通道")

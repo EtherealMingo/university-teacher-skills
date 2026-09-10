@@ -47,9 +47,9 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 | empirical-research | [eabeam/econ-skills](https://github.com/eabeam/econ-skills) | — | 见仓库 |
 | （新增） | [anthropics/k12-teacher-skills](https://github.com/anthropics/k12-teacher-skills) | 493 | Apache-2.0 |
 
-## 2. 子技能清单（14 个）
+## 2. 子技能清单（22 个）
 
-### 教学
+### 教学（6）
 
 | 子 skill | 覆盖场景 | 底座 |
 |---|---|---|
@@ -60,7 +60,7 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 | classroom-live | 随堂投票 / 提问链 / 平时分 | ibook-skills + education-skills/學習分析 |
 | teaching-contest | 教学竞赛 / 示范课 / 评委视角自评 | lesson-plan 增强 + 质量门 |
 
-### 科研
+### 科研（4）
 
 | 子 skill | 覆盖场景 | 底座 |
 |---|---|---|
@@ -69,19 +69,43 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 | paper-to-slides | 论文→组会/学术汇报 PPT | paper-slides + slides-polish |
 | peer-review | 期刊审稿意见 | 自建（借鉴评价量规与质量门分级） |
 
-### 指导
+### 指导（含学生工作，5）
 
 | 子 skill | 覆盖场景 | 底座 |
 |---|---|---|
 | thesis-supervisor | 开题审查 / 过程稿批注 / 评语 / 答辩预案 | office-layer（**原生批注**） |
 | lab-meeting | 组会轮值 / 文献派工 / 纪要 / 进度跟踪 | paper-to-slides + office-layer |
+| student-competition | 大创 / 挑战杯 / 创青春 / 互联网+：选题→组队→过程督导→中期→结题→答辩 | awesome-benzi/workflows（student-innovation、challenge-cup、innovation-competition） |
+| student-affairs | 学业预警 / 谈心谈话 / 评奖评优 / 心理危机转介 / 家长沟通 | education-skills/學習分析 + thinking-toolkit |
+| internship-practice | 实习基地 / 协议 / 安排表 / 安全管理 / 指导记录 / 考核鉴定 / 归档 | office-layer + education-skills 评量规 |
 
-### 考核与对外
+### 行政事务（5）
+
+> 共同纪律：**用检查代替记忆**，凡数据必须有出处，凡排期必须做冲突检测。
+
+| 子 skill | 覆盖场景 | 底座 |
+|---|---|---|
+| admin-reporting | 教学工作量 / 专业认证 / 审核评估 / 达成度计算 / 教学检查归档 / 课程思政 / 实验室安全 | office-layer + awesome-benzi 质量门三级分级 |
+| meeting-notices | 会议纪要 / 通知公文 / 工作总结与计划 / 发言稿 | LANGUAGE_MODEL（压公文套话）+ office-layer |
+| teaching-ops | 调课停课 / 监考安排 / 考试排期 / 教材申报（含冲突检测） | office-layer + INPUT_MODEL 问题批次 |
+| academic-correspondence | 审稿邀约回复 / 会议组织 / 合作洽谈 / 中英文学术邮件 | LANGUAGE_MODEL + office-layer |
+| student-recommendation | 保研/留学/求职推荐信 / 专家推荐 / 证明 / 邀请函 | LANGUAGE_MODEL + EVIDENCE_MODEL + office-layer |
+
+### 考核与对外（2）
 
 | 子 skill | 覆盖场景 | 底座 |
 |---|---|---|
 | annual-review | 年度述职 / 职称材料 / 教学成果奖 | awesome-benzi workflow 派生 |
-| science-outreach | 科普讲座 / 公众版叙事重构 | lecture-slides 公众版 + slides-polish |
+| science-outreach | 科普讲座 / 公众版叙事重构 | office-layer（pptx）+ slides-polish |
+
+### 场景间的重要边界
+
+| 边界 | 说明 |
+|---|---|
+| `grant-proposal` ↔ `student-competition` | 申报书**正文撰写**走前者；**导师怎么带团队**走后后者。两者有双向交接协议 |
+| `lecture-slides` ↔ `paper-to-slides` ↔ `science-outreach` | 三者的视觉体系**不同**：日常授课 / 学术汇报 / 公众科普，不得混用 |
+| `exam-pipeline` ↔ `admin-reporting` | 成绩分析走前者；工作量统计与迎检归档走后者 |
+| `quiz-generator` → `exam-pipeline` | 有冻结字段契约，见 `quiz-generator` 的交接协议一节 |
 
 ## 3. 自建脚本
 
