@@ -126,15 +126,24 @@ def main():
             ok(f"{name} ({n} 个触发短语, {len(text.splitlines())} 行)")
 
     # ---------- 3. vendor 引用真实性 ----------
+    # .venv 是 bootstrap.sh 生成的产物，不是源码。刚 clone 下来时它必然不存在，
+    # 若按普通路径判定会把「还没装依赖」误报成「引用了不存在的路径」。
+    GENERATED = ("vendor/office-layer/.venv",)
+
+    def is_generated(ref):
+        return any(ref == g or ref.startswith(g + "/") for g in GENERATED)
+
     print("\n[3] vendor 路径引用真实性")
-    bad_refs = {}
+    bad_refs, gen_refs = {}, set()
     for name in EXPECTED:
         f = skill_dir / name / "SKILL.md"
         if not f.exists():
             continue
         for ref in find_vendor_refs(f.read_text(encoding="utf-8")):
-            target = root / ref
-            if not target.exists():
+            if is_generated(ref):
+                gen_refs.add(ref)
+                continue
+            if not (root / ref).exists():
                 bad_refs.setdefault(name, []).append(ref)
     if bad_refs:
         for name, refs in bad_refs.items():
@@ -142,6 +151,14 @@ def main():
                 fail(f"{name} 引用了不存在的路径：{r}")
     else:
         ok("所有子技能引用的 vendor 路径均真实存在")
+
+    venv_py = root / "vendor/office-layer/.venv/bin/python"
+    if gen_refs:
+        if venv_py.exists():
+            ok(f"生成物引用正常（{len(gen_refs)} 处指向 .venv，已就绪）")
+        else:
+            warn(f"{len(gen_refs)} 处引用 vendor/office-layer/.venv —— 尚未生成，"
+                 f"请先运行：bash vendor/office-layer/bootstrap.sh")
 
     # ---------- 4/5. 纪律 ----------
     print("\n[4] 纪律与产出通道")
