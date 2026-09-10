@@ -96,7 +96,7 @@ fi
 
 SRC=""
 if [ -n "$SCRIPT_DIR" ] && [ -f "${SCRIPT_DIR}/SKILL.md" ] \
-   && [ -f "${SCRIPT_DIR}/vendor/office-layer/scripts/docx_kit.py" ]; then
+   && [ -f "${SCRIPT_DIR}/skills/office-layer/scripts/docx_kit.py" ]; then
   SRC="$SCRIPT_DIR"
   log "[1/5] 从本地仓库安装：$SRC"
 else
@@ -144,14 +144,14 @@ elif [ "$FORCE" = 1 ]; then
 elif [ -e "$PREFIX" ]; then
   # 幂等更新：默认保留 venv，只同步代码，避免每次重装都重新下载依赖
   VENV_TMP=""
-  if [ -x "${PREFIX}/vendor/office-layer/.venv/bin/python" ]; then
+  if [ -x "${PREFIX}/skills/office-layer/.venv/bin/python" ]; then
     VENV_TMP="$(mktemp -d)"
-    mv "${PREFIX}/vendor/office-layer/.venv" "${VENV_TMP}/.venv"
+    mv "${PREFIX}/skills/office-layer/.venv" "${VENV_TMP}/.venv"
   fi
   rm -rf "$PREFIX"
   copy_payload "$SRC" "$PREFIX"
   if [ -n "$VENV_TMP" ]; then
-    mv "${VENV_TMP}/.venv" "${PREFIX}/vendor/office-layer/.venv"
+    mv "${VENV_TMP}/.venv" "${PREFIX}/skills/office-layer/.venv"
     rm -rf "$VENV_TMP"
     ok "代码已更新，已有 venv 已保留"
   else
@@ -166,16 +166,16 @@ fi
 echo
 if [ "$DO_DEPS" = 1 ]; then
   log "[3/5] 安装文档产出层依赖（python-docx / pptx / openpyxl / matplotlib）"
-  if [ -x "${PREFIX}/vendor/office-layer/.venv/bin/python" ] \
-     && "${PREFIX}/vendor/office-layer/.venv/bin/python" -c "import docx,pptx,openpyxl" 2>/dev/null; then
+  if [ -x "${PREFIX}/skills/office-layer/.venv/bin/python" ] \
+     && "${PREFIX}/skills/office-layer/.venv/bin/python" -c "import docx,pptx,openpyxl" 2>/dev/null; then
     ok "依赖已存在，跳过"
   else
-    if bash "${PREFIX}/vendor/office-layer/bootstrap.sh" >/tmp/ut-bootstrap.log 2>&1; then
+    if bash "${PREFIX}/skills/office-layer/bootstrap.sh" >/tmp/ut-bootstrap.log 2>&1; then
       ok "依赖安装完成"
     else
       warn "依赖安装失败，详见 /tmp/ut-bootstrap.log"
       warn "技能文件已就位，但 docx/pptx/xlsx 产出不可用；可稍后重试："
-      warn "  bash ${PREFIX}/vendor/office-layer/bootstrap.sh"
+      warn "  bash ${PREFIX}/skills/office-layer/bootstrap.sh"
     fi
   fi
 else
@@ -237,9 +237,9 @@ cat <<EOF
 
   给 Agent 的说明：
     - 本技能包入口是 SKILL.md（总控路由），它会按教师意图路由到 skills/<name>/SKILL.md
-    - 全部 vendor/ 路径均相对本包根目录（$PREFIX），执行命令前先 cd 到该目录
-    - 文件产出必须走 vendor/office-layer/，解释器用：
-        $PREFIX/vendor/office-layer/.venv/bin/python
+    - 全部 skills/ 底座路径均相对本包根目录（$PREFIX），执行命令前先 cd 到该目录
+    - 文件产出必须走 skills/office-layer/，解释器用：
+        $PREFIX/skills/office-layer/.venv/bin/python
 
   给人看的用法：
     cd $PREFIX && cat SKILL.md      # 从路由表开始

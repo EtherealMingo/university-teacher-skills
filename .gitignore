@@ -1,7 +1,7 @@
-# 虚拟环境是可再生产物，由 vendor/office-layer/bootstrap.sh 生成，不要提交/分发
+# 虚拟环境是可再生产物，由 skills/office-layer/bootstrap.sh 生成，不要提交/分发
 # 排除后包体积从 ~214M 降到 ~5M
 .venv/
-vendor/office-layer/.venv/
+skills/office-layer/.venv/
 
 # Python 缓存
 __pycache__/
@@ -24,8 +24,8 @@ mplcache/
 
 # 技能运行期的工作目录与产物（文档示例约定用「过程/」放中间文件）
 # 教师使用过程中会在这些位置生成文件，不应入库。
-# 只匹配仓库根目录下的产物，避免误伤 vendor/ 里合法跟进的示例文件
-# （例如 vendor/slides-polish/examples/demo.pptx）。
+# 只匹配仓库根目录下的产物，避免误伤底座技能里合法跟进的示例文件
+# （例如 skills/slides-polish/examples/demo.pptx）。
 /过程/
 /交付/
 /*.xlsx

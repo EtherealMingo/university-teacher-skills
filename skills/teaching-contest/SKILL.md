@@ -39,7 +39,7 @@ description: "高校教学竞赛与示范课全流程辅助：竞赛材料清单
 若教师直接跳进来要 20 分钟节段，**先补齐底盘**（至少要有课程大纲、章节目标、学情），否则节段会悬空。
 
 **复用而不是重写**：整门课的教学设计、教学目标撰写、学情分析，一律走
-`vendor/education-skills/教學設計/lesson-plan-generator.md` 的框架，本技能只做三件事——
+`skills/education-skills/edu-teaching-design/references/lesson-plan-generator.md` 的框架，本技能只做三件事——
 **压缩到 20 分钟、提炼创新点、按评委视角自评**。
 
 ## 竞赛类型与材料清单
@@ -74,17 +74,17 @@ description: "高校教学竞赛与示范课全流程辅助：竞赛材料清单
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/education-skills/教學設計/` | **主底座**：`lesson-plan-generator.md`（教案框架）、`project-based-learning.md`（项目式设计）、`gamified-learning.md`（游戏化，做「高潮」用）、`differentiated-instruction.md`（分层）、`adaptive-learning-design.md`、`sel-activity-designer.md` |
-| `vendor/k12-teacher-skills/k12-lesson-plan-creation/` | 教案结构化的另一套参考（含 `references/`、`scripts/`） |
-| `vendor/k12-teacher-skills/k12-check-for-understanding/` | **形成性评价 / 课堂即时检测**设计，做互动环节用 |
-| `vendor/k12-teacher-skills/k12-lesson-differentiation/` | 分层任务设计，做「学生主体」证据用 |
-| `vendor/k12-teacher-skills/k12-lesson-prep/` | 备课流程与提问链参考 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | **评委视角自评（MOCK_REVIEW）的分级思想来源**：`blocked` / `needs-review` / `advisory` 三级问题模型、有 `blocked` 不得进入下一状态、字数门（汉字 1 字、西文串 1 字、超 110% 阻断） |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | 创新报告、说课稿的 AI 味治理 |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | 成效证据的分级与核验（创新点证据必须可定位） |
-| `vendor/office-layer/` | **文件产出唯一通道**：`docx_kit.py`（教案/报告）、`pptx_kit.py`（课件）、`xlsx_kit.py`（清单/证据表） |
-| `vendor/slides-polish/` | 竞赛课件视觉打磨（HTML/SVG → PNG → pptx），比赛课件观感占比高时启用 |
-| `vendor/VENDOR.md` | 上游溯源与许可证合规说明 |
+| `skills/education-skills/edu-teaching-design/` | **主底座**：`lesson-plan-generator.md`（教案框架）、`project-based-learning.md`（项目式设计）、`gamified-learning.md`（游戏化，做「高潮」用）、`differentiated-instruction.md`（分层）、`adaptive-learning-design.md`、`sel-activity-designer.md` |
+| `skills/k12-teacher-skills/k12-lesson-plan-creation/` | 教案结构化的另一套参考（含 `references/`、`scripts/`） |
+| `skills/k12-teacher-skills/k12-check-for-understanding/` | **形成性评价 / 课堂即时检测**设计，做互动环节用 |
+| `skills/k12-teacher-skills/k12-lesson-differentiation/` | 分层任务设计，做「学生主体」证据用 |
+| `skills/k12-teacher-skills/k12-lesson-prep/` | 备课流程与提问链参考 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | **评委视角自评（MOCK_REVIEW）的分级思想来源**：`blocked` / `needs-review` / `advisory` 三级问题模型、有 `blocked` 不得进入下一状态、字数门（汉字 1 字、西文串 1 字、超 110% 阻断） |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | 创新报告、说课稿的 AI 味治理 |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | 成效证据的分级与核验（创新点证据必须可定位） |
+| `skills/office-layer/` | **文件产出唯一通道**：`docx_kit.py`（教案/报告）、`pptx_kit.py`（课件）、`xlsx_kit.py`（清单/证据表） |
+| `skills/slides-polish/` | 竞赛课件视觉打磨（HTML/SVG → PNG → pptx），比赛课件观感占比高时启用 |
+| `THIRD_PARTY_NOTICES.md` | 上游溯源与许可证合规说明 |
 
 **加载建议**：日常结构问题只用前三个；一旦进入「做亮点」环节，再加载 `gamified-learning.md`
 与 `k12-check-for-understanding`；竞赛级别较高（省赛及以上）才启用 `slides-polish`。
@@ -120,7 +120,7 @@ description: "高校教学竞赛与示范课全流程辅助：竞赛材料清单
 ### 阶段零 · 底盘准备（拿整门课教学设计）
 
 - **输入**：课程大纲、教材、章节安排、学情（学生层次/先修基础）、教师现有教案。
-- **动作**：走 `lesson-plan` 通道与其底座 `vendor/education-skills/教學設計/lesson-plan-generator.md`，
+- **动作**：走 `lesson-plan` 通道与其底座 `skills/education-skills/edu-teaching-design/references/lesson-plan-generator.md`，
   产出整门课教学设计底盘。只做**结构化**，不评价、不编数据。
 - **输出**：`课程教学设计_底盘.md`（课程定位 / 目标 / 学情 / 内容重构 / 评价方案 / 章节目标表）。
 - **退出条件**：整门课目标与章节目标能对齐；学情有教师提供的事实依据（缺则标 `【待补：学情数据】`）。
@@ -137,10 +137,10 @@ description: "高校教学竞赛与示范课全流程辅助：竞赛材料清单
 - **输出**：`竞赛材料清单.xlsx`（列：材料名 / 是否必需 / 现有状态 / 负责人 / 截止时间 / 备注）。
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
-$PY vendor/office-layer/scripts/xlsx_kit.py build \
+$PY skills/office-layer/scripts/xlsx_kit.py build \
     --spec 材料清单_spec.json --out 竞赛材料清单.xlsx
 ```
 - **退出条件**：清单里**没有「未知状态」行**——每一项都明确「已有 / 待补 / 不适用」。
@@ -209,7 +209,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build \
 
 | 类型 | 做法 | 适用学科 | 底座 |
 |---|---|---|---|
-| **认知冲突型** | 先给出学生（和评委）都会答错的结论，用实验/数据推翻它 | 理工、医学 | `education-skills/教學設計/lesson-plan-generator.md` |
+| **认知冲突型** | 先给出学生（和评委）都会答错的结论，用实验/数据推翻它 | 理工、医学 | `skills/education-skills/edu-teaching-design/references/lesson-plan-generator.md` |
 | **动手生成型** | 学生现场做出一个东西并展示（模型、代码跑通、方案成形） | 工科、艺术、师范 | `project-based-learning.md` |
 | **真实案例辨析型** | 真实行业案例/新闻事件，学生分角色辩论后给出方案 | 经管、法学、新闻 | `differentiated-instruction.md` |
 | **机制竞技型** | 把练习设计成有即时反馈与排名的挑战 | 语言、基础课、大班课 | `gamified-learning.md` |
@@ -246,11 +246,11 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build \
 **输出**：`节段教学设计.md` → `节段教学设计.docx`（用下面命令）。
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 节段教学设计.md --out "XX课程20分钟节段教学设计.docx" \
     --title "《XX课程》20 分钟教学节段设计"
 
-$PY vendor/office-layer/scripts/docx_kit.py inspect \
+$PY skills/office-layer/scripts/docx_kit.py inspect \
     --in "XX课程20分钟节段教学设计.docx"     # 自检：表格数、段落数、字数
 ```
 
@@ -305,7 +305,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect \
 | ×× 式教学 | 学业成效 | 得分率 __ → __ | 课程成绩表 | 待教师确认 | `【待补：…】` |
 
 ```bash
-$PY vendor/office-layer/scripts/xlsx_kit.py build \
+$PY skills/office-layer/scripts/xlsx_kit.py build \
     --spec 成效证据表_spec.json --out 创新点成效证据表.xlsx
 ```
 
@@ -372,7 +372,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build \
 超时就删**「说教材/说学情」的修饰语**，不要删「说教学过程」。
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 说课脚本.md --out 说课脚本.docx --title "《××》教学节段说课稿"
 ```
 
@@ -395,17 +395,17 @@ $PY vendor/office-layer/scripts/docx_kit.py md \
 
 ```bash
 # 1) 生成课件（16:9，自动处理中文字体 a:ea）
-$PY vendor/office-layer/scripts/pptx_kit.py build --spec 课件spec.json --out 竞赛课件.pptx
+$PY skills/office-layer/scripts/pptx_kit.py build --spec 课件spec.json --out 竞赛课件.pptx
 
 # 2) 批量写演讲者备注（把节段设计表格里的教师活动，逐页写成口播提示）
-$PY vendor/office-layer/scripts/pptx_kit.py notes --in 竞赛课件.pptx --notes 讲稿备注.json
+$PY skills/office-layer/scripts/pptx_kit.py notes --in 竞赛课件.pptx --notes 讲稿备注.json
 
 # 3) 自检信息密度：overdense 页必须拆
-$PY vendor/office-layer/scripts/pptx_kit.py inspect --in 竞赛课件.pptx
+$PY skills/office-layer/scripts/pptx_kit.py inspect --in 竞赛课件.pptx
 ```
 
 **视觉打磨（省赛及以上建议启用）**：需要真实的阴影、贝塞尔曲线、渐变、箭头、图标时，
-走 `vendor/slides-polish/` 的「HTML + 内联 SVG → 无头 Chrome 截图 PNG → python-pptx 嵌图」
+走 `skills/slides-polish/` 的「HTML + 内联 SVG → 无头 Chrome 截图 PNG → python-pptx 嵌图」
 管线；标题/页脚/页码仍用原生 pptx 文本保持可编辑。**不要手写 OOXML 绕过 office-layer。**
 
 - **退出条件**：`inspect` 无 `overdense` 页；无小于 18pt 的正文；每页能在节段表里定位；
@@ -416,7 +416,7 @@ $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 竞赛课件.pptx
 ### 阶段六 · 评委视角自评（MOCK_REVIEW）
 
 以评委视角按**质量门思路**打分与提意见。分级思想借鉴
-`vendor/awesome-benzi/references/QUALITY_GATES.md`：问题分 **`blocked`（阻断，必须改）/
+`skills/awesome-benzi/references/QUALITY_GATES.md`：问题分 **`blocked`（阻断，必须改）/
 `needs-review`（需复核）/ `advisory`（建议）** 三级，**存在 `blocked` 就不得进入下一状态**。
 
 #### 6.1 评分维度与权重（默认，按实际竞赛调整）
@@ -485,9 +485,9 @@ $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 竞赛课件.pptx
 **所有分档与分数一律留人工确认位**，见红线。
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py spec \
+$PY skills/office-layer/scripts/docx_kit.py spec \
     --spec 模拟评审_spec.json --out 模拟评审意见.docx
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 模拟评审意见.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 模拟评审意见.docx
 ```
 
 - **退出条件**：15 条失分点逐条判定完毕（**不得用缺省表示「已检查」**）；
@@ -527,7 +527,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 模拟评审意见.docx
 ### 阶段八 · 交付与冻结
 
 1. 内容门 + MOCK_REVIEW 通过（无 `blocked`）后，冻结 Markdown 源稿。
-2. 全部交付物走 `vendor/office-layer/` 生成，并逐个 `inspect` 自检。
+2. 全部交付物走 `skills/office-layer/` 生成，并逐个 `inspect` 自检。
 3. 交付说明写清：**初稿性质、所有 `【待补：…】` 清单、所有 `【待教师确认：…】` 清单、
    用了哪些默认值、哪些结论需要教师本人背书**。
 
@@ -580,8 +580,8 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 模拟评审意见.docx
 
 **格式与合规**
 - [ ] `description` 里的触发短语是教师真实会说的口语（≥4 句），能被子技能路由命中
-- [ ] 引用的每个 `vendor/` 路径都 `ls` 验证过存在（含 `vendor/education-skills/教學設計/` 的具体文件名）
-- [ ] 所有 docx/pptx/xlsx 都由 `vendor/office-layer/scripts/*.py` 生成，且每个都跑过 `inspect`
+- [ ] 引用的每个 底座路径都 `ls` 验证过存在（含 `skills/education-skills/edu-teaching-design/` 的具体文件名）
+- [ ] 所有 docx/pptx/xlsx 都由 `skills/office-layer/scripts/*.py` 生成，且每个都跑过 `inspect`
 - [ ] `pptx_kit.py inspect` 无 `overdense` 页；课件正文 ≥18pt
 
 **内容纪律**

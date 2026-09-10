@@ -27,18 +27,18 @@ description: "高校课堂互动与平时分辅助：随堂投票题与投屏 PP
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/ibook-skills/quiz-generator/` | **主底座**：选择题生成流程、布鲁姆层次分布、答案均衡、质量校验 |
-| `vendor/ibook-skills/quiz-generator/references/distractor-writing-guide.md` | **干扰项四品质与四种构造模式**，投票题选项照此写 |
-| `vendor/education-skills/學習分析/student-profiling.md` | **主底座**：学习轮廓三维度、伦理原则（用于支持而非标签） |
-| `vendor/education-skills/學習分析/learning-analytics.md` | 参与度指标、三级预警、数据伦理（最小必要/匿名化/辅助而非取代判断） |
-| `vendor/education-skills/學習分析/peer-assessment.md` | 小组讨论的贡献度与互评口径 |
-| `vendor/education-skills/學習分析/competency-based-assessment.md` | 等级（A/B/C/D）口径参考 |
-| `vendor/k12-teacher-skills/k12-check-for-understanding/` | **理解性检查结构**：每个反应「说明什么 → 下一步怎么教」的写法，本 skill 的投票题备注照此组织 |
-| `vendor/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 追问技术：一次只问一问、区分事实/解释/判断、只问能改变结论的问题 |
-| `vendor/office-layer/` | **文件产出唯一通道**（pptx / xlsx / docx），见 `vendor/office-layer/SKILL.md` |
+| `skills/ibook-skills/question-writing/` | **主底座**：选择题生成流程、布鲁姆层次分布、答案均衡、质量校验 |
+| `skills/ibook-skills/question-writing/references/distractor-writing-guide.md` | **干扰项四品质与四种构造模式**，投票题选项照此写 |
+| `skills/education-skills/edu-learning-analytics/references/student-profiling.md` | **主底座**：学习轮廓三维度、伦理原则（用于支持而非标签） |
+| `skills/education-skills/edu-learning-analytics/references/learning-analytics.md` | 参与度指标、三级预警、数据伦理（最小必要/匿名化/辅助而非取代判断） |
+| `skills/education-skills/edu-learning-analytics/references/peer-assessment.md` | 小组讨论的贡献度与互评口径 |
+| `skills/education-skills/edu-learning-analytics/references/competency-based-assessment.md` | 等级（A/B/C/D）口径参考 |
+| `skills/k12-teacher-skills/k12-check-for-understanding/` | **理解性检查结构**：每个反应「说明什么 → 下一步怎么教」的写法，本 skill 的投票题备注照此组织 |
+| `skills/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 追问技术：一次只问一问、区分事实/解释/判断、只问能改变结论的问题 |
+| `skills/office-layer/` | **文件产出唯一通道**（pptx / xlsx / docx），见 `skills/office-layer/SKILL.md` |
 | `skills/classroom-live/scripts/participation_score.py` | **自建**（上游无可复用件）：可追溯计分 + 记录表模板生成 |
 
-> 许可证提示：`ibook-skills` 上游仓库无 LICENSE 文件（见 `vendor/VENDOR.md`「许可证合规」），
+> 许可证提示：`ibook-skills` 上游仓库无 LICENSE 文件（见 `THIRD_PARTY_NOTICES.md`「许可证合规」），
 > 本机自用可以，**本包若要对外分发需先取得作者授权或移除该目录**。
 
 ## 前置信息收集（intake，一次性问完）
@@ -115,21 +115,21 @@ description: "高校课堂互动与平时分辅助：随堂投票题与投屏 PP
   教学处置：请选 C 的学生说一遍邻接表为什么是 O(n+e)，用对比表当场收口
   ```
 
-  第 3、4 行照 `vendor/k12-teacher-skills/k12-check-for-understanding/` 的「看到什么反应 → 下一步怎么教」结构写，
+  第 3、4 行照 `skills/k12-teacher-skills/k12-check-for-understanding/` 的「看到什么反应 → 下一步怎么教」结构写，
   **不写出这两行就等于题目没有教学价值**。
 
   **5. 投屏 PPT 用 office-layer 生成**：
 
   ```bash
-  PY="vendor/office-layer/.venv/bin/python"
+  PY="skills/office-layer/.venv/bin/python"
 
   # 1) 写投票题规格（JSON，见下方片段）
   # 2) 生成 16:9 投屏文件
-  $PY vendor/office-layer/scripts/pptx_kit.py build \
+  $PY skills/office-layer/scripts/pptx_kit.py build \
       --spec 投票题.spec.json --out 随堂投票_图的遍历.pptx
 
   # 3) 读回结构与信息密度，单页正文 >220 字符会被报进 overdense —— 要拆页
-  $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 随堂投票_图的遍历.pptx
+  $PY skills/office-layer/scripts/pptx_kit.py inspect --in 随堂投票_图的遍历.pptx
   ```
 
   规格片段（`spec.json`；`meta` 出封面页，`slides` 一页一题）：
@@ -201,9 +201,9 @@ description: "高校课堂互动与平时分辅助：随堂投票题与投屏 PP
   **5. 提问链是教师手上的一张纸，出 DOCX**：
 
   ```bash
-  $PY vendor/office-layer/scripts/docx_kit.py md \
+  $PY skills/office-layer/scripts/docx_kit.py md \
       --in 提问链.md --out 提问链_图的遍历.docx --title "《数据结构》图的遍历 · 递进式提问链"
-  $PY vendor/office-layer/scripts/docx_kit.py inspect --in 提问链_图的遍历.docx
+  $PY skills/office-layer/scripts/docx_kit.py inspect --in 提问链_图的遍历.docx
   ```
 
   `提问链.md` 用一张表（层次 | 问题 | 预期回答 | 等答时间 | 追问），照上面示例的列写即可。
@@ -264,13 +264,13 @@ description: "高校课堂互动与平时分辅助：随堂投票题与投屏 PP
   **5. 生成记录表模板与默认规则：**
 
   ```bash
-  PY="vendor/office-layer/.venv/bin/python"
+  PY="skills/office-layer/.venv/bin/python"
 
   # 生成 6 张记录表 + 填写说明 的规格，同时出默认规则 JSON
   $PY skills/classroom-live/scripts/participation_score.py template \
       --out 记录表模板.spec.json --rules-out 平时分规则.json --course "数据结构"
 
-  $PY vendor/office-layer/scripts/xlsx_kit.py build \
+  $PY skills/office-layer/scripts/xlsx_kit.py build \
       --spec 记录表模板.spec.json --out 课堂互动记录表.xlsx
   ```
 
@@ -333,7 +333,7 @@ description: "高校课堂互动与平时分辅助：随堂投票题与投屏 PP
   **第 3 步 · 跑计算，出依据表规格：**
 
   ```bash
-  PY="vendor/office-layer/.venv/bin/python"
+  PY="skills/office-layer/.venv/bin/python"
 
   # 记录表 + 规则 + 名单 → 依据表规格 + 追溯明细 CSV + 待核清单
   # 脚本只读输入，不改记录表；输出全部落在 --outdir
@@ -341,11 +341,11 @@ description: "高校课堂互动与平时分辅助：随堂投票题与投屏 PP
       --records 课堂互动记录.xlsx --rules 平时分规则.json --roster 名单.csv --outdir ./平时分
 
   # 规格 → XLSX（build 会顺带回读各表行列数，这就是自检）
-  $PY vendor/office-layer/scripts/xlsx_kit.py build \
+  $PY skills/office-layer/scripts/xlsx_kit.py build \
       --spec 平时分/平时分依据表.spec.json --out 平时分依据表.xlsx
 
   # 需要单独再看一次结构时
-  $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 平时分依据表.xlsx
+  $PY skills/office-layer/scripts/xlsx_kit.py inspect --in 平时分依据表.xlsx
   ```
 
   脚本 stdout 只打印条数与文件路径，**不打印学生姓名**（避免姓名出现在终端记录里）。
@@ -448,9 +448,9 @@ description: "高校课堂互动与平时分辅助：随堂投票题与投屏 PP
   **5. 出 DOCX**：
 
   ```bash
-  $PY vendor/office-layer/scripts/docx_kit.py md \
+  $PY skills/office-layer/scripts/docx_kit.py md \
       --in 学情画像.md --out 学情画像与干预建议.docx --title "《数据结构》学情画像与干预建议"
-  $PY vendor/office-layer/scripts/docx_kit.py inspect --in 学情画像与干预建议.docx
+  $PY skills/office-layer/scripts/docx_kit.py inspect --in 学情画像与干预建议.docx
   ```
 
 - **输出**：`学情画像与干预建议.docx`（参与度分布 + 三类名单与干预动作）。
@@ -538,18 +538,18 @@ description: "高校课堂互动与平时分辅助：随堂投票题与投屏 PP
 - [ ] 交付说明写明「含个人信息 + 初算草稿待教师核定 + 中间文件清理」
 - [ ] 中间文件已删除或移入受控目录；未留在公网网盘/聊天群
 - [ ] 学情画像无标签化词、无排名、无记录不支撑的推断
-- [ ] 本文件引用的 `vendor/` 路径已用 `ls` 验证存在
+- [ ] 本文件引用的 底座路径已用 `ls` 验证存在
 
 **自检命令**（交付前跑一遍，别靠记忆）：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
-ls -d vendor/ibook-skills/quiz-generator/ vendor/education-skills/學習分析/ \
-      vendor/k12-teacher-skills/k12-check-for-understanding/ \
-      vendor/learning-education/thinking-toolkit/ vendor/office-layer/
+ls -d skills/ibook-skills/question-writing/ skills/education-skills/edu-learning-analytics/ \
+      skills/k12-teacher-skills/k12-check-for-understanding/ \
+      skills/learning-education/thinking-toolkit/ skills/office-layer/
 
-$PY vendor/office-layer/scripts/pptx_kit.py  inspect --in 随堂投票_图的遍历.pptx
-$PY vendor/office-layer/scripts/xlsx_kit.py  inspect --in 平时分依据表.xlsx
-$PY vendor/office-layer/scripts/docx_kit.py  inspect --in 学情画像与干预建议.docx
+$PY skills/office-layer/scripts/pptx_kit.py  inspect --in 随堂投票_图的遍历.pptx
+$PY skills/office-layer/scripts/xlsx_kit.py  inspect --in 平时分依据表.xlsx
+$PY skills/office-layer/scripts/docx_kit.py  inspect --in 学情画像与干预建议.docx
 ```

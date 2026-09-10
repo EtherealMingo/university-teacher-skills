@@ -18,36 +18,36 @@ description: "把一篇 PDF 论文拆解成组会/学术汇报用的 PPT 初稿�
 - 答辩/中期前需要快速复述自己或他人的方法框架
 
 **不适用**：非学术 PDF（产品说明书、政府报告、合同、财报）；教师自己的原创成果宣讲
-（那是 `lecture-slides` 或竞赛通道）；只想要一页摘要（直接用 `vendor/paper-slides/paper-analyst`
+（那是 `lecture-slides` 或竞赛通道）；只想要一页摘要（直接用 `skills/paper-analyst`
 的 `quick` 模式，不必出 PPT）。
 
 ## 底座（禁止重写）
 
 | 路径 | 用途 | 本机实测状态 |
 |---|---|---|
-| `vendor/paper-slides/paper-analyst/SKILL.md` | **主底座**：五种分析模式、降级输入回退策略 | 已读，模式定义直接复用 |
-| `vendor/paper-slides/paper-analyst/references/output-schema.md` | 解析结果的字段规范（7 节 + quick 模式） | 已读，字段与缺失标记照用 |
-| `vendor/paper-slides/paper-analyst/references/paper-type-rubric.md` | 论文类型判定规则（6 类 + 冲突消解） | 已读，类型标签与证据要求照用 |
-| `vendor/paper-slides/paper-analyst/references/presentation-schema.md` | 幻灯片计划 JSON 结构 + 时长→页数对照 | 已读，`slides.json` 以此为准 |
-| `vendor/paper-slides/paper-analyst/references/presentation-style-guide.md` | 压缩规则：每页 ≤4 bullets、数字不四舍五入、受众压缩档 | 已读，与 pptx_kit 的 overdense 一起用 |
-| `vendor/paper-slides/paper-analyst/references/quality-checklist.md` | **反幻觉清单**，交付前逐条过 | 已读，本 skill 红线直接引用 |
-| `vendor/paper-slides/paper-analyst/references/pptx-handoff.md` | 上游的 handoff 约定（面向自然语言 pptx skill） | 已读；**本包改为走 office-layer 的 JSON 通道**，只保留其「交接前剥掉 `[原文声明]` 标签」「不把备注塞进 PPT 正文」两条纪律 |
-| `vendor/paper-slides/paper-analyst/scripts/extract_pdf_meta.py` | PDF 元信息 + 扫描版判定 → JSON | **已实测跑通**（依赖 pypdf，venv 内已有） |
-| `vendor/paper-slides/paper-analyst/scripts/extract_pdf_figures.py` | 逐页导出 PDF 内嵌位图 + `figures/index.json` | **本机不可直接运行**：需 pymupdf，venv 未装且联网安装超时。见阶段一「路径 A/B/C」 |
-| `vendor/slides-polish/SKILL.md` | 可选视觉打磨：HTML+内联 SVG → headless Chrome → PNG → 嵌回 pptx | 已读；Chrome（`/Applications/Google Chrome.app/...`）与 Keynote AppleScript（实测版本 15.3.1）本机可用 |
-| `vendor/office-layer/SKILL.md` | **文件产出唯一通道**：pptx_kit build/notes/inspect | 已读，三个子命令均已实测 |
-| `vendor/empirical-research/lit-review/SKILL.md` | 综述型汇报时：多篇文献管理与综述式 deck 的组织方式 | 已读，仅在综述型论文时按需加载 |
-| `vendor/empirical-research/econ-audit/SKILL.md` | 实证型论文：识别方法与识别策略的可攻击点，用于生成「可能被追问」 | 已读，用于阶段六备注 |
-| `vendor/empirical-research/data-dictionary/SKILL.md` | 实证型论文：变量口径与样本说明，用于讲清数据段 | 已读，仅在论文有数据附录时用 |
-| `vendor/VENDOR.md` | 上游溯源与许可证合规 | 已读 |
+| `skills/paper-analyst/SKILL.md` | **主底座**：五种分析模式、降级输入回退策略 | 已读，模式定义直接复用 |
+| `skills/paper-analyst/references/output-schema.md` | 解析结果的字段规范（7 节 + quick 模式） | 已读，字段与缺失标记照用 |
+| `skills/paper-analyst/references/paper-type-rubric.md` | 论文类型判定规则（6 类 + 冲突消解） | 已读，类型标签与证据要求照用 |
+| `skills/paper-analyst/references/presentation-schema.md` | 幻灯片计划 JSON 结构 + 时长→页数对照 | 已读，`slides.json` 以此为准 |
+| `skills/paper-analyst/references/presentation-style-guide.md` | 压缩规则：每页 ≤4 bullets、数字不四舍五入、受众压缩档 | 已读，与 pptx_kit 的 overdense 一起用 |
+| `skills/paper-analyst/references/quality-checklist.md` | **反幻觉清单**，交付前逐条过 | 已读，本 skill 红线直接引用 |
+| `skills/paper-analyst/references/pptx-handoff.md` | 上游的 handoff 约定（面向自然语言 pptx skill） | 已读；**本包改为走 office-layer 的 JSON 通道**，只保留其「交接前剥掉 `[原文声明]` 标签」「不把备注塞进 PPT 正文」两条纪律 |
+| `skills/paper-analyst/scripts/extract_pdf_meta.py` | PDF 元信息 + 扫描版判定 → JSON | **已实测跑通**（依赖 pypdf，venv 内已有） |
+| `skills/paper-analyst/scripts/extract_pdf_figures.py` | 逐页导出 PDF 内嵌位图 + `figures/index.json` | **本机不可直接运行**：需 pymupdf，venv 未装且联网安装超时。见阶段一「路径 A/B/C」 |
+| `skills/slides-polish/SKILL.md` | 可选视觉打磨：HTML+内联 SVG → headless Chrome → PNG → 嵌回 pptx | 已读；Chrome（`/Applications/Google Chrome.app/...`）与 Keynote AppleScript（实测版本 15.3.1）本机可用 |
+| `skills/office-layer/SKILL.md` | **文件产出唯一通道**：pptx_kit build/notes/inspect | 已读，三个子命令均已实测 |
+| `skills/empirical-research/lit-review/SKILL.md` | 综述型汇报时：多篇文献管理与综述式 deck 的组织方式 | 已读，仅在综述型论文时按需加载 |
+| `skills/empirical-research/econ-audit/SKILL.md` | 实证型论文：识别方法与识别策略的可攻击点，用于生成「可能被追问」 | 已读，用于阶段六备注 |
+| `skills/empirical-research/data-dictionary/SKILL.md` | 实证型论文：变量口径与样本说明，用于讲清数据段 | 已读，仅在论文有数据附录时用 |
+| `THIRD_PARTY_NOTICES.md` | 上游溯源与许可证合规 | 已读 |
 
 **环境**（每个命令块都用这个绝对路径，避免 cwd 不同导致找不到 venv）：
 
 ```bash
 SKILLS="/Users/mingo/Documents/kimi/Workspaces/skills"
-PY="$SKILLS/vendor/office-layer/.venv/bin/python"
-ANALYST="$SKILLS/vendor/paper-slides/paper-analyst"
-KIT="$SKILLS/vendor/office-layer/scripts/pptx_kit.py"
+PY="$SKILLS/skills/office-layer/.venv/bin/python"
+ANALYST="$SKILLS/skills/paper-analyst"
+KIT="$SKILLS/skills/office-layer/scripts/pptx_kit.py"
 mkdir -p /tmp/mplcache && export MPLCONFIGDIR=/tmp/mplcache   # 受限环境下 matplotlib 必需
 ```
 
@@ -122,7 +122,7 @@ EOF
 **3）图表提取 —— 三条路径**
 
 ```bash
-# 路径 A（vendor 脚本，需要 pymupdf）
+# 路径 A（paper-analyst 自带脚本，需要 pymupdf）
 $PY -m pip install pymupdf        # 本机实测：联网安装超时未完成，缺这一步会直接报错
 $PY "$ANALYST/scripts/extract_pdf_figures.py" 论文.pdf
 ```
@@ -202,7 +202,7 @@ Header 行必须写 `PDF 质量：[良好 | 降级处理-具体原因 | 严重�
 **输出**：类型结论 + 讲述重点清单（写进 `论文解析.md` 顶部）
 **退出条件**：类型标签写明、证据引用到论文具体位置（摘要原话 / 章节 / 图表）
 
-先读 `vendor/paper-slides/paper-analyst/references/paper-type-rubric.md` 判类型，
+先读 `skills/paper-analyst/references/paper-type-rubric.md` 判类型，
 **不要默认这是 AI 论文**。该 rubric 的实验口径是 6 类：AI/深度学习、传统算法/理论、
 系统/工程、实验/实证、综述/Survey、其他/跨学科；教师日常说的"综述型/方法创新型/实证型/
 理论型/案例型"是另一套口径，按下表映射，**映射关系要写进交付说明**（口径不同，别混着说）：
@@ -296,7 +296,7 @@ $PY "$KIT" build --spec slides.json --out 组会汇报初稿.pptx
 $PY "$KIT" inspect --in 组会汇报初稿.pptx
 ```
 
-`slides.json` 片段（结构见 `vendor/paper-slides/paper-analyst/references/presentation-schema.md`，字段名以 pptx_kit 为准）：
+`slides.json` 片段（结构见 `skills/paper-analyst/references/presentation-schema.md`，字段名以 pptx_kit 为准）：
 
 ```json
 {"meta": {"title": "多模态城市轨道交通客流预测（文献汇报）",
@@ -328,7 +328,7 @@ $PY "$KIT" inspect --in 组会汇报初稿.pptx
   见 `presentation-style-guide.md`），所以 overdense 为空只是底线，不代表页面好看。
 - PPTX 尺寸 16:9（`12191695×6858000`），中文走 `a:ea` 字体，靠本层保证，**不要手写 pptx**。
 
-**可选打磨**：若教师要求"看起来像正式会议报告"，按 `vendor/slides-polish/SKILL.md` 的
+**可选打磨**：若教师要求"看起来像正式会议报告"，按 `skills/slides-polish/SKILL.md` 的
 HTML/SVG → headless Chrome → PNG → 嵌回 pptx 流程处理方法框架图与结果对比页。
 本机实测可用：Chrome 在 `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`，
 Keynote AppleScript 可用（版本 15.3.1），可走它那套"导出每页 PNG → `sips -Z 1800` → 人工看"
@@ -368,7 +368,7 @@ $PY "$KIT" inspect --in 组会汇报初稿.pptx          # 必须回读确认
 |---|---|---|
 | **时间分配** | 每页的起止时间，累计必须等于总时长 | `【时间】7:00–11:30`（20 分钟报告的第 4 页） |
 | **过渡语** | 上一段到下一段的那一句衔接话，写出来照念 | `【过渡】方法讲完了，下面看它到底有没有用。` |
-| **可能被追问的点** | 由 `vendor/empirical-research/econ-audit/SKILL.md` 的审查角度生成：识别策略是否可信、样本是否外推、指标是否可比、消融是否充分、基线是否公平 | `【追问】为什么用 MAPE 不用 RMSE？答：原文 4.2 节说明高峰时段短时误差更重要。` |
+| **可能被追问的点** | 由 `skills/empirical-research/econ-audit/SKILL.md` 的审查角度生成：识别策略是否可信、样本是否外推、指标是否可比、消融是否充分、基线是否公平 | `【追问】为什么用 MAPE 不用 RMSE？答：原文 4.2 节说明高峰时段短时误差更重要。` |
 | **需要提前准备的数据** | 一旦被追问就得立刻说出的具体数字/出处 | `【备数】基线 LSTM 的 MAPE=12.4（Table 2）；样本量 8.7 万（3.1 节）` |
 
 **备注里的追问点必须能在论文里找到答案**。找不到答案的，备注写成

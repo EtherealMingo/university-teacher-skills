@@ -28,15 +28,15 @@ description: "高校教师年度考核与职称材料全流程辅助：把零散
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/awesome-benzi/WORKFLOW.md` | **七阶段编排骨架，本 skill 的派生母体** |
-| `vendor/awesome-benzi/references/WRITING_MODEL.md` | 十模块写作内核（M1–M10）、段落与论证规则 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | **质量门**：字数门 `QG-LENGTH-001/002`、内容门 `QG-CONTENT-*`、错误码与退出码 |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | **AI 味与套话治理**（`WR-STYLE-010/011/012`）、严肃性（`WR-STYLE-015~018`） |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级：教师确认事实 / 材料事实 / 未知项 |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | 扫描、预算、只读边界、**一次性问题批次**（`IN-QUESTION-001~005`） |
-| `vendor/office-layer/SKILL.md` | **文件产出唯一通道**；`xlsx_kit.py` 归表、`docx_kit.py` 述职报告 |
-| `vendor/education-skills/教學設計/` | 教学成果奖的成果描述与推广材料可引用其教学设计框架 |
-| `vendor/education-skills/學習分析/` | 学生评教、学习成效类数据口径参考 |
+| `skills/awesome-benzi/WORKFLOW.md` | **七阶段编排骨架，本 skill 的派生母体** |
+| `skills/awesome-benzi/references/WRITING_MODEL.md` | 十模块写作内核（M1–M10）、段落与论证规则 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | **质量门**：字数门 `QG-LENGTH-001/002`、内容门 `QG-CONTENT-*`、错误码与退出码 |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | **AI 味与套话治理**（`WR-STYLE-010/011/012`）、严肃性（`WR-STYLE-015~018`） |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级：教师确认事实 / 材料事实 / 未知项 |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | 扫描、预算、只读边界、**一次性问题批次**（`IN-QUESTION-001~005`） |
+| `skills/office-layer/SKILL.md` | **文件产出唯一通道**；`xlsx_kit.py` 归表、`docx_kit.py` 述职报告 |
+| `skills/education-skills/edu-teaching-design/` | 教学成果奖的成果描述与推广材料可引用其教学设计框架 |
+| `skills/education-skills/edu-learning-analytics/` | 学生评教、学习成效类数据口径参考 |
 
 **派生关系（如实说明）**：本 skill 是 `awesome-benzi` 的 **workflow 派生**。
 `awesome-benzi` 是本包唯一能改 workflow 派生的引擎，本 skill **不改动其任何代码与规则**，
@@ -53,16 +53,16 @@ description: "高校教师年度考核与职称材料全流程辅助：把零散
 环境准备（首次使用）：
 
 ```bash
-bash vendor/office-layer/bootstrap.sh                  # 建 .venv 并装依赖
-PY="vendor/office-layer/.venv/bin/python"
+bash skills/office-layer/bootstrap.sh                  # 建 .venv 并装依赖
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 ```
 
-以下命令均以**技能包根目录**（含 `vendor/`、`skills/` 的那一层）为工作目录。
+以下命令均以**技能包根目录**（含 `skills/` 目录的那一层）为工作目录。
 
 ## 前置信息收集（intake，一次性问完）
 
-按 `vendor/awesome-benzi/references/INPUT_MODEL.md` 的 `question-batch`（`IN-QUESTION-001~004`）：
+按 `skills/awesome-benzi/references/INPUT_MODEL.md` 的 `question-batch`（`IN-QUESTION-001~004`）：
 **先扫材料、再一次性提问，不要边做边问**。把下面 5 项合并成一次提问发给教师：
 
 1. **考核年度**：本次考核的是哪一年（如 2024-01-01 ~ 2024-12-31）；跨年度成果（上年 12 月见刊、本年 1 月检索）算哪一期。
@@ -180,10 +180,10 @@ $PY skills/annual-review/scripts/dedup_merge.py \
 `dedup_merge.py` 直接产出这个规格，不需要手工拼）：
 
 ```bash
-$PY vendor/office-layer/scripts/xlsx_kit.py build \
+$PY skills/office-layer/scripts/xlsx_kit.py build \
     --spec /tmp/annual-review/归表.spec.json \
     --out 2024年度成果归表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 2024年度成果归表.xlsx   # 自检
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 2024年度成果归表.xlsx   # 自检
 ```
 
 生成的表结构（一个栏目一个工作表，均冻结首行）：
@@ -262,9 +262,9 @@ $PY skills/annual-review/scripts/word_gate.py \
 #### 3.5 出处与交付
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in draft.md --out 2024年度述职报告初稿.docx --title "2024年度个人述职报告"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 2024年度述职报告初稿.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 2024年度述职报告初稿.docx
 ```
 
 需要按学校表格排版（含表头、表格、人工确认位）时用 `spec` 通道，`placeholder` 字段会以显式占位段落在 Word 里显示：
@@ -280,7 +280,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 2024年度述职报告�
 ```
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec report.spec.json --out 2024年度述职报告初稿.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec report.spec.json --out 2024年度述职报告初稿.docx
 ```
 
 - **输入**：阶段二归表 + 教务/科研系统数据 + 考核表栏目与字数要求。
@@ -436,7 +436,7 @@ $PY vendor/office-layer/scripts/docx_kit.py spec --spec report.spec.json --out 2
 ## 自检清单
 
 - [ ] `description` 触发短语能命中「写年度述职 / 整理职称评审材料 / 把成果整理成表 / 教学成果奖申报 / 年度考核材料」
-- [ ] 引用的 `vendor/` 路径都真实存在（`ls` 验证过）
+- [ ] 引用的 底座路径都真实存在（`ls` 验证过）
 - [ ] intake 的 5 项（考核年度 / 考核表模板 / 职称层级与要求 / 材料清单与位置 / 字数要求）**一次性**问完
 - [ ] 每条成果都能追溯到 `_source`（来自哪份材料）
 - [ ] 归表用 `xlsx_kit.py build` 生成，并用 `inspect` 读回核对过表数与列数

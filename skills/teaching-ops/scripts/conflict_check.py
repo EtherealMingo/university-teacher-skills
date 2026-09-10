@@ -8,7 +8,7 @@
 
 用法：
 
-    PY="vendor/office-layer/.venv/bin/python"
+    PY="skills/office-layer/.venv/bin/python"
     $PY skills/teaching-ops/scripts/conflict_check.py \\
         --in 过程/排期数据.json --spec 过程/冲突spec.json \\
         --report 过程/冲突报告.md

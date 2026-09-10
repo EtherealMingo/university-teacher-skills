@@ -32,25 +32,25 @@ description: "本科/硕士毕业论文全流程指导：开题审查、过程�
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/` | **文件产出唯一通道**；本技能几乎所有交付物都从这里出 |
-| `vendor/office-layer/scripts/docx_kit.py` | `comment` 写 Word 原生批注（**本技能核心能力**）、`spec` 生成意见表、`inspect` 自检 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | 质量门与 `blocked` / `needs-review` / `advisory` 三级问题模型，直接映射为批注三级 |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | `IN-QUESTION-001…005`：一次性收集缺失信息（`question-batch`）的规则来源 |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | AI 味与口语化表达治理，用于「口语化表达」类批注的改写判据 |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级与核验，用于判断学生文中「无来源主张」 |
-| `vendor/education-skills/研究方法/education-research-design.md` | 研究设计类型与适用条件 → 开题「方法与问题匹配」判据 |
-| `vendor/education-skills/研究方法/quasi-experimental-design.md` | 准实验设计，教育类论文最常被质疑的方法 |
-| `vendor/education-skills/研究方法/mixed-methods.md` | 混合方法设计，用于判断"质性+量化"是否真混合 |
-| `vendor/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底式提问 → 「提问式批注」与答辩追问的话术来源 |
-| `vendor/learning-education/thinking-toolkit/methods/09-double-steelman.md` | 双向钢人论证 → 构造最强反驳，用于答辩预案的质疑类问题 |
-| `vendor/learning-education/thinking-toolkit/methods/05-fact-check.md` | 事实核查流程 → 核查学生文中的数据与主张 |
-| `vendor/empirical-research/lit-review/SKILL.md` | 文献综述的评述性写法与 referee pass，用于「综述只罗列不评述」类批注 |
-| `vendor/paper-slides/paper-analyst/` | 论文分析 → 汇报 PPT 的结构化拆解（答辩 PPT 的骨架） |
-| `vendor/slides-polish/SKILL.md` | 答辩 PPT 视觉打磨 |
-| `vendor/office-layer/scripts/pptx_kit.py` | 真正生成答辩 PPT 的 16:9 文件，含演讲者备注 |
-| `vendor/VENDOR.md` | 溯源与许可证说明 |
+| `skills/office-layer/` | **文件产出唯一通道**；本技能几乎所有交付物都从这里出 |
+| `skills/office-layer/scripts/docx_kit.py` | `comment` 写 Word 原生批注（**本技能核心能力**）、`spec` 生成意见表、`inspect` 自检 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | 质量门与 `blocked` / `needs-review` / `advisory` 三级问题模型，直接映射为批注三级 |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | `IN-QUESTION-001…005`：一次性收集缺失信息（`question-batch`）的规则来源 |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | AI 味与口语化表达治理，用于「口语化表达」类批注的改写判据 |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级与核验，用于判断学生文中「无来源主张」 |
+| `skills/education-skills/edu-research-methods/references/education-research-design.md` | 研究设计类型与适用条件 → 开题「方法与问题匹配」判据 |
+| `skills/education-skills/edu-research-methods/references/quasi-experimental-design.md` | 准实验设计，教育类论文最常被质疑的方法 |
+| `skills/education-skills/edu-research-methods/references/mixed-methods.md` | 混合方法设计，用于判断"质性+量化"是否真混合 |
+| `skills/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底式提问 → 「提问式批注」与答辩追问的话术来源 |
+| `skills/learning-education/thinking-toolkit/methods/09-double-steelman.md` | 双向钢人论证 → 构造最强反驳，用于答辩预案的质疑类问题 |
+| `skills/learning-education/thinking-toolkit/methods/05-fact-check.md` | 事实核查流程 → 核查学生文中的数据与主张 |
+| `skills/empirical-research/lit-review/SKILL.md` | 文献综述的评述性写法与 referee pass，用于「综述只罗列不评述」类批注 |
+| `skills/paper-analyst/` | 论文分析 → 汇报 PPT 的结构化拆解（答辩 PPT 的骨架） |
+| `skills/slides-polish/SKILL.md` | 答辩 PPT 视觉打磨 |
+| `skills/office-layer/scripts/pptx_kit.py` | 真正生成答辩 PPT 的 16:9 文件，含演讲者备注 |
+| `THIRD_PARTY_NOTICES.md` | 溯源与许可证说明 |
 
-**选底座的原则**：批注与文档产出**只有** `office-layer` 一条路；方法学判据查 `education-skills/研究方法/`；
+**选底座的原则**：批注与文档产出**只有** `office-layer` 一条路；方法学判据查 `skills/education-skills/edu-research-methods/`；
 质疑与追问的话术查 `thinking-toolkit`；不做重复实现。
 
 ## 前置信息收集（intake，一次性问完）
@@ -150,7 +150,7 @@ description: "本科/硕士毕业论文全流程指导：开题审查、过程�
 锚点可落在表格单元格上——`iter_paragraphs` 会遍历正文与所有表格，已实测可用）。
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 cat > 开题审查_spec.json <<'EOF'
@@ -175,10 +175,10 @@ cat > 开题审查_spec.json <<'EOF'
     "placeholder":"【待教师确认：是否安排面谈及时间】"}]}
 EOF
 
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec 开题审查_spec.json --out 开题审查意见表.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec 开题审查_spec.json --out 开题审查意见表.docx
 
 # 自检：读回表格数与段落数
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 开题审查意见表.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 开题审查意见表.docx
 ```
 
 > 上面 `spec.json` 里的 `placeholder` 字段就是**人工确认位**——它会被渲染成独立的楷体占位段落，
@@ -201,7 +201,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 开题审查意见表.d
 破折号、引号样式）。先把原文段落**原样导出**，锚点只能从这里复制粘贴，不要手打：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限/沙箱环境的常规预备（office-layer 依赖含 matplotlib；本技能的 docx 命令本身不依赖它，导出无副作用）
 
 # 导出全部段落文本（含表格单元格），作为锚点唯一可信来源
@@ -223,7 +223,7 @@ walk(doc)
 PY
 
 # 同时读回文档结构，确认段落数/表格数/标题，建立"文件确实读到了"的基线
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 学生论文_过程稿.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 学生论文_过程稿.docx
 ```
 
 导出后先通读一遍再动笔：批量批注最容易犯的错是把"必须改"打在了无关段落上。
@@ -232,17 +232,17 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 学生论文_过程稿.
 #### 完整可执行命令
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 # 0) 先复制一份原件做工作副本，绝不直接在原件上操作
 cp 学生论文_过程稿.docx 学生论文_过程稿_work.docx
 
 # 1) 自检输入：确认能读到段落/表格
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 学生论文_过程稿_work.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 学生论文_过程稿_work.docx
 
 # 2) 写批注：--author 会显示在 Word 批注气球上，写"指导教师"
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in  学生论文_过程稿_work.docx \
     --out 学生论文_过程稿_导师批注.docx \
     --comments 批注清单.json \
@@ -250,7 +250,7 @@ $PY vendor/office-layer/scripts/docx_kit.py comment \
 echo "exit=$?"          # ★ 0 = 全部命中；2 = 有锚点未命中，必须修正后重跑
 
 # 3) 自检：读回批注数与批注正文，确认与 JSON 条数一致
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 学生论文_过程稿_导师批注.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 学生论文_过程稿_导师批注.docx
 ```
 
 `--comments` 也支持 `-` 从 stdin 读 JSON，适合脚本化批量处理：
@@ -427,7 +427,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 学生论文_过程稿_
   交付时明确说明「模板文件未被改动，建议文本以批注形式给出」。
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 cat > 评语_spec.json <<'EOF'
@@ -457,8 +457,8 @@ cat > 评语_spec.json <<'EOF'
     "placeholder":"【待教师确认：是否同意参加答辩（同意 / 修改后同意 / 不同意）】\n【待教师确认：成绩 ____ 分】"}]}
 EOF
 
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec 评语_spec.json --out 论文评语草稿.docx
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 论文评语草稿.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec 评语_spec.json --out 论文评语草稿.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 论文评语草稿.docx
 ```
 
 **输出**：`论文评语草稿.docx`（+ 如有模板，则 `模板_评语建议批注.docx`）。
@@ -522,18 +522,18 @@ cat > 答辩问题_spec.json <<'EOF'
    {"heading":"五、教师复核","paras":[],"placeholder":"【待教师确认：本预案是否需按本组评委特点增删问题】"}]}
 EOF
 
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec 答辩问题_spec.json --out 答辩问题预案.docx
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 答辩问题预案.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec 答辩问题_spec.json --out 答辩问题预案.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 答辩问题预案.docx
 ```
 
 **可选：答辩 PPT**（教师明确要了才做）
-用 `vendor/paper-slides/paper-analyst/` 把论文拆成汇报结构，`vendor/slides-polish/SKILL.md` 打磨视觉，
+用 `skills/paper-analyst/` 把论文拆成汇报结构，`skills/slides-polish/SKILL.md` 打磨视觉，
 最后**必须**用 `pptx_kit.py` 落成文件（16:9、中文走 `a:ea`），别手搓 pptx：
 
 ```bash
-$PY vendor/office-layer/scripts/pptx_kit.py build --spec 答辩PPT_spec.json --out 答辩汇报.pptx
-$PY vendor/office-layer/scripts/pptx_kit.py notes --in 答辩汇报.pptx --notes 备注.json
-$PY vendor/office-layer/scripts/pptx_kit.py inspect --in 答辩汇报.pptx   # 单页 >220 字符会进 overdense，提示拆页
+$PY skills/office-layer/scripts/pptx_kit.py build --spec 答辩PPT_spec.json --out 答辩汇报.pptx
+$PY skills/office-layer/scripts/pptx_kit.py notes --in 答辩汇报.pptx --notes 备注.json
+$PY skills/office-layer/scripts/pptx_kit.py inspect --in 答辩汇报.pptx   # 单页 >220 字符会进 overdense，提示拆页
 ```
 
 **输出**：`答辩问题预案.docx`（+ 可选 `答辩汇报.pptx`）。
@@ -600,7 +600,7 @@ $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 答辩汇报.pptx   # �
 
 - [ ] **intake 一次性问完**：层次、学科、阶段、论文原件、评语模板、格式与字数要求、是否定稿、
       答辩形式、合规情况、交付格式、批注语气偏好（11 项同批问，未边做边问）
-- [ ] **引用的 vendor 路径均已 `ls` 验证存在**（本文件所有路径已实测）
+- [ ] **引用的 底座路径均已 `ls` 验证存在**（本文件所有路径已实测）
 - [ ] 学生原件**未被修改**；`comment` 的 `--out` 与 `--in` 不同路径
 - [ ] **`comment` 退出码为 0**，返回 JSON 的 `failed` 为空数组
 - [ ] `inspect` 读回的 `comments` 数 == `批注清单.json` 的条数
@@ -616,6 +616,6 @@ $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 答辩汇报.pptx   # �
 - [ ] **没有任何 AI 生成的文献条目**，缺失处为 `【待补文献】`
 - [ ] 抄袭风险段落只写「请核查」，**无定性结论**
 - [ ] 所有 docx 均经 `inspect` 自检（段落/表格/批注数符合预期）
-- [ ] 文件产出**全部**走 `vendor/office-layer/`，无手搓 OOXML、无伪表格
+- [ ] 文件产出**全部**走 `skills/office-layer/`，无手搓 OOXML、无伪表格
 - [ ] `交付说明.md` 含：待补/待确认清单、默认值标注、保密提示、中间文件清理提醒
 - [ ] 交付时用了**初稿口吻**，并明确告诉教师重点核对哪几处

@@ -37,23 +37,23 @@ description: "高校教师实证研究全流程辅助：研究设计定型、文
 
 | 路径 | 能做什么（已实读确认） | 边界 |
 |---|---|---|
-| `vendor/empirical-research/econ-audit/SKILL.md` | **对抗式计量审查**：审 Stata/R/Python 分析代码。三模式 `spec`/`full`/`compare`；标志 `pap:`（对预注册方案）、`vars:`、`design:rct|did|iv|rd|panel`、`severity:`。覆盖聚类层级、坏控制、函数形式、样本漂移、未授权填补、多重检验、抽样权重。输出按 CRITICAL / HIGH / MEDIUM / LOW 分级，骨架为 `econ_audit_[文件]_[日期].md` | 只审**代码中的分析选择**；明确声明不审数据分布、不审代码风格。本包把它作为**阶段四审计的规则来源**，输出改写为中文 |
-| `vendor/empirical-research/data-dictionary/SKILL.md` | **从 Stata `.dta` 生成 codebook**：三模式 `summary`/`full`/`analysis`；输出变量名/标签/类型/值标签/缺失率/描述统计；`analysis` 模式还会按命名规则猜变量角色（处理、分层、指数、结果、权重）并给处理组平衡表 | 依赖 `pyreadstat`+`pandas`（**本层 venv 默认未装**，见阶段三）。只吃 `.dta`；xlsx/csv 用本技能自建脚本。角色分类是「建议，非断言」 |
-| `vendor/empirical-research/lit-review/SKILL.md` | **多会话文献综述工作流**：`setup` 配置 → `new [name]` 脚手架 → `[name]` 续做 → `[name] referee` 查经典遗漏。标准文件集：`AGENT_INSTRUCTIONS.md`、`RESEARCH_QUESTIONS.md`、`MASTER_LIST.md`、`SEARCH_PROCESS.md`、`[name]_lit.bib`、`CONTINUATION_LOG.md`、`pdfs/`。含对比表模板、定位段、跨综述去重 | **它有「联网检索补文献」的能力，本包对其加装防幻觉约束**（见下文「绝不虚构」一节）：默认档只整理教师材料 |
-| `vendor/empirical-research/README.md` | 上游三技能总览与出处 | 参考 |
-| `vendor/education-skills/研究方法/quasi-experimental-design.md` | 准实验设计全流程：设计类型选择（不等组前后测 / 中断时间序列 / 断点回归）、样本量与检定力（d=0.5, α=.05, power=.80 的 G\*Power 逻辑）、测量工具信效度、统计方法（ANCOVA、DID、倾向分数配对）、**内在效度威胁表**（历史/成熟/测验/选择/流失/实验者效应）、IRB 伦理审查准备 | 繁體中文 .md，非 SKILL.md 结构，读后按其阶段表执行 |
-| `vendor/education-skills/研究方法/education-research-design.md` | 研究类型分类（基础/应用/行动）、量化-质性-混合三范式适用情境、五步设计流程（问题界定→文献→方法→结果→结论）、四种常见设计图式（准实验、个案、DBR、行动研究） | 同上 |
-| `vendor/education-skills/研究方法/mixed-methods.md` | 混合方法：并行/解释性序列/探索性序列三类设计、量质互补逻辑、整合点、**效度清单含统计结论效度、建构效度、外在效度、可信度** | 同上 |
-| `vendor/education-skills/研究方法/empirical-research-automation.md` | 实证研究自动化：Stata→Python/R 代码现代化、数据清理、描述与推断统计、APA 格式图表、文献回顾整理、GitHub 可复现性套件 | 同上 |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | **证据分级与独立核验**：事实类型（user-confirmed / material-verified / unknown…）、证据卡（主张+来源+定位+`verified`）、`[n]` 引用键双向可达规则、独立核验结论只能为 supported/limited/unsupported/unknown、`EV-LIT-001~005` 文献综合规则（**不编造作者、题名、DOI、页码**） | 本技能「不虚构」一节直接复用其规则编号 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | 交付前质量门 | 内容门 |
-| `vendor/office-layer/` | **文件产出唯一通道**：`xlsx_kit.py`（build/analyze/inspect，含成绩分析口径）、`docx_kit.py`（md/comment/spec/inspect，原生批注）、`pptx_kit.py` | 见其 `SKILL.md` |
+| `skills/empirical-research/econ-audit/SKILL.md` | **对抗式计量审查**：审 Stata/R/Python 分析代码。三模式 `spec`/`full`/`compare`；标志 `pap:`（对预注册方案）、`vars:`、`design:rct|did|iv|rd|panel`、`severity:`。覆盖聚类层级、坏控制、函数形式、样本漂移、未授权填补、多重检验、抽样权重。输出按 CRITICAL / HIGH / MEDIUM / LOW 分级，骨架为 `econ_audit_[文件]_[日期].md` | 只审**代码中的分析选择**；明确声明不审数据分布、不审代码风格。本包把它作为**阶段四审计的规则来源**，输出改写为中文 |
+| `skills/empirical-research/data-dictionary/SKILL.md` | **从 Stata `.dta` 生成 codebook**：三模式 `summary`/`full`/`analysis`；输出变量名/标签/类型/值标签/缺失率/描述统计；`analysis` 模式还会按命名规则猜变量角色（处理、分层、指数、结果、权重）并给处理组平衡表 | 依赖 `pyreadstat`+`pandas`（**本层 venv 默认未装**，见阶段三）。只吃 `.dta`；xlsx/csv 用本技能自建脚本。角色分类是「建议，非断言」 |
+| `skills/empirical-research/lit-review/SKILL.md` | **多会话文献综述工作流**：`setup` 配置 → `new [name]` 脚手架 → `[name]` 续做 → `[name] referee` 查经典遗漏。标准文件集：`AGENT_INSTRUCTIONS.md`、`RESEARCH_QUESTIONS.md`、`MASTER_LIST.md`、`SEARCH_PROCESS.md`、`[name]_lit.bib`、`CONTINUATION_LOG.md`、`pdfs/`。含对比表模板、定位段、跨综述去重 | **它有「联网检索补文献」的能力，本包对其加装防幻觉约束**（见下文「绝不虚构」一节）：默认档只整理教师材料 |
+| `THIRD_PARTY_NOTICES.md` | 上游三技能（econ-audit / data-dictionary / lit-review）出处与许可证 | 参考 |
+| `skills/education-skills/edu-research-methods/references/quasi-experimental-design.md` | 准实验设计全流程：设计类型选择（不等组前后测 / 中断时间序列 / 断点回归）、样本量与检定力（d=0.5, α=.05, power=.80 的 G\*Power 逻辑）、测量工具信效度、统计方法（ANCOVA、DID、倾向分数配对）、**内在效度威胁表**（历史/成熟/测验/选择/流失/实验者效应）、IRB 伦理审查准备 | 简体中文版（本包译自繁体），非 SKILL.md 结构，读后按其阶段表执行 |
+| `skills/education-skills/edu-research-methods/references/education-research-design.md` | 研究类型分类（基础/应用/行动）、量化-质性-混合三范式适用情境、五步设计流程（问题界定→文献→方法→结果→结论）、四种常见设计图式（准实验、个案、DBR、行动研究） | 同上 |
+| `skills/education-skills/edu-research-methods/references/mixed-methods.md` | 混合方法：并行/解释性序列/探索性序列三类设计、量质互补逻辑、整合点、**效度清单含统计结论效度、建构效度、外在效度、可信度** | 同上 |
+| `skills/education-skills/edu-research-methods/references/empirical-research-automation.md` | 实证研究自动化：Stata→Python/R 代码现代化、数据清理、描述与推断统计、APA 格式图表、文献回顾整理、GitHub 可复现性套件 | 同上 |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | **证据分级与独立核验**：事实类型（user-confirmed / material-verified / unknown…）、证据卡（主张+来源+定位+`verified`）、`[n]` 引用键双向可达规则、独立核验结论只能为 supported/limited/unsupported/unknown、`EV-LIT-001~005` 文献综合规则（**不编造作者、题名、DOI、页码**） | 本技能「不虚构」一节直接复用其规则编号 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | 交付前质量门 | 内容门 |
+| `skills/office-layer/` | **文件产出唯一通道**：`xlsx_kit.py`（build/analyze/inspect，含成绩分析口径）、`docx_kit.py`（md/comment/spec/inspect，原生批注）、`pptx_kit.py` | 见其 `SKILL.md` |
 | `skills/research-assistant/scripts/desc_stats.py` | **本技能自建**：研究数据的描述统计与交叉表。只读、不填补、不剔除、不出推断结论。可同时产出 Markdown 报告与 `xlsx_kit build` 规格 JSON | 只做描述统计；推断统计不在此脚本职责内 |
-| `vendor/VENDOR.md` | 上游溯源与许可证合规 | 引用前查 |
+| `THIRD_PARTY_NOTICES.md` | 上游溯源与许可证合规 | 引用前查 |
 
 ## 前置信息收集（intake，一次性问完）
 
-按 `vendor/awesome-benzi/references/INPUT_MODEL.md` 的 `question-batch` 思路，**合并成一次提问**，
+按 `skills/awesome-benzi/references/INPUT_MODEL.md` 的 `question-batch` 思路，**合并成一次提问**，
 不要边做边问。信息不全时**用安全默认值继续**，并在交付物里标明哪几处用了默认值。
 
 1. **研究问题**：一句话研究问题；学科与学段；研究情境（课堂/学校/线上/跨校）。
@@ -149,7 +149,7 @@ description: "高校教师实证研究全流程辅助：研究设计定型、文
 
 **输入**：教师提供的文献材料（`.bib` / 参考文献列表 / `pdfs/` / 论文初稿）。
 
-**动作**：加载 `vendor/empirical-research/lit-review/SKILL.md`，按其文件集组织，但**执行两处本包强制的改动**：
+**动作**：加载 `skills/empirical-research/lit-review/SKILL.md`，按其文件集组织，但**执行两处本包强制的改动**：
 
 1. **默认关闭联网补文献**（理由见「绝不虚构」）：只在教师明确说"可以去检索"时才用
    `web_search` 找**线索**，且每条线索必须附可点击链接与检索日期，标注
@@ -217,18 +217,18 @@ description: "高校教师实证研究全流程辅助：研究设计定型、文
 
 #### 3.1 两条路径（按数据格式分）
 
-**路径 A — `.dta`（Stata）**：按 `vendor/empirical-research/data-dictionary/SKILL.md` 走，
+**路径 A — `.dta`（Stata）**：按 `skills/empirical-research/data-dictionary/SKILL.md` 走，
 模式建议 `full` 或 `analysis`。先确认依赖（本层 venv 默认没装）：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 $PY -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas pyreadstat
 ```
 
 **路径 B — `.xlsx` / `.csv`（多数教师场景）**：用本技能自建脚本先出**统计事实底稿**：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
 # 描述统计 + 缺失概况 + 交叉表（只读，不改原始数据）
 $PY skills/research-assistant/scripts/desc_stats.py \
@@ -238,8 +238,8 @@ $PY skills/research-assistant/scripts/desc_stats.py \
     --out-md 过程/描述统计.md --out-json 过程/描述统计.json
 
 # 出 xlsx 底稿
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 过程/描述统计.json --out 数据字典_统计底稿.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 数据字典_统计底稿.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 过程/描述统计.json --out 数据字典_统计底稿.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 数据字典_统计底稿.xlsx
 ```
 
 > ⚠ 注意 `--missing-codes` 的值以 `-` 开头，**必须写成 `--missing-codes="-99,-98,-97"`**（用等号），
@@ -299,7 +299,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 数据字典_统计底�
 
 **输入**：分析代码（`.do` / `.R` / `.py`）或分析计划文字；数据字典；预注册方案（若有）。
 
-**动作**：以 `vendor/empirical-research/econ-audit/SKILL.md` 为规则来源，按下面六项清单逐条过。
+**动作**：以 `skills/empirical-research/econ-audit/SKILL.md` 为规则来源，按下面六项清单逐条过。
 **没有代码时，就审计"数据处理说明 + 分析计划"这份文字**——清单一样适用。
 
 #### 4.1 审计清单 A — 样本筛选是否可复现
@@ -401,7 +401,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 数据字典_统计底�
 
 ```bash
 # 在技能包根目录（含 CONVENTIONS.md 的那一级）执行
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 $PY skills/research-assistant/scripts/desc_stats.py \
@@ -410,8 +410,8 @@ $PY skills/research-assistant/scripts/desc_stats.py \
     --cross 组别,后测成绩 --cross 组别,性别 \
     --out-md 过程/描述统计.md --out-json 过程/描述统计.json
 
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 过程/描述统计.json --out 描述统计.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 描述统计.xlsx    # 自检：工作表与行列数
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 过程/描述统计.json --out 描述统计.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 描述统计.xlsx    # 自检：工作表与行列数
 ```
 
 脚本产出 4 张表：说明（数据来源/行数/缺失编码/声明）、连续变量（N/缺失/均值/标准差/P25/中位数/P75/极值）、
@@ -434,7 +434,7 @@ cat > 过程/组间比较.json <<'JSON'
   "chart":{"type":"bar","title":"前后测均值对比（数字来自数据文件）","value_col":2}}]}
 JSON
 # ↑ rows 里的 0 必须替换成脚本算出的真实均值后再执行；不要凭印象填数
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 过程/组间比较.json --out 组间比较.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 过程/组间比较.json --out 组间比较.xlsx
 ```
 
 `chart` 支持 `type: bar|line`、`value_col`（从第几列取数）、`anchor`（图表锚点位置）。
@@ -459,7 +459,7 @@ PY
 如果是**考试/测验成绩**（不是实验数据），可用 `xlsx_kit.py analyze` 出教育测量口径的三张表：
 
 ```bash
-$PY vendor/office-layer/scripts/xlsx_kit.py analyze \
+$PY skills/office-layer/scripts/xlsx_kit.py analyze \
     --in 成绩.xlsx --out 成绩分析.xlsx \
     --first-q-col 3 --full-marks '[10,10,15,15]'
 ```
@@ -578,11 +578,11 @@ $PY vendor/office-layer/scripts/xlsx_kit.py analyze \
 #### 6.4 交付
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
-$PY vendor/office-layer/scripts/docx_kit.py md --in 研究报告初稿.md --out 研究报告初稿.docx \
+$PY skills/office-layer/scripts/docx_kit.py md --in 研究报告初稿.md --out 研究报告初稿.docx \
     --title "【待补：研究标题】"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 研究报告初稿.docx   # 自检段落/表格/字数
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 研究报告初稿.docx   # 自检段落/表格/字数
 ```
 
 需要给学生或合作者标注待改处时用**原生批注**：
@@ -592,7 +592,7 @@ cat > 过程/批注.json <<'JSON'
 [{"anchor": "本研究报告的是相关关系，不主张因果",
   "text": "此处措辞已按识别策略降级；若补做平行趋势检验，可升级为因果讨论。"}]
 JSON
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 研究报告初稿.docx --out 研究报告初稿_批注.docx \
     --comments 过程/批注.json --author "研究助理"
 ```
@@ -607,7 +607,7 @@ $PY vendor/office-layer/scripts/docx_kit.py comment \
 ## 绝不虚构（最高红线，独立成节）
 
 > 高校研究材料一旦编造，后果是学术不端。以下每一条都是**硬约束**，不是建议。
-> 规则沿用 `vendor/awesome-benzi/references/EVIDENCE_MODEL.md`（`EV-CARD-005`、`EV-LIT-005`、`EV-UNKNOWN-001`）。
+> 规则沿用 `skills/awesome-benzi/references/EVIDENCE_MODEL.md`（`EV-CARD-005`、`EV-LIT-005`、`EV-UNKNOWN-001`）。
 
 ### 1. 文献：绝不生成引用
 
@@ -687,7 +687,7 @@ $PY vendor/office-layer/scripts/docx_kit.py comment \
 6. **不改写结果去迎合假设**。发现结果与假设相反，如实报告并讨论——这是研究的一部分。
 7. **涉及人的研究提示伦理审查**。涉及未成年人、可识别信息、干预实验时，
    提醒教师确认伦理审查与知情同意（参照 `quasi-experimental-design.md` 的 IRB 准备节）。AI 不代替审查。
-8. **文件产出只走 `vendor/office-layer/`**。不用文本框拼表格，不手搓 OOXML，
+8. **文件产出只走 `skills/office-layer/`**。不用文本框拼表格，不手搓 OOXML，
    不生成 `.md` 当交付物（教师明确只要 Markdown 除外）。
 9. **不放任 CRITICAL 问题**。审计发现的 CRITICAL 项若不修，必须在报告与交付说明中明确标注，
    不得默默略过。

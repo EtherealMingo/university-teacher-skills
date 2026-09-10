@@ -3,24 +3,30 @@
 本文件是本技能包的「宪法」。新增或修改任何子 skill 前先读这里，再读范本
 `skills/grant-proposal/SKILL.md`。
 
-## 1. vendor-first
+## 1. 底座复用（foundation-first）
 
-实现任何能力前，先查 `vendor/` 是否已有底座（见 `vendor/VENDOR.md` 溯源表）。
+实现任何能力前，先查 `skills/` 下是否已有底座技能（上游溯源见 `THIRD_PARTY_NOTICES.md`）。
+底座技能共 26 个，按上游套件组织：独立件 `awesome-benzi`、`office-layer`、`paper-analyst`、
+`slides-polish` 平铺；其余收进五个套件目录 —— `empirical-research/`（`econ-audit`、
+`data-dictionary`、`lit-review`）、`ibook-skills/`（`question-writing`、`learning-graph-generator`、
+`glossary-generator`、`faq-generator`、`course-description-analyzer`）、
+`learning-education/`（`study-skill`、`thinking-toolkit`、`learning-paths`）、
+`k12-teacher-skills/`（k12-* 四技能）、`education-skills/`（edu-* 七技能）。
 **有则引用，禁止重写。** 引用时在 SKILL.md 里写明：
 
 ```markdown
 ## 底座
-- `vendor/awesome-benzi/references/QUALITY_GATES.md` — 质量门规则，直接复用
-- `vendor/office-layer/` — 文件产出通道
+- `skills/awesome-benzi/references/QUALITY_GATES.md` — 质量门规则，直接复用
+- `skills/office-layer/` — 文件产出通道
 ```
 
 ## 2. 文件产出唯一通道
 
-任何 docx / pptx / xlsx / pdf 产出**一律**走 `vendor/office-layer/`：
+任何 docx / pptx / xlsx / pdf 产出**一律**走 `skills/office-layer/`：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
-$PY vendor/office-layer/scripts/docx_kit.py md --in draft.md --out 交付.docx
+PY="skills/office-layer/.venv/bin/python"
+$PY skills/office-layer/scripts/docx_kit.py md --in draft.md --out 交付.docx
 ```
 
 禁止：
@@ -93,7 +99,7 @@ description: "<中文说明>。Triggers: <至少 3 句教师真实会说的话>"
 ## 8. 自检清单（交付前逐项过）
 
 - [ ] `description` 里至少有 3 个教师真实会说的触发短语
-- [ ] 引用的 `vendor/` 路径**真实存在**（用 `ls` 验证过，不是凭记忆写的）
+- [ ] 引用的底座路径（`skills/` 下）**真实存在**（用 `ls` 验证过，不是凭记忆写的）
 - [ ] 有「不虚构 + 一次性收集缺失信息」纪律
 - [ ] 文件产出走了 `office-layer`
 - [ ] 评价性内容留了人工确认位

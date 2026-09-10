@@ -31,18 +31,18 @@ description: "高校教师实习实训与实践教学全流程辅助：从联系
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/` | **文件产出唯一通道**：`docx_kit.py` 出协议要素清单/方案/指导记录/鉴定表说明、`xlsx_kit.py` 出安排表与成绩汇总、`pptx_kit.py` 出实习动员与安全教育稿 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | **评价量规的分级思路**：`blocked` / `needs-review` / `advisory` 三级问题模型，直接复用到实习评价量表与材料检查表 |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | **实习鉴定的真实性纪律**：事实分级、未知项 `【待补：…】`、不允许把模型推断写成学生事实 |
-| `vendor/education-skills/教學設計/project-based-learning.md` | 实践教学设计思路：真实任务驱动、阶段化推进、过程性检核点、教师作为促进者 |
-| `vendor/education-skills/學習分析/competency-based-assessment.md` | 实践能力评价量规：真实情境、表现本位、四等第评分规准、历程档案 |
-| `vendor/VENDOR.md` | 底座溯源与许可证合规（引用前先查，不猜路径） |
+| `skills/office-layer/` | **文件产出唯一通道**：`docx_kit.py` 出协议要素清单/方案/指导记录/鉴定表说明、`xlsx_kit.py` 出安排表与成绩汇总、`pptx_kit.py` 出实习动员与安全教育稿 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | **评价量规的分级思路**：`blocked` / `needs-review` / `advisory` 三级问题模型，直接复用到实习评价量表与材料检查表 |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | **实习鉴定的真实性纪律**：事实分级、未知项 `【待补：…】`、不允许把模型推断写成学生事实 |
+| `skills/education-skills/edu-teaching-design/references/project-based-learning.md` | 实践教学设计思路：真实任务驱动、阶段化推进、过程性检核点、教师作为促进者 |
+| `skills/education-skills/edu-learning-analytics/references/competency-based-assessment.md` | 实践能力评价量规：真实情境、表现本位、四等第评分规准、历程档案 |
+| `THIRD_PARTY_NOTICES.md` | 底座溯源与许可证合规（引用前先查，不猜路径） |
 
 > 引用前先 `ls` 验证路径存在。上表路径均已在包根实测存在，**不要凭记忆改写路径**。
 
 ## 前置信息收集（intake，一次性问完）
 
-按 `vendor/awesome-benzi/references/INPUT_MODEL.md` 的 `question-batch` 机制，
+按 `skills/awesome-benzi/references/INPUT_MODEL.md` 的 `question-batch` 机制，
 **把下面 7 项合并成一次提问，不要边做边问**：
 
 1. **专业与年级**：专业名称、学生年级、层次（本科/专科/研究生）
@@ -71,9 +71,9 @@ description: "高校教师实习实训与实践教学全流程辅助：从联系
 **动作**：
 
 ```bash
-cd /Users/mingo/Documents/kimi/Workspaces/skills      # 包根，所有 vendor 路径都相对它写
-bash vendor/office-layer/bootstrap.sh                 # 首次使用才需要
-PY="vendor/office-layer/.venv/bin/python"
+cd <技能包根目录>      # 包根，所有底座路径都相对它写
+bash skills/office-layer/bootstrap.sh                 # 首次使用才需要
+PY="skills/office-layer/.venv/bin/python"
 ```
 
 建立任务目录，敏感材料单独放：
@@ -90,7 +90,7 @@ PY="vendor/office-layer/.venv/bin/python"
 ```
 
 **输出**：可用的 venv 与目录骨架
-**退出条件**：`$PY vendor/office-layer/scripts/docx_kit.py --help` 能正常打印用法
+**退出条件**：`$PY skills/office-layer/scripts/docx_kit.py --help` 能正常打印用法
 
 ### 阶段一 · 实习基地联系与资质核查
 
@@ -120,8 +120,8 @@ PY="vendor/office-layer/.venv/bin/python"
 **必须留白的地方**：单位全称、联系人姓名职务、电话、地址一律 `【待补：…】`，**不得由 AI 编造**。
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md --in 基地联系函.md --out 基地联系函.docx --title "实习基地联系函"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 基地联系函.docx
+$PY skills/office-layer/scripts/docx_kit.py md --in 基地联系函.md --out 基地联系函.docx --title "实习基地联系函"
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 基地联系函.docx
 ```
 
 **输出**：`基地资质核查清单.md`、`基地联系函.docx`、`基地候选单位清单.xlsx`
@@ -211,8 +211,8 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 基地联系函.docx
 2. **生成安排表**（走 `xlsx_kit.py build`）：
 
 ```bash
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 安排表规格.json --out 实习安排表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 实习安排表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 安排表规格.json --out 实习安排表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 实习安排表.xlsx
 ```
 
 `安排表规格.json` 规格片段：
@@ -248,8 +248,8 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 实习安排表.xlsx
 1. **实习前安全教育**（出讲稿与签到表，走 `pptx_kit.py` 出动员稿）：
 
 ```bash
-$PY vendor/office-layer/scripts/pptx_kit.py build --spec 动员规格.json --out 实习动员与安全教育.pptx
-$PY vendor/office-layer/scripts/pptx_kit.py inspect --in 实习动员与安全教育.pptx
+$PY skills/office-layer/scripts/pptx_kit.py build --spec 动员规格.json --out 实习动员与安全教育.pptx
+$PY skills/office-layer/scripts/pptx_kit.py inspect --in 实习动员与安全教育.pptx
 ```
 
 必讲内容（一页一条，不合并）：① 实习性质与目标；② 纪律红线（不得擅自变更单位或岗位、
@@ -259,7 +259,7 @@ $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 实习动员与安全�
 2. **安全承诺书**（走 `docx_kit.py spec`，出空白待签版，**不代签、不预填**）：
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec 承诺书规格.json --out 实习安全承诺书.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec 承诺书规格.json --out 实习安全承诺书.docx
 ```
 
 规格片段（`placeholder` 字段即人工确认位，会以显式占位落在正文）：
@@ -312,8 +312,8 @@ $PY vendor/office-layer/scripts/docx_kit.py spec --spec 承诺书规格.json --o
 1. **现场指导记录**（一份一次，走 `docx_kit.py md`）：
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md --in 指导记录.md --out 实习指导记录.docx --title "实习指导记录"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 实习指导记录.docx
+$PY skills/office-layer/scripts/docx_kit.py md --in 指导记录.md --out 实习指导记录.docx --title "实习指导记录"
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 实习指导记录.docx
 ```
 
 结构固定七要素：**时间 / 地点 / 参与学生 / 指导内容 / 发现问题 / 处理结果 / 后续跟进**。
@@ -336,10 +336,10 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 实习指导记录.docx
 学生打开就是批注气泡，可读可回：
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 学生周报.docx --out 学生周报_批注.docx \
     --comments 批注.json --author "校内指导教师"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 学生周报_批注.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 学生周报_批注.docx
 ```
 
 `批注.json`（`anchor` 必须是原文逐字片段，含标点；锚点未命中会进 `failed` 且退出码为 2，
@@ -415,7 +415,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 学生周报_批注.doc
 若实习成绩本身由多道分项考核构成，可另用 `analyze` 做分项统计：
 
 ```bash
-$PY vendor/office-layer/scripts/xlsx_kit.py analyze --in 分项评分表.xlsx \
+$PY skills/office-layer/scripts/xlsx_kit.py analyze --in 分项评分表.xlsx \
     --out 实习分项分析.xlsx --first-q-col 3 --full-marks '[30,30,40]'
 ```
 
@@ -505,7 +505,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py analyze --in 分项评分表.xlsx \
 ## 自检清单
 
 - [ ] intake 七项是否一次性问完，缺项是否用了安全默认值并在产出物顶部标注
-- [ ] 引用的 `vendor/` 路径是否都用 `ls` 验证过存在（不凭记忆写路径）
+- [ ] 引用的 底座路径是否都用 `ls` 验证过存在（不凭记忆写路径）
 - [ ] 基地资质核查是否**只出清单**、未替院系下「合格」结论
 - [ ] 协议产出是否为「要素核对表 + 缺口清单」，且写明**须法务/主管部门审核**
 - [ ] 每个实习目标是否都挂到了培养方案能力指标（编号无依据时是否留占位）
@@ -518,7 +518,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py analyze --in 分项评分表.xlsx \
 - [ ] 企业名称、考勤、企业评价、成绩是否全部有真实依据，无依据处是否留 `【待补：…】`
 - [ ] 成绩权重、报告得分、评语、是否通过是否都留了 `【待教师确认：…】`
 - [ ] 含学生个人信息的文件是否只在本机处理、交付说明是否注明保管要求、是否提供了脱敏版
-- [ ] 全部 docx/pptx/xlsx 是否都走 `vendor/office-layer/` 且生成后用 `inspect` 读回核对
+- [ ] 全部 docx/pptx/xlsx 是否都走 `skills/office-layer/` 且生成后用 `inspect` 读回核对
 - [ ] `comment` 是否退出码为 0（非 0 说明有锚点未命中，必须逐条修正，不得忽略）
 - [ ] 归档清单 16 项是否逐项有状态，缺项是否标 `【缺失：…】` 而非默默略过
 - [ ] 总结报告里的每处数据是否都能追到原始材料

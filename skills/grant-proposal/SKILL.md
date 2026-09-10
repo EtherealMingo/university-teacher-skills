@@ -22,15 +22,15 @@ description: "高校教师科研/教改项目申报全流程辅助：选题查�
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/awesome-benzi/WORKFLOW.md` | **七阶段工作流总纲，本 skill 的编排主干** |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | 扫描、预算、恢复、问题批次 |
-| `vendor/awesome-benzi/references/WRITING_MODEL.md` | 十模块写作与结构化推理 |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级与独立核验 |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | AI 味治理、严肃表达 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | **质量门规则，交付前必须全过** |
-| `vendor/awesome-benzi/references/MARKDOWN_DOCX_CONTRACT.md` | Markdown 冻结与 DOCX 契约 |
-| `vendor/awesome-benzi/workflows/*/WORKFLOW.md` | 按项目族选**一个**加载 |
-| `vendor/office-layer/` | 文件产出通道 |
+| `skills/awesome-benzi/WORKFLOW.md` | **七阶段工作流总纲，本 skill 的编排主干** |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | 扫描、预算、恢复、问题批次 |
+| `skills/awesome-benzi/references/WRITING_MODEL.md` | 十模块写作与结构化推理 |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级与独立核验 |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | AI 味治理、严肃表达 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | **质量门规则，交付前必须全过** |
+| `skills/awesome-benzi/references/MARKDOWN_DOCX_CONTRACT.md` | Markdown 冻结与 DOCX 契约 |
+| `skills/awesome-benzi/workflows/*/WORKFLOW.md` | 按项目族选**一个**加载 |
+| `skills/office-layer/` | 文件产出通道 |
 
 选工作流：社科基金 → `social-science-grant`；自然/工程 → `natural-science-grant`；
 创新创业大赛 → `innovation-competition`；大创 → `student-innovation`；挑战杯/创青春 → `challenge-cup`。
@@ -54,7 +54,7 @@ description: "高校教师科研/教改项目申报全流程辅助：选题查�
 用自建脚本对选题做**已立项/已发表**的重叠度检查：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 $PY skills/grant-proposal/scripts/topic_overlap.py \
     --topic "基于多模态学习的城市轨道交通客流预测" \
     --corpus 已立项清单.xlsx --out 查重报告.md
@@ -98,8 +98,8 @@ $PY skills/grant-proposal/scripts/topic_overlap.py \
 内容门通过后冻结 Markdown，用 office-layer 出 DOCX：
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md --in draft.md --out 申报书初稿.docx
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 申报书初稿.docx   # 自检
+$PY skills/office-layer/scripts/docx_kit.py md --in draft.md --out 申报书初稿.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 申报书初稿.docx   # 自检
 ```
 
 同时交付：`查重报告.md`、`指南匹配矩阵.xlsx`、`模拟评审意见.docx`。

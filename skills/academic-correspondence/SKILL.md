@@ -36,15 +36,15 @@ description: "高校教师对外学术通信与联络的起草辅助：审稿邀
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | **本技能最关键**。压掉 AI 味、营销腔、聊天残留（WR-STYLE-010/011/012）与机械转承；中文去过度客套、英文去过度谦卑的判据都在这里 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | 问题分级 `blocked` / `needs-review` / `advisory`；风格门 `QG-STYLE-001` 与错误码约定 |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 机制 —— intake 一次性问完的依据 |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级 —— 核对对方职称/成果/奖项时用来区分「已核实」与「教师口述未核」 |
-| `vendor/office-layer/` | **文件产出唯一通道** |
-| `vendor/office-layer/scripts/docx_kit.py` | 正式函件出 DOCX（`md` / `spec` / `inspect`） |
-| `vendor/office-layer/scripts/pptx_kit.py` | 会议议程大屏、主持人提词卡、致辞提词卡 |
-| `vendor/paper-slides/paper-analyst/` | 邀请函里需介绍讲者研究、或需读懂对方论文时用 |
-| `vendor/VENDOR.md` | 底座溯源与许可证边界 |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | **本技能最关键**。压掉 AI 味、营销腔、聊天残留（WR-STYLE-010/011/012）与机械转承；中文去过度客套、英文去过度谦卑的判据都在这里 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | 问题分级 `blocked` / `needs-review` / `advisory`；风格门 `QG-STYLE-001` 与错误码约定 |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 机制 —— intake 一次性问完的依据 |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级 —— 核对对方职称/成果/奖项时用来区分「已核实」与「教师口述未核」 |
+| `skills/office-layer/` | **文件产出唯一通道** |
+| `skills/office-layer/scripts/docx_kit.py` | 正式函件出 DOCX（`md` / `spec` / `inspect`） |
+| `skills/office-layer/scripts/pptx_kit.py` | 会议议程大屏、主持人提词卡、致辞提词卡 |
+| `skills/paper-analyst/` | 邀请函里需介绍讲者研究、或需读懂对方论文时用 |
+| `THIRD_PARTY_NOTICES.md` | 底座溯源与许可证边界 |
 
 > 不允许自行发明「邮件写作技巧」。语言层面的规则一律引用 `LANGUAGE_MODEL.md` 的规则 ID，
 > 冲突时以该文件为准。
@@ -201,20 +201,20 @@ description: "高校教师对外学术通信与联络的起草辅助：审稿邀
   需要**盖章、留档、走公文流程**的正式函件才走 `office-layer`：
 
   ```bash
-  cd /Users/mingo/Documents/kimi/Workspaces/skills   # 必须在包根执行，vendor 路径是相对包根写的
-  PY="vendor/office-layer/.venv/bin/python"
+  cd <技能包根目录>   # 必须在包根执行，底座路径是相对包根写的
+  PY="skills/office-layer/.venv/bin/python"
 
   # 方式一：Markdown → DOCX（中文字体、标题层级、页码、首行缩进两字）
-  $PY vendor/office-layer/scripts/docx_kit.py md \
+  $PY skills/office-layer/scripts/docx_kit.py md \
       --in 专家邀请函.md --out 专家邀请函.docx --title "专家邀请函"
 
   # 方式二：JSON 规格 → DOCX（正式函件的抬头、表格回执、人工确认位）
   # spec 结构：{title, subtitle, sections:[{heading, paras, no_indent, table:{header,rows}, placeholder}]}
-  $PY vendor/office-layer/scripts/docx_kit.py spec \
+  $PY skills/office-layer/scripts/docx_kit.py spec \
       --spec 邀请函_spec.json --out 专家邀请函.docx
 
   # 写完必须 self-check，读回段落/表格/字数
-  $PY vendor/office-layer/scripts/docx_kit.py inspect --in 专家邀请函.docx
+  $PY skills/office-layer/scripts/docx_kit.py inspect --in 专家邀请函.docx
   ```
 
   `spec` 里留人工确认位（会在文档里以楷体斜体显式出现，提醒教师必须手改）：

@@ -33,25 +33,25 @@ description: "把教案、教材章节或知识点清单变成能直接上课的
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/SKILL.md` | 文件产出通道总说明，**先读它再动手** |
-| `vendor/office-layer/scripts/pptx_kit.py` | `build` / `notes` / `inspect` 三个命令，本技能的**唯一出片工具** |
-| `vendor/office-layer/bootstrap.sh` | 首次使用装依赖（python-pptx 等） |
-| `vendor/education-skills/教學設計/lesson-plan-generator.md` | 「引起動機 / 發展活動 / 綜合活動」三段式流程 —— 教案 → 课件的**页序映射依据** |
-| `vendor/education-skills/教學設計/differentiated-instruction.md` | 同一知识点分层（基础/中等/进阶）时的页面处理思路 |
-| `vendor/k12-teacher-skills/k12-lesson-prep/SKILL.md` | 备课时「先自己做一遍关键任务」的思路，用于决定哪些页要留白让学生动手 |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | 备注与正文的「AI 味与口水话」治理规则 |
-| `vendor/slides-polish/SKILL.md` | **仅在需要精美视觉时**：HTML/SVG → 无头 Chrome 截图 → PNG → 嵌入 pptx 的管线 |
+| `skills/office-layer/SKILL.md` | 文件产出通道总说明，**先读它再动手** |
+| `skills/office-layer/scripts/pptx_kit.py` | `build` / `notes` / `inspect` 三个命令，本技能的**唯一出片工具** |
+| `skills/office-layer/bootstrap.sh` | 首次使用装依赖（python-pptx 等） |
+| `skills/education-skills/edu-teaching-design/references/lesson-plan-generator.md` | 「引起動機 / 發展活動 / 綜合活動」三段式流程 —— 教案 → 课件的**页序映射依据** |
+| `skills/education-skills/edu-teaching-design/references/differentiated-instruction.md` | 同一知识点分层（基础/中等/进阶）时的页面处理思路 |
+| `skills/k12-teacher-skills/k12-lesson-prep/SKILL.md` | 备课时「先自己做一遍关键任务」的思路，用于决定哪些页要留白让学生动手 |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | 备注与正文的「AI 味与口水话」治理规则 |
+| `skills/slides-polish/SKILL.md` | **仅在需要精美视觉时**：HTML/SVG → 无头 Chrome 截图 → PNG → 嵌入 pptx 的管线 |
 
 **首次使用先装依赖**：
 
 ```bash
-bash vendor/office-layer/bootstrap.sh
+bash skills/office-layer/bootstrap.sh
 ```
 
 **环境变量约定**（后文所有命令都用这个）：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 ```
 
 受限环境下 matplotlib 需要可写缓存（本技能用不到 matplotlib，但同一 venv 被别的技能共用时仍建议先导出）：
@@ -64,7 +64,7 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 ## 前置信息收集（intake，一次性问完）
 
-按 `vendor/awesome-benzi/references/INPUT_MODEL.md` 的「一次性问题」机制（`IN-QUESTION-001~005`），
+按 `skills/awesome-benzi/references/INPUT_MODEL.md` 的「一次性问题」机制（`IN-QUESTION-001~005`），
 把下面这些**合并成一次提问**，不要边做边问：
 
 1. **课程与层次**：课程名、章节、学科；学生是本科低年级 / 高年级 / 研究生 / 高职
@@ -172,7 +172,7 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 > 上面第 3 页的 `image` 路径是**示意占位**。真实使用时必须换成教师本地图片的**绝对路径**，文件不存在脚本会直接抛 `FileNotFoundError` 且不产出任何文件。**教师没给图，就把整个 `image` 字段删掉**，不要留假路径。
 
-**spec 字段速查**（与 `vendor/office-layer/SKILL.md` 一致，此处补充教学场景细节）：
+**spec 字段速查**（与 `skills/office-layer/SKILL.md` 一致，此处补充教学场景细节）：
 
 | 字段 | 层级 | 说明 |
 |---|---|---|
@@ -194,8 +194,8 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 **动作**：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
-$PY vendor/office-layer/scripts/pptx_kit.py build --spec 课件_spec.json --out 课件.pptx
+PY="skills/office-layer/.venv/bin/python"
+$PY skills/office-layer/scripts/pptx_kit.py build --spec 课件_spec.json --out 课件.pptx
 ```
 
 `build` 完成后会**顺手把自己 `inspect` 的结果打到 stdout**，也就是一次生成自带一次自检。把上面那份 spec（图片换成真实存在的本地图）跑一遍，实测输出：
@@ -248,10 +248,10 @@ cat > 备注.json <<'JSON'
 JSON
 
 # 原地写入（覆盖原文件，最常用）
-$PY vendor/office-layer/scripts/pptx_kit.py notes --in 课件.pptx --notes 备注.json
+$PY skills/office-layer/scripts/pptx_kit.py notes --in 课件.pptx --notes 备注.json
 
 # 另存一份（想保留无备注版时用）
-$PY vendor/office-layer/scripts/pptx_kit.py notes --in 课件.pptx --notes 备注.json --out 课件_含备注.pptx
+$PY skills/office-layer/scripts/pptx_kit.py notes --in 课件.pptx --notes 备注.json --out 课件_含备注.pptx
 ```
 
 **索引口径（关键）**：`notes` 的 key 是 **1-based 的页序，且第 1 页就是封面页**。封面页的备注用来写开场语。
@@ -278,7 +278,7 @@ $PY vendor/office-layer/scripts/pptx_kit.py notes --in 课件.pptx --notes 备�
 **动作**：
 
 ```bash
-$PY vendor/office-layer/scripts/pptx_kit.py inspect --in 课件.pptx > 课件_自检.json
+$PY skills/office-layer/scripts/pptx_kit.py inspect --in 课件.pptx > 课件_自检.json
 ```
 
 **退出条件**：
@@ -417,7 +417,7 @@ pptx_kit 的字号是**写死在脚本里的**，这套数值就是本技能的*
 | 阶梯教室（100–200 人） | 10–15 m | **偏小** | 减少每页条数，或在 PowerPoint 里全选正文放大到 24–28pt |
 | 报告厅 / 直播录课 | > 15 m | 不够 | 一页一个结论，正文不超过 3 条，字号手动放大 |
 
-> **诚实交代一个限制**：pptx_kit 不提供字号参数。要放大只能在 PowerPoint 里选中文本框改字号（中文字体设置会保留，因为是逐个 run 写进 `a:ea` 的），或者改用 `vendor/slides-polish/` 的 HTML→PNG 路径自行控制排版。**第一次上课前请到最后一排坐一下，看一眼最下面那行字**，这是唯一可靠的验收方式。
+> **诚实交代一个限制**：pptx_kit 不提供字号参数。要放大只能在 PowerPoint 里选中文本框改字号（中文字体设置会保留，因为是逐个 run 写进 `a:ea` 的），或者改用 `skills/slides-polish/` 的 HTML→PNG 路径自行控制排版。**第一次上课前请到最后一排坐一下，看一眼最下面那行字**，这是唯一可靠的验收方式。
 
 **反面清单**：不要为了塞内容把字号调小；不要用 12pt 以下的字；不要在图片里嵌小字（截图里的代码按 1:1 贴上去一定看不清，宁可拆成两页放关键几行）。
 
@@ -451,7 +451,7 @@ pptx_kit 的字号是**写死在脚本里的**，这套数值就是本技能的*
 | 3 个以上并列的短条目 | **改成 `table`**。表格是 `pptx_kit` 里密度最低的表达方式 |
 | 两组事物的差异 | **对比表**，列为「维度 / A / B」，或「做法 / 后果 / 正确做法」 |
 | 变化趋势、分布、比例 | 教师自备图表图片，用 `image` 字段插入；也可先用 `xlsx_kit.py analyze` 出 Excel 图表再自行导出 PNG |
-| 流程、结构、关系 | 教师自备示意图（自己画或从教材取），或用 `vendor/slides-polish/` 的 HTML/SVG 管线生成 |
+| 流程、结构、关系 | 教师自备示意图（自己画或从教材取），或用 `skills/slides-polish/` 的 HTML/SVG 管线生成 |
 | 一行公式 / 一句关键话 | 单独一页，只放这一句 |
 
 **对比优于罗列的写法示例**（习题课、复习课最好用）：
@@ -519,7 +519,7 @@ pptx_kit 的配色是固定的，也是本技能的配色规范：
 
 **时间锚点必须闭合**：所有页的【时间】之和要等于课时。写完后自查一遍，超了就是内容多了，砍页；少了就是讲得太快，补例题。90 分钟的课建议每 4–5 页放一个累计时间锚点（如「累计 45/90，正好下课时点」）。
 
-**备注的语言纪律**：按 `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` 的「AI 味与口水话」一节处理 —— 删掉「值得注意的是」「综上所述」「让我们」这类转承词，改成人真的会说的话（「这里停一下」「注意这一步」「上次作业错在这」）。
+**备注的语言纪律**：按 `skills/awesome-benzi/references/LANGUAGE_MODEL.md` 的「AI 味与口水话」一节处理 —— 删掉「值得注意的是」「综上所述」「让我们」这类转承词，改成人真的会说的话（「这里停一下」「注意这一步」「上次作业错在这」）。
 
 ## 常见课件类型模板
 
@@ -625,7 +625,7 @@ pptx_kit 的配色是固定的，也是本技能的配色规范：
 5. **评价性内容留人工确认位**。平时分构成、考核比例、评分标准、实验报告要求涉及判断，一律 `【待教师确认：…】`，AI 不写具体数字。
 6. **不生成、不写入学生个人信息**。课件的受众是全体学生，任何成绩、学号、姓名单都不进课件；敏感数据只在本机处理。
 7. **不绕过 office-layer**。不用文本框拼伪表格，不手搓 OOXML，不用 python-pptx 直连绕过本层，不产出 markdown 冒充课件。
-8. **改动脚本内置样式要慎重**。字号与配色是 `inspect` 密度口径的配套基准，擅自改动会让自检结论失效；要自定义视觉请走 `vendor/slides-polish/`。
+8. **改动脚本内置样式要慎重**。字号与配色是 `inspect` 密度口径的配套基准，擅自改动会让自检结论失效；要自定义视觉请走 `skills/slides-polish/`。
 
 ## 自检清单
 
@@ -645,5 +645,5 @@ pptx_kit 的配色是固定的，也是本技能的配色规范：
 - [ ] 全篇只有 `#0B5C8A` 一个强调色，没有高饱和撞色
 - [ ] 所有 `【待补：…】`、`【待教师确认：…】` 占位都还在，没有被模型补全
 - [ ] 课件里没有出现学生姓名、学号、成绩
-- [ ] PPTX 由 `vendor/office-layer/scripts/pptx_kit.py` 生成（不是手搓 XML、不是 markdown）
+- [ ] PPTX 由 `skills/office-layer/scripts/pptx_kit.py` 生成（不是手搓 XML、不是 markdown）
 - [ ] 交付说明写明了「初稿 + 未套用模板 + 图片需自备 + 请核对占位」

@@ -12,11 +12,11 @@
 
 只输出 spec.json / 核对 JSON，落盘一律交 office-layer：
 
-    PY="vendor/office-layer/.venv/bin/python"
+    PY="skills/office-layer/.venv/bin/python"
     $PY skills/teaching-ops/scripts/invigilation_plan.py \\
         --in 过程/排期数据.json --spec 过程/监考spec.json \\
         --out-check 过程/监考核对.json
-    $PY vendor/office-layer/scripts/xlsx_kit.py build \\
+    $PY skills/office-layer/scripts/xlsx_kit.py build \\
         --spec 过程/监考spec.json --out 监考表.xlsx
     $PY skills/teaching-ops/scripts/conflict_check.py \\
         --in 过程/监考核对.json --report 过程/监考核对报告.md

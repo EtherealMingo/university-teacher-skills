@@ -39,11 +39,11 @@ description: "高校教师教学运行事务辅助：调课/停课/补课申请�
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | **`question-batch` 一次性提问机制**，本技能 intake 直接复用（`IN-QUESTION-002` 同批合并，`IN-QUESTION-004` 不连环追问） |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | **冲突分级口径**：`blocked` / `needs-review` / `advisory`，`QG-ISSUE-003` 有 blocked 不得进入下一状态；错误码退出约定见 `QG-ERROR-003` |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | 通知话术、监考须知的「AI 味」治理：去套话、去机械转承 |
-| `vendor/office-layer/` | **文件产出唯一通道**（docx / xlsx / pptx），禁止手写 OOXML、禁止文本框拼伪表格 |
-| `vendor/VENDOR.md` | 底座溯源与许可证合规（哪些能引用、哪些已排除） |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | **`question-batch` 一次性提问机制**，本技能 intake 直接复用（`IN-QUESTION-002` 同批合并，`IN-QUESTION-004` 不连环追问） |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | **冲突分级口径**：`blocked` / `needs-review` / `advisory`，`QG-ISSUE-003` 有 blocked 不得进入下一状态；错误码退出约定见 `QG-ERROR-003` |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | 通知话术、监考须知的「AI 味」治理：去套话、去机械转承 |
+| `skills/office-layer/` | **文件产出唯一通道**（docx / xlsx / pptx），禁止手写 OOXML、禁止文本框拼伪表格 |
+| `THIRD_PARTY_NOTICES.md` | 底座溯源与许可证合规（哪些能引用、哪些已排除） |
 
 本技能自带的检查工具（**只做计算与出 spec，落盘一律交 office-layer**）：
 
@@ -140,13 +140,13 @@ description: "高校教师教学运行事务辅助：调课/停课/补课申请�
 
 ```bash
 cd /Users/mingo/Documents/kimi/Workspaces/skills     # 技能包根目录
-PY="vendor/office-layer/.venv/bin/python"            # 首次：bash vendor/office-layer/bootstrap.sh
+PY="skills/office-layer/.venv/bin/python"            # 首次：bash skills/office-layer/bootstrap.sh
 
 $PY skills/teaching-ops/scripts/conflict_check.py \
     --in 过程/排期数据.json --spec 过程/冲突spec.json --report 过程/冲突报告.md
 # 退出码 2 = 有 blocked，**不要忽略这个非零退出码**
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 过程/冲突spec.json --out 排期冲突核对表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 排期冲突核对表.xlsx   # 自检
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 过程/冲突spec.json --out 排期冲突核对表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 排期冲突核对表.xlsx   # 自检
 ```
 
 ### 没有 JSON 时的替代做法（Excel 条件核对）
@@ -237,8 +237,8 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 排期冲突核对表.x
 **动作 3：出申请表初稿**（表内带冲突自查表 + 三级审批栏 + 人工确认位）
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec 过程/调课申请spec.json --out 调课申请表初稿.docx
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 调课申请表初稿.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec 过程/调课申请spec.json --out 调课申请表初稿.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 调课申请表初稿.docx
 ```
 
 `调课申请spec.json` 骨架（`spec` 模式支持 title/subtitle/sections/table/placeholder）：
@@ -307,9 +307,9 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 调课申请表初稿.d
 $PY skills/teaching-ops/scripts/invigilation_plan.py \
     --in 过程/排期数据.json --spec 过程/监考spec.json --out-check 过程/监考核对.json
 # 需要关闭「任课教师回避本班」时（仅在本校确无此规定时）加 --allow-own-class
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 过程/监考spec.json --out 监考表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 过程/监考spec.json --out 监考表.xlsx
 $PY skills/teaching-ops/scripts/conflict_check.py --in 过程/监考核对.json --report 过程/监考核对报告.md
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 监考表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 监考表.xlsx
 ```
 
 排班器遵守的约束（**硬约束绝不违反，宁可留缺口报错**）：
@@ -354,7 +354,7 @@ X 老师您好，本学期期末监考先跟您对一下：
 **本技能不引具体条款号、不代替学校的认定程序。**
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md --in 过程/监考须知.md --out 监考须知.docx --title "监考须知"
+$PY skills/office-layer/scripts/docx_kit.py md --in 过程/监考须知.md --out 监考须知.docx --title "监考须知"
 ```
 
 **输出**：`监考表.xlsx`（需求汇总 / 安排表 / 均衡与可用性统计 / 缺口与说明）、
@@ -449,8 +449,8 @@ ISBN 是硬事实，编错就是错订教材，这里严禁模型补全**）
 $PY skills/teaching-ops/scripts/term_calendar.py \
     --start 2026-03-02 --weeks 18 --exam-weeks 17,18 \
     --holidays 2026-04-06,2026-05-01 --spec 过程/倒排spec.json
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 过程/倒排spec.json --out 学期时间节点倒排表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 学期时间节点倒排表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 过程/倒排spec.json --out 学期时间节点倒排表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 学期时间节点倒排表.xlsx
 ```
 
 倒排表默认节点（**通行惯例，每行都留了「校历核对位」，必须逐行对本校通知核实**）：
@@ -480,7 +480,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 学期时间节点倒�
 
 ### 阶段末 · 交付
 
-1. 所有 xlsx/docx 均由 `vendor/office-layer/` 生成，并用 `inspect` 读回校验（表格数、段落数符合预期）。
+1. 所有 xlsx/docx 均由 `skills/office-layer/` 生成，并用 `inspect` 读回校验（表格数、段落数符合预期）。
 2. 交付说明固定包含四句：
    - 「这是初稿，请重点核对：`【待补：…】` 处、`【待教师确认：…】` 处、日期与教室编号。」
    - 「调课/停课/补课须经教务审批，**审批前不得执行、不得通知学生**。」
@@ -536,10 +536,10 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 学期时间节点倒�
 - [ ] 监考：无 `INV-CLASH` / `INV-UNAVAIL` / `INV-TEACH-BUSY`；缺口为 0 或已上报
 - [ ] 监考表里每位教师都留了「待本人确认」位，且话术已起草
 - [ ] 教材表里所有 ISBN / 价格 / 版次要么真实来源、要么 `【待补：…】`
-- [ ] 所有 docx/xlsx 由 `vendor/office-layer/` 生成，并 `inspect` 过
+- [ ] 所有 docx/xlsx 由 `skills/office-layer/` 生成，并 `inspect` 过
 - [ ] 交付说明写清了四句固定提示（初稿 / 需教务审批 / 需与同事协调 / 以本校文件为准）
 - [ ] 含学生信息的文件已标注保管要求；已提醒删除 `过程/` 中间文件
-- [ ] 引用的 `vendor/` 路径真实存在（`ls` 验证过）
+- [ ] 引用的 底座路径真实存在（`ls` 验证过）
 
 ## 附：常见翻车点 → 哪一步挡住它
 

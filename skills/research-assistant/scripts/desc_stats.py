@@ -14,7 +14,7 @@ desc_stats.py — 研究数据的描述统计与交叉表（只读，绝不修�
   --out-json   符合 office-layer/xlsx_kit.py build 的 JSON 规格，供出 xlsx
 
 用法示例：
-  PY="vendor/office-layer/.venv/bin/python"
+  PY="skills/office-layer/.venv/bin/python"
   $PY skills/research-assistant/scripts/desc_stats.py \
       --in 数据.xlsx --sheet 数据 \
       --cross 组别,后测成绩 --cross 组别,性别 \
@@ -35,7 +35,7 @@ def _read_xlsx(path, sheet=None):
     try:
         import openpyxl
     except ImportError:
-        sys.exit("缺少 openpyxl：请用 vendor/office-layer/.venv/bin/python 运行本脚本")
+        sys.exit("缺少 openpyxl：请用 skills/office-layer/.venv/bin/python 运行本脚本")
     wb = openpyxl.load_workbook(path, data_only=True, read_only=True)
     ws = wb[sheet] if sheet else wb[wb.sheetnames[0]]
     rows = []

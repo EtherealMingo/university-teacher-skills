@@ -29,13 +29,13 @@ description: "高校教师担任期刊/会议审稿人时的审稿意见撰写�
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/` | **文件产出唯一通道**；`docx_kit.py comment` 写 Word 原生批注（稿内批注靠它） |
-| `vendor/paper-slides/paper-analyst/references/paper-type-rubric.md` | **论文类型判定量规**，决定用哪套方法学审查口径 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | 问题分级 `blocked`/`needs-review`/`advisory` 与退出码语义，映射为本 skill 的 must-fix/should-fix/nice-to-have |
-| `vendor/k12-teacher-skills/` | 评价量规（rubric）向度设计与等级描述写法，用于六维清单的「可观察、可判定」表述 |
-| `vendor/education-skills/學習分析/peer-assessment.md` | 同行评议方法、**高/低质量反馈对照指标**、评审偏误类型（友谊/敌意/宽严/光环）与口径校正思路 |
-| `vendor/empirical-research/econ-audit/SKILL.md` | 实证类稿件的对抗式方法学审查清单：识别策略、聚类层级、坏控制、规格漂移 |
-| `vendor/VENDOR.md` | 底座溯源与许可证合规 |
+| `skills/office-layer/` | **文件产出唯一通道**；`docx_kit.py comment` 写 Word 原生批注（稿内批注靠它） |
+| `skills/paper-analyst/references/paper-type-rubric.md` | **论文类型判定量规**，决定用哪套方法学审查口径 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | 问题分级 `blocked`/`needs-review`/`advisory` 与退出码语义，映射为本 skill 的 must-fix/should-fix/nice-to-have |
+| `skills/k12-teacher-skills/k12-lesson-plan-creation/`、`skills/k12-teacher-skills/k12-check-for-understanding/` | 评价量规（rubric）向度设计与等级描述写法，用于六维清单的「可观察、可判定」表述 |
+| `skills/education-skills/edu-learning-analytics/references/peer-assessment.md` | 同行评议方法、**高/低质量反馈对照指标**、评审偏误类型（友谊/敌意/宽严/光环）与口径校正思路 |
+| `skills/empirical-research/econ-audit/SKILL.md` | 实证类稿件的对抗式方法学审查清单：识别策略、聚类层级、坏控制、规格漂移 |
+| `THIRD_PARTY_NOTICES.md` | 底座溯源与许可证合规 |
 
 > 使用前先 `ls` 确认路径存在。**论文类型不同，方法学检查口径不同**——
 > 实证类重点在识别策略与统计检验，AI/算法类重点在基线公平性与消融，理论类重点在证明完整性，
@@ -136,7 +136,7 @@ description: "高校教师担任期刊/会议审稿人时的审稿意见撰写�
 - 评价指标是否与结论匹配？（类别不平衡却只报 accuracy 是典型问题）
 - 是否做了统计检验？多次运行是否给均值/方差/置信区间？
 - 领域特定口径：
-  - **实验/实证类**：识别策略与前提检验（RCT/DiD/IV/RD 各自的成立条件）、聚类层级是否正确、控制变量是否为「坏控制」、是否做了稳健性检验 → 参考 `vendor/empirical-research/econ-audit/SKILL.md` 的清单
+  - **实验/实证类**：识别策略与前提检验（RCT/DiD/IV/RD 各自的成立条件）、聚类层级是否正确、控制变量是否为「坏控制」、是否做了稳健性检验 → 参考 `skills/empirical-research/econ-audit/SKILL.md` 的清单
   - **AI/算法类**：基线公平性、超参搜索预算是否对等、是否只在测试集上调参、消融是否逐模块
   - **理论类**：定理陈述完整性、证明是否跳步、假设是否过强、符号是否定义
   - **系统/工程类**：负载条件、可扩展性测试、与现有系统的对比条件是否交代
@@ -372,22 +372,22 @@ description: "高校教师担任期刊/会议审稿人时的审稿意见撰写�
 2. 用 office-layer 生成 docx：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 审稿意见.md --out 审稿意见.docx --title "审稿意见"
 
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 给编辑的保密意见.md --out 给编辑的保密意见.docx --title "Confidential Comments to the Editor"
 
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 审稿意见.docx   # 自检
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 审稿意见.docx   # 自检
 ```
 
 3. **若要在稿件上直接留批注**（很多期刊支持上传批注版；教师也常习惯先标再写），
    用 `docx_kit.py comment` 写 **Word 原生批注**（真 `comments.xml`，Word 打开即显示批注气球）：
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 稿件.docx --out 稿件_审稿批注.docx \
     --comments 批注锚点.json --author "Reviewer"
 ```

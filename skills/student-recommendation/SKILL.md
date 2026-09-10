@@ -44,14 +44,14 @@ description: "高校教师推荐信与证明材料全流程辅助：保研/考�
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/` | **文件产出唯一通道**；docx / xlsx 全部从这里出 |
-| `vendor/office-layer/scripts/docx_kit.py` | `spec` 生成带**人工确认位**的推荐信、`md` 生成常规稿、`comment` 写 Word 原生核对批注、`inspect` 自检 |
-| `vendor/office-layer/scripts/xlsx_kit.py` | `build` 生成**素材采集表**（阶段一的核心工具） |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | **AI 味治理口径**，推荐信最怕写成模板，本技能套话清理直接引用其规则号 |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级与未知项占位（`EV-FACT-*`、`EV-UNKNOWN-*`），防止写出无依据的溢美之词 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | 质量门与 `blocked` / `needs-review` / `advisory` 三级问题模型 |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | `IN-QUESTION` 式一次性收集缺失信息（`question-batch`）的规则来源 |
-| `vendor/VENDOR.md` | 底座溯源与许可证 |
+| `skills/office-layer/` | **文件产出唯一通道**；docx / xlsx 全部从这里出 |
+| `skills/office-layer/scripts/docx_kit.py` | `spec` 生成带**人工确认位**的推荐信、`md` 生成常规稿、`comment` 写 Word 原生核对批注、`inspect` 自检 |
+| `skills/office-layer/scripts/xlsx_kit.py` | `build` 生成**素材采集表**（阶段一的核心工具） |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | **AI 味治理口径**，推荐信最怕写成模板，本技能套话清理直接引用其规则号 |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级与未知项占位（`EV-FACT-*`、`EV-UNKNOWN-*`），防止写出无依据的溢美之词 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | 质量门与 `blocked` / `needs-review` / `advisory` 三级问题模型 |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | `IN-QUESTION` 式一次性收集缺失信息（`question-batch`）的规则来源 |
+| `THIRD_PARTY_NOTICES.md` | 底座溯源与许可证 |
 | `skills/student-recommendation/scripts/cliche_scan.py` | **自建**：套话扫描 + 同批草稿雷同度检测（阶段五核心） |
 
 ## 前置信息收集（intake，一次性问完）
@@ -107,8 +107,8 @@ description: "高校教师推荐信与证明材料全流程辅助：保研/考�
 生成采集表：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
-$PY vendor/office-layer/scripts/xlsx_kit.py build \
+PY="skills/office-layer/.venv/bin/python"
+$PY skills/office-layer/scripts/xlsx_kit.py build \
     --spec 素材采集表.json --out 素材采集表.xlsx
 ```
 
@@ -167,7 +167,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build \
   同批两两重合率 **< 0.10**（脚本判读口径）；`blocked` 项必须清零
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 $PY skills/student-recommendation/scripts/cliche_scan.py \
     推荐信_李明.md 推荐信_王芳.md 推荐信_张野.md \
     --out 套话与雷同报告.md
@@ -187,16 +187,16 @@ $PY skills/student-recommendation/scripts/cliche_scan.py \
 
 ```bash
 # 1) 常规稿（Markdown → DOCX，中文排版已处理）
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 推荐信_李明.md --out 推荐信_李明_初稿.docx --title "推荐信"
 
 # 2) 把待核对项锚到原文（anchor 必须与正文逐字一致，含标点）
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 推荐信_李明_初稿.docx --out 推荐信_李明_待教师定稿.docx \
     --comments 核对.json --author "AI 草稿（待教师核对）"
 
 # 3) 自检：段落数 / 批注数 / 字数是否符合预期
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 推荐信_李明_待教师定稿.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 推荐信_李明_待教师定稿.docx
 ```
 
 `核对.json`（anchor 也可以直接锚在 `【待补：…】` 占位上，效果最好，已实测 2/2 命中）：
@@ -428,7 +428,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 推荐信_李明_待教
 
 ## AI 味治理：推荐信最该删的套话
 
-直接引用 `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` 的口径。
+直接引用 `skills/awesome-benzi/references/LANGUAGE_MODEL.md` 的口径。
 
 **判定一条通用判据 —— 「名字替换测试」**：
 把这句话里学生的名字换成**任意一个学生**，如果句子仍然成立，**这句话就没有信息量，删掉**。

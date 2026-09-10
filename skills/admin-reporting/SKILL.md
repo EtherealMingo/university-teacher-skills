@@ -35,21 +35,21 @@ description: "高校教师行政填报与迎检材料全流程辅助：教学工
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/scripts/xlsx_kit.py` | **统计表主力**：`build` 出任意结构表格 + 原生图表；`analyze` 出成绩分析（得分率/区分度/分数段）；`inspect` 自检 |
-| `vendor/office-layer/scripts/docx_kit.py` | 报告产出：`md` 出 Word；**`comment` 写 Word 原生批注**（大纲/材料审校意见直接批在文件上）；`spec` 出带人工确认位的排版稿；`inspect` 自检 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | **问题三级分级 blocked / needs-review / advisory，直接复用为缺件追踪的分级标准**；`QG-ISSUE-003` 存在 blocked 不得进入下一状态 |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 一次性问题机制（`IN-QUESTION-001..005`），用于一次性收集缺件 |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级（`EV-FACT-001`）与冲突处理（`EV-CONFLICT-001`），防止编造数据、防止同一数字多版本 |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | 压掉总结/计划里的公文空话（`WR-STYLE-010..012`、`WR-STYLE-024`） |
-| `vendor/office-layer/` | **文件产出唯一通道** |
-| `vendor/VENDOR.md` | 底座溯源与许可证合规说明 |
+| `skills/office-layer/scripts/xlsx_kit.py` | **统计表主力**：`build` 出任意结构表格 + 原生图表；`analyze` 出成绩分析（得分率/区分度/分数段）；`inspect` 自检 |
+| `skills/office-layer/scripts/docx_kit.py` | 报告产出：`md` 出 Word；**`comment` 写 Word 原生批注**（大纲/材料审校意见直接批在文件上）；`spec` 出带人工确认位的排版稿；`inspect` 自检 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | **问题三级分级 blocked / needs-review / advisory，直接复用为缺件追踪的分级标准**；`QG-ISSUE-003` 存在 blocked 不得进入下一状态 |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 一次性问题机制（`IN-QUESTION-001..005`），用于一次性收集缺件 |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级（`EV-FACT-001`）与冲突处理（`EV-CONFLICT-001`），防止编造数据、防止同一数字多版本 |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | 压掉总结/计划里的公文空话（`WR-STYLE-010..012`、`WR-STYLE-024`） |
+| `skills/office-layer/` | **文件产出唯一通道** |
+| `THIRD_PARTY_NOTICES.md` | 底座溯源与许可证合规说明 |
 
 **环境自检**（每次开始前跑一次）：
 
 ```bash
-cd <技能包根目录>          # 全部 vendor/... 路径都是相对包根写的
+cd <技能包根目录>          # 全部底座路径（skills/...）都是相对包根写的
 python3 verify.py                                   # 依赖与包完整性
-PY="vendor/office-layer/.venv/bin/python"           # 后续所有命令都用这个解释器
+PY="skills/office-layer/.venv/bin/python"           # 后续所有命令都用这个解释器
 ```
 
 ## 前置信息收集（intake，一次性问完）
@@ -104,8 +104,8 @@ cat > 材料台账.json <<'EOF'
    "widths": [6,34,8,14,12,14,10,30,24]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 材料台账.json --out 材料台账.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 材料台账.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 材料台账.json --out 材料台账.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 材料台账.xlsx
 ```
 
 ### 阶段一 · 缺件追踪表（本技能的核心工具）
@@ -146,7 +146,7 @@ cat > 缺件追踪表.json <<'EOF'
    "chart": {"type":"bar","title":"缺件分级分布","value_col":2,"anchor":"E2"}}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 缺件追踪表.json --out 缺件追踪表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 缺件追踪表.json --out 缺件追踪表.xlsx
 ```
 
 - **退出条件**：`blocked` 条数已明确并向教师列出「一次性问题清单」；
@@ -201,8 +201,8 @@ cat > 教学工作量统计表.json <<'EOF'
    "widths": [22,18,10,12,16,12,24,16]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 教学工作量统计表.json --out 教学工作量统计表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 教学工作量统计表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 教学工作量统计表.json --out 教学工作量统计表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 教学工作量统计表.xlsx
 ```
 
 ### 阶段三 · 专业认证 / 审核评估材料（最大的一摊）
@@ -233,10 +233,10 @@ cat > 大纲审校意见.json <<'EOF'
    "text": "此处未写明支撑强度（H/M/L）。请按本校模板补充，并确认与专业毕业要求支撑矩阵一致。"}
 ]
 EOF
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 课程大纲.docx --out 课程大纲_审校意见.docx \
     --comments 大纲审校意见.json --author "教学副院长"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 课程大纲_审校意见.docx   # 确认批注数 > 0
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 课程大纲_审校意见.docx   # 确认批注数 > 0
 ```
 
 > 锚点 `anchor` 必须是**原文逐字片段（含标点）**，正文与表格单元格内均可锚定。
@@ -317,8 +317,8 @@ cat > 达成度计算表.json <<'EOF'
    "widths": [14,14,12,12,12,34]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 达成度计算表.json --out 课程目标达成度计算表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 课程目标达成度计算表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 达成度计算表.json --out 课程目标达成度计算表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 课程目标达成度计算表.xlsx
 ```
 
 **配套材料**：
@@ -327,7 +327,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 课程目标达成度�
   这是达成度计算里「期末」环节得分的来源与佐证：
 
 ```bash
-$PY vendor/office-layer/scripts/xlsx_kit.py analyze \
+$PY skills/office-layer/scripts/xlsx_kit.py analyze \
     --in 成绩单.xlsx --out 试卷分析.xlsx \
     --first-q-col 3 --full-marks '[10,10,15,15,10,20,10,10]'
 ```
@@ -475,8 +475,8 @@ cat > 年度统计报表.json <<'EOF'
    "widths": [6,40,24,12,14,10,26,18]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 年度统计报表.json --out 年度统计报表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 年度统计报表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 年度统计报表.json --out 年度统计报表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 年度统计报表.xlsx
 ```
 
 ### 阶段八 · 教学工作总结与计划
@@ -496,9 +496,9 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 年度统计报表.xlsx
   问题与计划一一对应；无空话段落
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 教学工作总结.md --out 教学工作总结.docx --title "2025-2026学年第一学期教学工作总结"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 教学工作总结.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 教学工作总结.docx
 ```
 
 需要固定排版（页眉页脚、评语模板、显式留空位）时用 `spec`：
@@ -516,7 +516,7 @@ cat > 总结规格.json <<'EOF'
     "paras": ["【待教师确认：每条计划对应一条问题，写明时间与指标】"]}
  ]}
 EOF
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec 总结规格.json --out 教学工作总结.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec 总结规格.json --out 教学工作总结.docx
 ```
 
 ### 阶段九 · 数据一致性校验（交付前必做）
@@ -559,7 +559,7 @@ cat > 数据一致性校验表.json <<'EOF'
    "widths": [16,12,22,12,22,30]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 数据一致性校验表.json --out 数据一致性校验表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 数据一致性校验表.json --out 数据一致性校验表.xlsx
 ```
 
 ### 阶段十 · 交付
@@ -649,7 +649,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build --spec 数据一致性校验�
 
 **文件产出**
 
-- [ ] 所有 docx / xlsx 均由 `vendor/office-layer/` 生成，无伪表格、无手搓 OOXML
+- [ ] 所有 docx / xlsx 均由 `skills/office-layer/` 生成，无伪表格、无手搓 OOXML
 - [ ] 每个文件都跑了 `inspect` 自检（段落/表格/批注数符合预期）
 - [ ] `docx_kit comment` 退出码为 0，批注数 > 0，无 `failed` 锚点
 - [ ] 交付物是 docx / xlsx，没有拿 `.md` 当交付物

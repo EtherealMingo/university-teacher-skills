@@ -26,6 +26,7 @@
   - [按角色看](#按角色看)
 - [22 个子技能详解](#22-个子技能详解)
   - [教学](#教学) · [科研](#科研) · [指导](#指导含学生工作) · [行政事务](#行政事务) · [考核与对外](#考核与对外)
+- [底座技能（26 个）](#底座技能26-个)
 - [文件产出层](#文件产出层)
 - [三条铁律](#三条铁律)
 - [敏感数据](#敏感数据)
@@ -112,7 +113,7 @@ cd university-teacher-skills && bash install.sh
 |---|---|
 | 1 | 取源：本地仓库直接用；否则 `git clone`，失败回退 tarball |
 | 2 | 落到 `~/.local/share/university-teacher-skills`（可用 `--prefix` 改） |
-| 3 | 建 `vendor/office-layer/.venv` 并装文档依赖 |
+| 3 | 建 `skills/office-layer/.venv` 并装文档依赖 |
 | 4 | **软链**到各 agent 技能目录（软链指向同一份，venv 不重复占空间） |
 | 5 | 跑 `verify.py` 完整性自检 |
 
@@ -147,15 +148,15 @@ bash install.sh --uninstall                # 卸载（只删软链与安装目�
 ```bash
 git clone --depth 1 https://github.com/EtherealMingo/university-teacher-skills.git
 cd university-teacher-skills
-bash vendor/office-layer/bootstrap.sh   # 建 venv、装依赖
-python3 verify.py                       # 自检，应 33 项全过
+bash skills/office-layer/bootstrap.sh   # 建 venv、装依赖
+python3 verify.py                       # 自检（结构/frontmatter/底座路径/冒烟），应全部通过
 ```
 
 在支持 Agent Skills 的客户端里，把本目录加入技能搜索路径即可。入口是根目录的 `SKILL.md`。
 
 ### 关于体积
 
-仓库本身约 **4.1 MB**（不含 `vendor/office-layer/.venv/`，已在 `.gitignore` 排除）。
+仓库本身约 **4.1 MB**（不含 `skills/office-layer/.venv/`，已在 `.gitignore` 排除）。
 装完依赖后本地约 **111 MB**，其中 venv 占 105 MB。
 
 依赖里 `matplotlib` + `numpy` 占约 39 MB，确有用途（`paper-to-slides` 重绘论文图表、
@@ -792,26 +793,95 @@ D≥0.4 优良 / 0.3–0.39 良好 / 0.2–0.29 尚可需修改 / <0.2 应淘汰
 
 ---
 
+## 底座技能（26 个）
+
+主技能背后的方法库与工具层，位于 `skills/` 下、与主技能同构
+（`SKILL.md` + `references/` + `scripts/`），文档均为简体中文
+（英文与繁体中文上游已全部翻译，2026-09-10 自 `vendor/` 迁入）。
+同一上游的一套收进一个套件目录：`education-skills/`（7）、`ibook-skills/`（5）、
+`k12-teacher-skills/`（4）、`empirical-research/`（3）、`learning-education/`（3）；
+独立件 `office-layer/`、`awesome-benzi/`、`paper-analyst/`、`slides-polish/` 平铺。
+教师一般不直接点名它们 —— 主技能会在需要时自动引用；也可以单独打开查阅。
+来源与许可证见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+**文件产出与课件**（独立件，平铺于 `skills/`）
+
+| 技能 | 做什么 |
+|---|---|
+| `office-layer` | docx / pptx / xlsx 产出唯一通道（自建）：Word 原生批注、16:9 课件、成绩分析 |
+| `paper-analyst` | 学术论文 PDF 深度拆解：五种分析模式、反幻觉来源标注、按论文类型给量规 |
+| `slides-polish` | 设计师水准 pptx 视觉增强：真实投影、贝塞尔曲线、渐变填充、SVG 图标 |
+
+**申报书与实证研究**（`awesome-benzi` 独立平铺；后三件在 `skills/empirical-research/`）
+
+| 技能 | 做什么 |
+|---|---|
+| `awesome-benzi` | 项目申报书写作引擎：十模块写作与评审、证据卡、质量门，交付可编辑 DOCX |
+| `econ-audit` | 对抗性计量审查：查 Stata/R/Python 实证代码中的设定错误与静默分析失误 |
+| `data-dictionary` | 从 Stata .dta 自动生成代码手册（变量清单、值标签、缺失与摘要统计） |
+| `lit-review` | 结构化多会话文献综述工作流：搭骨架、跨会话追踪、「审稿人检查」补经典 |
+
+**智能教材工具链**（`skills/ibook-skills/`）
+
+| 技能 | 做什么 |
+|---|---|
+| `question-writing` | 交互式选择题命制：对齐学习图谱概念、按布鲁姆认知层级分布、干扰项写作指南 |
+| `learning-graph-generator` | 从课程描述生成学习图谱（300–600 个概念及依赖关系、分类归类与质量报告） |
+| `glossary-generator` | 按 ISO 11179 规范生成术语表（精确、简洁、非循环） |
+| `faq-generator` | 依据课程内容、学习图谱与术语表生成分类 FAQ |
+| `course-description-analyzer` | 校验/创建课程描述，按必备要素与布鲁姆学习成果打分 |
+
+**K-12 教学法**（`skills/k12-teacher-skills/`，Anthropic，Apache-2.0）
+
+| 技能 | 做什么 |
+|---|---|
+| `k12-lesson-plan-creation` | K-12 从零备课：教案 + 学生材料 + 课堂观察模板，一次产出可编辑 Word |
+| `k12-lesson-differentiation` | 把已有课程改编为低于/达到/超出年级水平的三层版本 |
+| `k12-lesson-prep` | 已有课程的课前内化搭档：想透关键学生任务，留一份教师备课笔记 |
+| `k12-check-for-understanding` | 数学理解检测（CFU）：形成性小题 + 迷思概念干扰项 + 教学行动对照 |
+
+**教育方法库**（`skills/education-skills/`，台湾课纲体系，本包已译简体）
+
+| 技能 | 做什么 |
+|---|---|
+| `edu-teaching-design` | 教学设计六法：差异化教学、游戏化、PBL、自适应学习、SEL、AI 教案生成 |
+| `edu-learning-analytics` | 学习分析与评量：素养导向评量、学习分析四层、同侪互评、学生画像 |
+| `edu-research-methods` | 教育研究方法：研究设计、实证自动化、混合方法、准实验设计 |
+| `edu-rural-education` | 偏乡与资源受限环境教学：在地化内容设计、离线优先平台 |
+| `edu-math-tech-education` | 数学科技工具（GeoGebra、Desmos 等）的选型与融入教学 |
+| `edu-ai-tools` | 教育 AI 工具分类总览与生成式 AI 应用框架 |
+| `edu-ict-integration` | ICT 融入教学：SAMR、TPACK 模型与工具选择 |
+
+**学习方法**（`skills/learning-education/`）
+
+| 技能 | 做什么 |
+|---|---|
+| `study-skill` | 交互式学习导师：FSRS 间隔重复闪卡、可安全重启的学习工作区 |
+| `thinking-toolkit` | 12 种结构化思考方法：苏格拉底提问、第一性原理、双重钢人等（CC BY-NC-SA） |
+| `learning-paths` | 学习路径与进度追踪模型的命令层参考（15 个功能模块文档） |
+
+---
+
 ## 文件产出层
 
-所有 docx / pptx / xlsx 产出走 `vendor/office-layer/`，针对中文场景做了处理：
+所有 docx / pptx / xlsx 产出走 `skills/office-layer/`，针对中文场景做了处理：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
 # Markdown → Word（中文字体、页码、首行缩进两字）
-$PY vendor/office-layer/scripts/docx_kit.py md --in draft.md --out 交付.docx
+$PY skills/office-layer/scripts/docx_kit.py md --in draft.md --out 交付.docx
 
 # 在学生的 Word 文档上写「真批注」（Word 原生，学生看得见批注气球）
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 学生论文.docx --out 学生论文_批注.docx --comments 批注.json --author "指导教师"
 
 # 成绩分析（得分率 / 区分度 / 分数段分布）
-$PY vendor/office-layer/scripts/xlsx_kit.py analyze \
+$PY skills/office-layer/scripts/xlsx_kit.py analyze \
     --in 成绩.xlsx --out 试卷分析.xlsx --first-q-col 3
 
 # 课件（16:9，可写演讲者备注，自带信息密度检查）
-$PY vendor/office-layer/scripts/pptx_kit.py build --spec 课件.json --out 课件.pptx
+$PY skills/office-layer/scripts/pptx_kit.py build --spec 课件.json --out 课件.pptx
 ```
 
 `docx_kit.py comment` 的批注是**真正的 Word 原生批注** —— 写入 `word/comments.xml`
@@ -854,13 +924,19 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 ## 许可证
 
-本包**自建部分**（`install.sh`、`SKILL.md`、`CONVENTIONS.md`、`skills/*`、`vendor/office-layer/`）
+本包**自建部分**（`install.sh`、`verify.py`、`SKILL.md`、`CONVENTIONS.md`、`README.md`、
+`ROADMAP.md`、`START-HERE.md`，以及 `skills/` 下的 22 个主技能与 `skills/office-layer/`）
 采用 MIT，详见 [LICENSE](LICENSE)。
 
-**上游底座**各自遵循其原许可证，完整清单见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。特别注意：
+**底座技能**（`skills/` 下五个套件目录及 `awesome-benzi`、`paper-analyst`、
+`slides-polish` 三个独立件，共 26 个）源自上游开源项目，各自遵循其原许可证，
+完整清单见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。特别注意：
 
 - ⚠️ **未收录** Anthropic 官方 `docx`/`pptx`/`xlsx`/`pdf` —— 其为专有许可，
-  禁止复制、创作衍生作品与分发。本包以自建 `office-layer/` 替代。
-- ⚠️ `vendor/ibook-skills/` 上游仓库**无 LICENSE 文件**，依法默认保留全部权利。
-- ⚠️ `vendor/learning-education/thinking-toolkit/` 为 **CC BY-NC-SA 4.0**：禁止商业使用，
+  禁止复制、创作衍生作品与分发。本包以自建 `skills/office-layer/` 替代。
+- ⚠️ ibook 系列底座（`question-writing`、`learning-graph-generator`、`glossary-generator`、
+  `faq-generator`、`course-description-analyzer`）的上游仓库**无 LICENSE 文件**，
+  依法默认保留全部权利，仅供本机自用；对外分发前须取得作者授权。
+- ⚠️ `skills/learning-education/thinking-toolkit/` 为 **CC BY-NC-SA 4.0**：禁止商业使用，
   且要求相同方式共享。**商用前请先删除该目录。**
+

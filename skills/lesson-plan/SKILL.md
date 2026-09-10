@@ -34,40 +34,41 @@ description: "高校课程教案与整体教学设计辅助：单次课教案（
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/education-skills/教學設計/lesson-plan-generator.md` | **教案骨架主干**：標準教案要素、引起動機／發展活動／綜合活動三段式、品質檢核清單 |
-| `vendor/education-skills/教學設計/differentiated-instruction.md` | **差异化三要素（內容／過程／成果）**、三層內容設計表、彈性分組策略 |
-| `vendor/education-skills/教學設計/project-based-learning.md` | Gold Standard PBL 七大要素、微專題→長期專題的時程檔位（用于 PBL 选型与项目课教案） |
-| `vendor/education-skills/教學設計/gamified-learning.md` | 遊戲化機制三層架構（積分／徽章／排行榜／任務／敘事），用于课堂活动与动机设计 |
-| `vendor/education-skills/教學設計/adaptive-learning-design.md` | 學習路徑模型（診斷→分級→推薦→回饋→調整），用于分层任务闭环 |
-| `vendor/education-skills/學習分析/student-profiling.md` | **学情分析维度来源**：認知／情意／社會三维轮廓与数据来源对照 |
-| `vendor/education-skills/學習分析/competency-based-assessment.md` | 素養導向評量四要素、雙向細目表与认知层次题量比例（30/50/20），用于考核设计 |
-| `vendor/education-skills/學習分析/learning-analytics.md` | 描述／診斷／預測／處方四层分析框架，用于过程性考核与学情追踪设计 |
-| `vendor/education-skills/學習分析/peer-assessment.md` | 同儕互評量规设计，用于课堂互评环节 |
-| `vendor/education-skills/ICT科技融入/ict-integration.md` | SAMR／TPACK 模型，用于判定翻转课堂与混合式教学的**技术融入是否到位** |
-| `vendor/education-skills/AI工具應用/generative-ai-education.md` | **課程大綱生成提示词范本**、單元教材編寫框架，用于课程整体设计 |
-| `vendor/k12-teacher-skills/k12-lesson-plan-creation/SKILL.md` | 教案＋学生材料＋观察表一体化产出、**先出草稿再定稿的确认节奏** |
-| `vendor/k12-teacher-skills/k12-lesson-plan-creation/references/output.md` | 每份文档的密度／一致性／可读性硬要求与文档 schema |
-| `vendor/k12-teacher-skills/k12-lesson-differentiation/SKILL.md` | **below／at／above 三档分层法**；「共享内容只写一次」的防漂移规则；asset-based 语言纪律 |
-| `vendor/k12-teacher-skills/k12-check-for-understanding/SKILL.md` | 出口票／课中检核题设计：干扰项来自**真实迷思概念**，教师按学生反应走下一步 |
-| `vendor/k12-teacher-skills/k12-lesson-prep/SKILL.md` | 教师备课内化：关键任务先自己试做、留备课便签 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | 交付前质量门（与 `grant-proposal` 共用同一套） |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 一次性提问机制 |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | AI 味治理，教案语言要像人写的教学文件 |
-| `vendor/office-layer/` | **文件产出唯一通道**（docx / pptx / xlsx） |
+| `skills/education-skills/edu-teaching-design/references/lesson-plan-generator.md` | **教案骨架主干**：標準教案要素、引起動機／發展活動／綜合活動三段式、品質檢核清單 |
+| `skills/education-skills/edu-teaching-design/references/differentiated-instruction.md` | **差异化三要素（內容／過程／成果）**、三層內容設計表、彈性分組策略 |
+| `skills/education-skills/edu-teaching-design/references/project-based-learning.md` | Gold Standard PBL 七大要素、微專題→長期專題的時程檔位（用于 PBL 选型与项目课教案） |
+| `skills/education-skills/edu-teaching-design/references/gamified-learning.md` | 遊戲化機制三層架構（積分／徽章／排行榜／任務／敘事），用于课堂活动与动机设计 |
+| `skills/education-skills/edu-teaching-design/references/adaptive-learning-design.md` | 學習路徑模型（診斷→分級→推薦→回饋→調整），用于分层任务闭环 |
+| `skills/education-skills/edu-learning-analytics/references/student-profiling.md` | **学情分析维度来源**：認知／情意／社會三维轮廓与数据来源对照 |
+| `skills/education-skills/edu-learning-analytics/references/competency-based-assessment.md` | 素養導向評量四要素、雙向細目表与认知层次题量比例（30/50/20），用于考核设计 |
+| `skills/education-skills/edu-learning-analytics/references/learning-analytics.md` | 描述／診斷／預測／處方四层分析框架，用于过程性考核与学情追踪设计 |
+| `skills/education-skills/edu-learning-analytics/references/peer-assessment.md` | 同儕互評量规设计，用于课堂互评环节 |
+| `skills/education-skills/edu-ict-integration/references/ict-integration.md` | SAMR／TPACK 模型，用于判定翻转课堂与混合式教学的**技术融入是否到位** |
+| `skills/education-skills/edu-ai-tools/references/generative-ai-education.md` | **課程大綱生成提示词范本**、單元教材編寫框架，用于课程整体设计 |
+| `skills/k12-teacher-skills/k12-lesson-plan-creation/SKILL.md` | 教案＋学生材料＋观察表一体化产出、**先出草稿再定稿的确认节奏** |
+| `skills/k12-teacher-skills/k12-lesson-plan-creation/references/output.md` | 每份文档的密度／一致性／可读性硬要求与文档 schema |
+| `skills/k12-teacher-skills/k12-lesson-differentiation/SKILL.md` | **below／at／above 三档分层法**；「共享内容只写一次」的防漂移规则；asset-based 语言纪律 |
+| `skills/k12-teacher-skills/k12-check-for-understanding/SKILL.md` | 出口票／课中检核题设计：干扰项来自**真实迷思概念**，教师按学生反应走下一步 |
+| `skills/k12-teacher-skills/k12-lesson-prep/SKILL.md` | 教师备课内化：关键任务先自己试做、留备课便签 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | 交付前质量门（与 `grant-proposal` 共用同一套） |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 一次性提问机制 |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | AI 味治理，教案语言要像人写的教学文件 |
+| `skills/office-layer/` | **文件产出唯一通道**（docx / pptx / xlsx） |
 
 ### 底座口径转译（必做，不能直接照抄）
 
-`vendor/education-skills/` 是**繁體中文、108 課綱口径**（學習表現／學習內容代碼、核心素養、
-領域學習節數）。本 skill 面向内地高校课堂，引用时**必须转译**，不得把台湾课纲术语直接写进交付物：
+`skills/education-skills/edu-teaching-design/` 等 `edu-` 系列底座源自台湾 **108 课纲**口径（学习表现／
+学习内容代码、核心素养、领域学习节数），本包已将其译为简体，但**术语体系仍是台湾课纲的**。
+本 skill 面向内地高校课堂，引用时**必须转译**，不得把台湾课纲术语直接写进交付物：
 
 | 底座的写法 | 转译成本包的写法 |
 |---|---|
-| 學習目標（認知／情意／技能） | **知识目标／能力目标／素养目标**三维目标 |
-| 核心素養、學習表現代碼 | 毕业要求指标点 / 专业人才培养方案对应要求（**不引具体条款号，写「按本专业培养方案」**） |
-| 引起動機／發展活動／綜合活動 | 导入／核心环节／小结（三段式逻辑保留，名称本地化） |
-| 節數（40 分鐘一節） | **學時（45 分鐘一學時）**，45／90／135 分钟课时结构 |
-| 課綱、領域 | 课程教学大纲、开课单位 |
-| 偏鄉教育策略 | 大班额／基础薄弱班级策略（仅取「师资与资源有限时如何分层」的思路） |
+| 学习目标（认知／情意／技能） | **知识目标／能力目标／素养目标**三维目标 |
+| 核心素养、学习表现代码 | 毕业要求指标点 / 专业人才培养方案对应要求（**不引具体条款号，写「按本专业培养方案」**） |
+| 引起动机／发展活动／综合活动 | 导入／核心环节／小结（三段式逻辑保留，名称本地化） |
+| 节数（40 分钟一节） | **学时（45 分钟一学时）**，45／90／135 分钟课时结构 |
+| 课纲、领域 | 课程教学大纲、开课单位 |
+| 偏乡教育策略 | 大班额／基础薄弱班级策略（仅取「师资与资源有限时如何分层」的思路） |
 
 > 转译只改术语与课时口径，**不改教学法内核**（差异化三要素、PBL 七要素、双向细目表照用）。
 
@@ -453,23 +454,23 @@ grep -oE "[0-9]+′" draft.md
 **动作二 · 生成 DOCX 教案**（唯一文件通道）：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
-$PY vendor/office-layer/scripts/docx_kit.py md --in draft.md --out 教案_<课程名>_<章节>.docx --title "《课程名》教学设计"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 教案_<课程名>_<章节>.docx   # 读回段落/表格数自检
+PY="skills/office-layer/.venv/bin/python"
+$PY skills/office-layer/scripts/docx_kit.py md --in draft.md --out 教案_<课程名>_<章节>.docx --title "《课程名》教学设计"
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 教案_<课程名>_<章节>.docx   # 读回段落/表格数自检
 ```
 
 若教师提供了**学校教案模板**，用 `spec` 命令套版：
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec plan_spec.json --out 教案.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec plan_spec.json --out 教案.docx
 ```
 
 **动作三 · 生成配套 PPTX 课件**：
 
 ```bash
-$PY vendor/office-layer/scripts/pptx_kit.py build --spec slides.json --out 课件_<课程名>_<章节>.pptx
-$PY vendor/office-layer/scripts/pptx_kit.py notes --in 课件_....pptx --notes notes.json   # 演讲者备注=教师讲稿要点
-$PY vendor/office-layer/scripts/pptx_kit.py inspect --in 课件_....pptx                     # 信息密度自检
+$PY skills/office-layer/scripts/pptx_kit.py build --spec slides.json --out 课件_<课程名>_<章节>.pptx
+$PY skills/office-layer/scripts/pptx_kit.py notes --in 课件_....pptx --notes notes.json   # 演讲者备注=教师讲稿要点
+$PY skills/office-layer/scripts/pptx_kit.py inspect --in 课件_....pptx                     # 信息密度自检
 ```
 
 - `inspect` 报出的 `overdense`（单页正文 >220 字符）**必须拆页**，不是可忽略的提示。
@@ -479,7 +480,7 @@ $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 课件_....pptx        
 
 ```bash
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限环境必需
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec grid.json --out 目标考核覆盖矩阵.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec grid.json --out 目标考核覆盖矩阵.xlsx
 ```
 
 **退出条件**：不可测动词零命中；`inspect` 读回的表格数/段落数与预期一致；
@@ -518,7 +519,7 @@ pptx 无 `overdense` 页；所有 `【待补】` 已列表告知教师。
 | `目标考核覆盖矩阵.xlsx` | 课程目标 × 考核项覆盖关系 + 认知层次比例统计 | `xlsx_kit.py build` |
 | `draft.md` | 中间稿（可编辑源），改稿走它，不要直接改 docx | — |
 
-> 全部 docx/pptx/xlsx **必须经 `vendor/office-layer/`**；禁止手搓 OOXML、禁止文本框拼伪表格、
+> 全部 docx/pptx/xlsx **必须经 `skills/office-layer/`**；禁止手搓 OOXML、禁止文本框拼伪表格、
 > 禁止把 `.md` 当交付物（除非教师明确只要 Markdown）。
 
 ## 红线
@@ -563,4 +564,4 @@ pptx 无 `overdense` 页；所有 `【待补】` 已列表告知教师。
 - [ ] DOCX 走 `docx_kit.py` 生成并 `inspect` 过；PPTX 走 `pptx_kit.py` 生成且无 `overdense` 页
 - [ ] 交付话术是初稿口吻，明确列出教师需核对的三处（学情数据/时间分配/教材映射）
 - [ ] 含学生个人信息的产出已提示保管与删除中间文件
-- [ ] 引用过的每个 `vendor/` 路径都实际 `ls` 验证存在
+- [ ] 引用过的每个 底座路径都实际 `ls` 验证存在

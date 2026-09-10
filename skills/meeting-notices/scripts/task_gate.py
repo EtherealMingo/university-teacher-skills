@@ -12,7 +12,7 @@ task_gate.py — 会议纪要 / 通知 / 工作计划文书的交付前自检（
      营销腔、聊天机器人残留、空泛判断句。
 
 用法：
-  PY="vendor/office-layer/.venv/bin/python"
+  PY="skills/office-layer/.venv/bin/python"
   $PY skills/meeting-notices/scripts/task_gate.py --in 教研会纪要.md --out 纪要自检报告.md
   $PY skills/meeting-notices/scripts/task_gate.py --in 通知.md          # 只打印，不落盘
 

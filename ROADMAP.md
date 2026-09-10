@@ -1,7 +1,7 @@
 # 大学教师 AI 提效 Skill 包 — 场景总览与实现状态
 
 > 本文档由规划文档更新为**状态文档**，记录实际实现情况与偏离原计划之处。
-> 开发约定见 `CONVENTIONS.md`，路由见 `SKILL.md`，底座溯源见 `vendor/VENDOR.md`。
+> 开发约定见 `CONVENTIONS.md`，路由见 `SKILL.md`，底座溯源见 `THIRD_PARTY_NOTICES.md`。
 
 ## 0. 与原计划的三处重要偏离
 
@@ -11,7 +11,7 @@
 核对许可证后**未采用**：该四件套为 **Proprietary** 许可，其 `LICENSE.txt` 明令禁止
 「在 Services 之外保留副本」「复制」「创作衍生作品」「分发」。
 
-改为自建 `vendor/office-layer/`，能力对齐且针对中文场景加强：
+改为自建 `skills/office-layer/`（原 `vendor/office-layer/`），能力对齐且针对中文场景加强：
 
 | 能力 | 说明 |
 |---|---|
@@ -31,7 +31,24 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 ### 偏离三：部分底座在原文档中只给了能力名，未给仓库
 
 `learning-education`（苏格拉底问答/闪卡/学习路径）与 `paper-slides`/`slides-polish`/
-`empirical-research` 在原文档中只有名字。已按能力逐个寻找相似项目并收录，来源见 `vendor/VENDOR.md`。
+`empirical-research` 在原文档中只有名字。已按能力逐个寻找相似项目并收录，来源见 `THIRD_PARTY_NOTICES.md`。
+
+### 偏离四（2026-09-10 后续）：vendor/ 底座整体迁入 skills/，并全部中文化
+
+底座不再以 `vendor/` 下的上游副本形式存放，而是迁入 `skills/` 成为 26 个一等技能目录
+（与 22 个主技能同构：`SKILL.md` + `references/` + `scripts/`）。所有文档译为简体中文
+（英文底座全文翻译，繁体中文底座逐字转简体）；代码与 LICENSE/NOTICE 保持原文。
+两处目录改名：`ibook-skills/quiz-generator` → `skills/ibook-skills/question-writing/`，
+`tov-learn-reference` → `skills/learning-education/learning-paths/`。主技能与根部文件中的全部引用已改写，
+`vendor/` 目录已删除，溯源与许可证合规统一收口到 `THIRD_PARTY_NOTICES.md`。
+
+同日下午又做了一次布局调整：26 个底座不再与主技能一起平铺，而是**按上游套件嵌套** ——
+`skills/education-skills/`（edu-* 七件）、`skills/empirical-research/`（econ-audit /
+data-dictionary / lit-review）、`skills/ibook-skills/`（教材工具链五件）、
+`skills/k12-teacher-skills/`（k12-* 四件）、`skills/learning-education/`（study-skill /
+thinking-toolkit / learning-paths）；独立件 `office-layer`、`awesome-benzi`、
+`paper-analyst`、`slides-polish` 保持平铺。22 个主技能是教师直接点名的路由入口，保持平铺。
+技能名（frontmatter `name`）不变，仅目录位置移动；全部引用同步改写，`verify.py` 通过。
 
 ## 1. 底座对照表（原计划 → 实际采用）
 
@@ -53,20 +70,20 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 
 | 子 skill | 覆盖场景 | 底座 |
 |---|---|---|
-| lesson-plan | 教案 / 教学设计 / 教学大纲 | education-skills/教學設計 |
+| lesson-plan | 教案 / 教学设计 / 教学大纲 | edu-teaching-design |
 | lecture-slides | 日常课件 | office-layer（pptx） |
-| quiz-generator | 出题 / 测评 / A-B 卷 | ibook-skills/quiz-generator |
+| quiz-generator | 出题 / 测评 / A-B 卷 | question-writing |
 | exam-pipeline | 试卷审核 / 评分细则 / 成绩分析 / 归档 | office-layer（xlsx 分析） |
-| classroom-live | 随堂投票 / 提问链 / 平时分 | ibook-skills + education-skills/學習分析 |
+| classroom-live | 随堂投票 / 提问链 / 平时分 | question-writing + edu-learning-analytics |
 | teaching-contest | 教学竞赛 / 示范课 / 评委视角自评 | lesson-plan 增强 + 质量门 |
 
 ### 科研（4）
 
 | 子 skill | 覆盖场景 | 底座 |
 |---|---|---|
-| research-assistant | 研究设计 / 文献综述 / 实证审计 | empirical-research |
+| research-assistant | 研究设计 / 文献综述 / 实证审计 | econ-audit + data-dictionary + lit-review |
 | grant-proposal | 申报全流程（查重→匹配→撰写→模拟评审） | awesome-benzi + 自建 `topic_overlap.py` |
-| paper-to-slides | 论文→组会/学术汇报 PPT | paper-slides + slides-polish |
+| paper-to-slides | 论文→组会/学术汇报 PPT | paper-analyst + slides-polish |
 | peer-review | 期刊审稿意见 | 自建（借鉴评价量规与质量门分级） |
 
 ### 指导（含学生工作，5）
@@ -76,8 +93,8 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 | thesis-supervisor | 开题审查 / 过程稿批注 / 评语 / 答辩预案 | office-layer（**原生批注**） |
 | lab-meeting | 组会轮值 / 文献派工 / 纪要 / 进度跟踪 | paper-to-slides + office-layer |
 | student-competition | 大创 / 挑战杯 / 创青春 / 互联网+：选题→组队→过程督导→中期→结题→答辩 | awesome-benzi/workflows（student-innovation、challenge-cup、innovation-competition） |
-| student-affairs | 学业预警 / 谈心谈话 / 评奖评优 / 心理危机转介 / 家长沟通 | education-skills/學習分析 + thinking-toolkit |
-| internship-practice | 实习基地 / 协议 / 安排表 / 安全管理 / 指导记录 / 考核鉴定 / 归档 | office-layer + education-skills 评量规 |
+| student-affairs | 学业预警 / 谈心谈话 / 评奖评优 / 心理危机转介 / 家长沟通 | edu-learning-analytics + thinking-toolkit |
+| internship-practice | 实习基地 / 协议 / 安排表 / 安全管理 / 指导记录 / 考核鉴定 / 归档 | office-layer + edu-learning-analytics 评量规 |
 
 ### 行政事务（5）
 
@@ -111,7 +128,7 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 
 均为实测跑通，非纸面代码。
 
-### 文档产出层（`vendor/office-layer/`）
+### 文档产出层（`skills/office-layer/`）
 
 | 脚本 | 用途 | 实测状态 |
 |---|---|---|
@@ -137,7 +154,7 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 | 脚本 | 用途 |
 |---|---|
 | `install.sh` | 自举安装：取源 → 落盘 → 建依赖 → 软链到各 agent 技能目录 → 自检。幂等，支持 `--uninstall` |
-| `verify.py` | 包完整性自检（结构 / frontmatter / vendor 路径真实性 / 纪律 / 冒烟） |
+| `verify.py` | 包完整性自检（结构 / frontmatter / 底座路径真实性 / 纪律 / 冒烟） |
 
 ### 本轮实测发现的缺陷（已修复）
 
@@ -153,9 +170,9 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 
 跑 `python3 verify.py` 会逐项检查：
 
-- [x] 14 个子技能目录与 `SKILL.md` 齐全
+- [x] 22 个主技能 + 26 个底座技能目录与 `SKILL.md` 齐全
 - [x] frontmatter 含 `name` + `description`，description 带 Triggers 与 ≥3 个教师真实口语触发短语
-- [x] 所有引用的 `vendor/` 路径**真实存在**（脚本自动比对，杜绝凭记忆写路径）
+- [x] 所有引用的底座路径（`skills/` 下）**真实存在**（脚本自动比对，杜绝凭记忆写路径）
 - [x] 每个子技能都指向 office-layer 产出通道
 - [x] 「不虚构」与「人工确认位」纪律已写入
 - [x] office-layer 三个脚本可正常拉起
@@ -167,4 +184,4 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 | 实时数据接入 | 对接教务系统导出格式，省去手工整理成绩表 |
 | 题库沉淀 | 把 `quiz-generator` 产出按课程/知识点归档，形成可复用题库 |
 | 模板库 | 收集各校评语模板、试卷审批表、职称评审表，做成 `templates/` |
-| 分发合规 | 对外分发前须处理 `vendor/ibook-skills/` 的无许可证问题（见 `vendor/VENDOR.md`） |
+| 分发合规 | 对外分发前须处理 ibook 五件底座的无许可证问题与 `thinking-toolkit` 的 CC BY-NC-SA 限制（见 `THIRD_PARTY_NOTICES.md`） |

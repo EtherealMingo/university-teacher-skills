@@ -33,23 +33,23 @@ description: "Triggers: 做个科普 PPT、给中学生讲我的研究、科普�
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/` | **文件产出唯一通道**（pptx / docx）。本技能的 PPT 与讲稿全文都由它生成 |
-| `vendor/office-layer/scripts/pptx_kit.py` | `build` / `notes` / `inspect` —— 科普 PPT 的唯一生成路径 |
-| `vendor/office-layer/scripts/docx_kit.py` | 讲稿全文、受众分析卡、自检报告的 DOCX 产出（`md` 通道） |
-| `vendor/slides-polish/` | 视觉打磨：HTML/SVG → headless Chrome → PNG 的管线、配色纪律、迭代自检循环（**只借视觉管线与纪律，pptx 骨架仍走 office-layer**） |
-| `vendor/learning-education/thinking-toolkit/methods/02-dual-layer-explain.md` | **双层解释法**：小白版 + 专业版各讲一遍，与本技能「先类比后定义」直接同源 |
-| `vendor/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底提问法，用于设计互动提问 |
-| `vendor/education-skills/偏鄉教育/localized-content-design.md` | 文化回应教学与在地化内容层次，做**受众适配**的通用思路 |
-| `vendor/education-skills/偏鄉教育/rural-education-platform.md` | 面向资源受限受众的内容设计（低带宽、低设备条件下的呈现取舍） |
-| `vendor/education-skills/AI工具應用/generative-ai-education.md` | 面向**非专业受众讲 AI 主题**时的既有表述范式 |
-| `vendor/VENDOR.md` | 上游溯源与许可证合规，引用前先读 |
+| `skills/office-layer/` | **文件产出唯一通道**（pptx / docx）。本技能的 PPT 与讲稿全文都由它生成 |
+| `skills/office-layer/scripts/pptx_kit.py` | `build` / `notes` / `inspect` —— 科普 PPT 的唯一生成路径 |
+| `skills/office-layer/scripts/docx_kit.py` | 讲稿全文、受众分析卡、自检报告的 DOCX 产出（`md` 通道） |
+| `skills/slides-polish/` | 视觉打磨：HTML/SVG → headless Chrome → PNG 的管线、配色纪律、迭代自检循环（**只借视觉管线与纪律，pptx 骨架仍走 office-layer**） |
+| `skills/learning-education/thinking-toolkit/methods/02-dual-layer-explain.md` | **双层解释法**：小白版 + 专业版各讲一遍，与本技能「先类比后定义」直接同源 |
+| `skills/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底提问法，用于设计互动提问 |
+| `skills/education-skills/edu-rural-education/references/localized-content-design.md` | 文化回应教学与在地化内容层次，做**受众适配**的通用思路 |
+| `skills/education-skills/edu-rural-education/references/rural-education-platform.md` | 面向资源受限受众的内容设计（低带宽、低设备条件下的呈现取舍） |
+| `skills/education-skills/edu-ai-tools/references/generative-ai-education.md` | 面向**非专业受众讲 AI 主题**时的既有表述范式 |
+| `THIRD_PARTY_NOTICES.md` | 上游溯源与许可证合规，引用前先读 |
 
-未在本表列出的 vendor 路径**不要凭记忆写进交付物**。引用前用 `ls` 验证：
+未在本表列出的底座路径**不要凭记忆写进交付物**。引用前用 `ls` 验证：
 
 ```bash
-ls vendor/office-layer/scripts/ vendor/slides-polish/ \
-   vendor/learning-education/thinking-toolkit/methods/ \
-   vendor/education-skills/偏鄉教育/ vendor/education-skills/AI工具應用/
+ls skills/office-layer/scripts/ skills/slides-polish/ \
+   skills/learning-education/thinking-toolkit/methods/ \
+   skills/education-skills/edu-rural-education/ skills/education-skills/edu-ai-tools/
 ```
 
 ## 前置信息收集（intake，一次性问完）
@@ -241,7 +241,7 @@ ls vendor/office-layer/scripts/ vendor/slides-polish/ \
 
 #### 3.2 诚实说明：`pptx_kit.py` 的「大字」怎么实现
 
-`vendor/office-layer/scripts/pptx_kit.py` 的 `build` **目前不提供字号参数**：
+`skills/office-layer/scripts/pptx_kit.py` 的 `build` **目前不提供字号参数**：
 封面主标题 40pt、副标题 20pt、署名 16pt；内容页标题 28pt、一级要点 18pt、二级要点 15pt；
 表格表头 14pt、表体 13pt。**不要改脚本去调字号**（那会破坏全包的统一产出通道）。
 
@@ -305,10 +305,10 @@ ls vendor/office-layer/scripts/ vendor/slides-polish/ \
 
 ```bash
 cd /Users/mingo/Documents/kimi/Workspaces/skills
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
 # 1) 生成
-$PY vendor/office-layer/scripts/pptx_kit.py build --spec 科普_spec.json --out 科普讲座.pptx
+$PY skills/office-layer/scripts/pptx_kit.py build --spec 科普_spec.json --out 科普讲座.pptx
 ```
 
 `build` 会顺手打印一份 `inspect` 结果。注意它自带的 `overdense` 阈值是 **220 字符**——
@@ -316,7 +316,7 @@ $PY vendor/office-layer/scripts/pptx_kit.py build --spec 科普_spec.json --out 
 科普版自设阈值 **90 字符（含标题）**，并用下面这段门（实测正常退出）：
 
 ```bash
-$PY vendor/office-layer/scripts/pptx_kit.py inspect --in 科普讲座.pptx | $PY -c "
+$PY skills/office-layer/scripts/pptx_kit.py inspect --in 科普讲座.pptx | $PY -c "
 import json,sys
 d=json.load(sys.stdin)
 bad=[(s['n'],s['chars']) for s in d['detail'] if s['chars']>90]
@@ -387,8 +387,8 @@ print('结论:', '密度门通过' if not bad and not no_notes else '需修改')
 `build` 时也可以在每页 spec 里直接写 `notes`；**改稿阶段用 `notes` 命令批量覆盖更省事**：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
-$PY vendor/office-layer/scripts/pptx_kit.py notes \
+PY="skills/office-layer/.venv/bin/python"
+$PY skills/office-layer/scripts/pptx_kit.py notes \
     --in 科普讲座.pptx --notes 讲稿_notes.json --out 科普讲座_含讲稿.pptx
 ```
 
@@ -439,7 +439,7 @@ $PY vendor/office-layer/scripts/pptx_kit.py notes \
 
 #### 5.2 视觉自检
 
-视觉管线走 `vendor/slides-polish/` 的 HTML/SVG → headless Chrome → PNG（本机已确认装 Chrome）：
+视觉管线走 `skills/slides-polish/` 的 HTML/SVG → headless Chrome → PNG（本机已确认装 Chrome）：
 
 ```bash
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
@@ -488,8 +488,8 @@ pkill -f chrome-prof          # 收尾，见下方实测提醒
 教师需要打印或提词时，走 `docx_kit`：
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md --in 讲稿.md --out 讲稿全文.docx
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 讲稿全文.docx   # 自检
+$PY skills/office-layer/scripts/docx_kit.py md --in 讲稿.md --out 讲稿全文.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 讲稿全文.docx   # 自检
 ```
 
 ## 产出物
@@ -548,7 +548,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 讲稿全文.docx   # �
 - [ ] 概念数是否符合 `时长 ÷ 8`；是否只有 1 个核心概念
 - [ ] 「复述检验」是否通过：能写出听众会带走的那一句话
 - [ ] `description` 的触发短语是否覆盖教师真实说法（本文件已含 10 句）
-- [ ] 引用的 `vendor/` 路径是否都用 `ls` 验证过
+- [ ] 引用的 底座路径是否都用 `ls` 验证过
 - [ ] 每页可见正文 ≤ 90 字符、要点 1–3 条（**`inspect` 实测，不是目测**；表格页需人工再看，见 3.3）
 - [ ] 每页是否都有讲稿备注（`inspect` 的 `has_notes` 全为 true）
 - [ ] 互动点数量是否 ≥ `时长 ÷ 8`，形式是否适配场地与受众
@@ -561,5 +561,5 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 讲稿全文.docx   # �
 - [ ] 每张图是否在图源表里有可追溯来源
 - [ ] 视觉自检是否执行；**无图像能力时是否如实告知教师，而不是声称看过**
 - [ ] 所有 `【待教师确认：…】` 是否汇成清单交给教师
-- [ ] pptx 是否由 `vendor/office-layer/scripts/pptx_kit.py` 生成，`build / notes / inspect` 是否都跑过
+- [ ] pptx 是否由 `skills/office-layer/scripts/pptx_kit.py` 生成，`build / notes / inspect` 是否都跑过
 - [ ] 交付说明是否写明「**这是初稿**，请重点核对科学表述、数字出处与图片来源」

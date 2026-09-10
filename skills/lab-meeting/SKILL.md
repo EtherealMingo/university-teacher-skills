@@ -23,15 +23,15 @@ description: "研究生组会全流程管理：学期组会总排期、轮值表
 **不适用**：本科毕业论文指导（走 `thesis-supervisor`）；课程教学设计（走 `lesson-plan`）；
 单篇论文的纯分析不要 PPT（直接走 paper-to-slides / 文献精读）。
 
-## 底座（vendor-first，禁止重写）
+## 底座（复用优先，禁止重写）
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/` | **文件产出唯一通道**：`xlsx_kit.py`（轮值表/进度表 + 原生图表）、`docx_kit.py`（纪要 + **原生批注**）、`pptx_kit.py`（学生汇报稿骨架） |
-| `vendor/paper-slides/paper-analyst/` | 文献派工后的上游分析能力。`references/output-schema.md` 分析结构；`references/presentation-schema.md` 幻灯片计划 JSON；`references/presentation-style-guide.md` 幻灯片内容压缩规则；`references/quality-checklist.md` 反幻觉（`[原文声明]`/`[模型归纳]` 标注） |
-| `vendor/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底提问法 —— 组会追问问题的问法来源 |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | 问题批次（`question-batch`）机制 —— 本 skill intake 一次问完的依据 |
-| `vendor/VENDOR.md` | 上游溯源与许可证合规 |
+| `skills/office-layer/` | **文件产出唯一通道**：`xlsx_kit.py`（轮值表/进度表 + 原生图表）、`docx_kit.py`（纪要 + **原生批注**）、`pptx_kit.py`（学生汇报稿骨架） |
+| `skills/paper-analyst/` | 文献派工后的上游分析能力。`references/output-schema.md` 分析结构；`references/presentation-schema.md` 幻灯片计划 JSON；`references/presentation-style-guide.md` 幻灯片内容压缩规则；`references/quality-checklist.md` 反幻觉（`[原文声明]`/`[模型归纳]` 标注） |
+| `skills/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底提问法 —— 组会追问问题的问法来源 |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | 问题批次（`question-batch`）机制 —— 本 skill intake 一次问完的依据 |
+| `THIRD_PARTY_NOTICES.md` | 上游溯源与许可证合规 |
 
 ### 底座的两处必要改造（照抄会出错，务必看清）
 
@@ -100,7 +100,7 @@ description: "研究生组会全流程管理：学期组会总排期、轮值表
 **动作**：用 `scripts/roster_plan.py` 出 spec，再用 office-layer 落盘。
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
 # 1) 学生名单写文件，一行一名（# 后为注释）
 cat > 学生名单.txt <<'EOF'
@@ -123,7 +123,7 @@ $PY skills/lab-meeting/scripts/roster_plan.py \
     --out roster_spec.json
 
 # 3) 落盘（office-layer 唯一通道）
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec roster_spec.json --out 组会轮值表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec roster_spec.json --out 组会轮值表.xlsx
 ```
 
 脚本会打印 `有效组会 / 跳过 / 汇报次数 / 点评次数 / 公平性告警`，**告警非空就必须处理**。
@@ -169,7 +169,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build --spec roster_spec.json --out 
 
 1. **先填派工单**（下面的四要素是重点，缺一样学生就白读）。派工单走 docx：
    ```bash
-   $PY vendor/office-layer/scripts/docx_kit.py md --in 文献派工单.md --out 文献派工单.docx --title "文献派工单"
+   $PY skills/office-layer/scripts/docx_kit.py md --in 文献派工单.md --out 文献派工单.docx --title "文献派工单"
    ```
 2. **走 paper-analyst 做上游分析**（`presentation` 或 `presentation_with_figures` 模式）：
    按 `references/paper-type-rubric.md` **先判论文类型再分析**（不要默认是 AI/ML 论文），
@@ -178,10 +178,10 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build --spec roster_spec.json --out 
    缺失字段标 `[未明确给出]`，**venue/DOI/年份原文没有就不许写**。
 3. **出幻灯片计划**（`references/presentation-schema.md`），再映射到 office-layer 的 spec：
    ```bash
-   $PY vendor/office-layer/scripts/pptx_kit.py build --spec slides.json --out 汇报稿骨架.pptx
-   $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 汇报稿骨架.pptx
+   $PY skills/office-layer/scripts/pptx_kit.py build --spec slides.json --out 汇报稿骨架.pptx
+   $PY skills/office-layer/scripts/pptx_kit.py inspect --in 汇报稿骨架.pptx
    ```
-   映射关系（替代 vendor 的自然语言 handoff）：
+   映射关系（替代底座技能间的自然语言交接）：
 
    | presentation-schema | office-layer spec |
    |---|---|
@@ -289,8 +289,8 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build --spec roster_spec.json --out 
 **输出**：`组会纪要_YYYYMMDD.docx`。
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md --in 组会纪要.md --out 组会纪要_20250303.docx --title "组会纪要 · 第1周"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 组会纪要_20250303.docx
+$PY skills/office-layer/scripts/docx_kit.py md --in 组会纪要.md --out 组会纪要_20250303.docx --title "组会纪要 · 第1周"
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 组会纪要_20250303.docx
 ```
 
 需要单独给学生留批注时，走 office-layer 的**原生批注**（学生看得见的批注气球）：
@@ -300,7 +300,7 @@ cat > 批注.json <<'EOF'
 [{"anchor": "未完成（服务器排队 2 周）",
   "text": "顺延可以，但下周组会必须给出第一组对比结果。"}]
 EOF
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 组会纪要_20250303.docx --out 组会纪要_20250303_批注.docx \
     --comments 批注.json --author "指导教师"
 ```
@@ -317,10 +317,10 @@ $PY vendor/office-layer/scripts/docx_kit.py comment \
 **动作**：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
 # 1) 出进度表（spec 里「状态」列的值必须是四个口径词之一）
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 进度spec.json --out 实验进度跟踪表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 进度spec.json --out 实验进度跟踪表.xlsx
 
 # 2) 上状态色标（office-layer 的 build 不支持逐格填充，故用本 skill 的薄后处理，仍走 office-layer 的 venv）
 $PY skills/lab-meeting/scripts/status_colorize.py \
@@ -412,7 +412,7 @@ $PY skills/lab-meeting/scripts/status_colorize.py \
 ## 自检清单
 
 - [ ] `description` 里至少 4 句教师真实会说的触发短语
-- [ ] 引用的 `vendor/` 路径**都用 `ls` 验证过真实存在**（不是凭记忆写的）
+- [ ] 引用的 底座路径**都用 `ls` 验证过真实存在**（不是凭记忆写的）
 - [ ] intake 的 6 项**一次性问完**，没有边做边问
 - [ ] 学生名单 100% 来自教师，**无一个编造姓名**
 - [ ] 学生进度事实均有出处；缺失处为 `【待补：…】` 而非模型补全

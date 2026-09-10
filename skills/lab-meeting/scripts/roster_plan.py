@@ -5,9 +5,9 @@
 只做「排期计算 + 出 spec」，不直接写 xlsx。
 落盘一律走 office-layer：
 
-    PY="vendor/office-layer/.venv/bin/python"
+    PY="skills/office-layer/.venv/bin/python"
     $PY skills/lab-meeting/scripts/roster_plan.py --students a.txt ... --out spec.json
-    $PY vendor/office-layer/scripts/xlsx_kit.py build --spec spec.json --out 组会轮值表.xlsx
+    $PY skills/office-layer/scripts/xlsx_kit.py build --spec spec.json --out 组会轮值表.xlsx
 
 生成逻辑（四步，全部可解释）：
   1. 按频率（每周/双周）从开学首日铺出学期周次 → 会议槽位 slots

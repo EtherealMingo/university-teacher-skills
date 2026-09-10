@@ -53,17 +53,17 @@ description: "高校班主任 / 学业导师 / 本科生导师的学生事务与
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/SKILL.md` | **文件产出唯一通道**，命令用法与四条铁律 |
-| `vendor/office-layer/scripts/docx_kit.py` | `md` 出记录表/帮扶方案/推荐意见；`spec` 出带**人工确认位**的表单；`inspect` 自检 |
-| `vendor/office-layer/scripts/xlsx_kit.py` | `build` 出台账/依据矩阵/审批台账；`inspect` 自检 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | **三级问题分级**（`blocked` / `needs-review` / `advisory`）直接复用为本技能的红线等级 |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 机制：intake 一次性问完 |
-| `vendor/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | **谈心谈话的提问主干**：一次只问一个、区分事实/解释/判断/目标、只问可能改变结论的问题 |
-| `vendor/education-skills/學習分析/student-profiling.md` | 学情三/四维度（认知·情意·社会）用于谈话前的背景梳理；其**伦理节**（数据保护、用于支持而非标签、避免偏见固化）本技能全盘遵守 |
-| `vendor/education-skills/學習分析/learning-analytics.md` | 预警指标与风险分级的思路（高/中/低风险 → 本技能映射为严重/重点/一般预警） |
-| `vendor/education-skills/學習分析/peer-assessment.md` | 量规（rubric）与去标识化、品质保证的思路 → 评奖评优的「依据矩阵」与反同质化写法 |
-| `vendor/education-skills/學習分析/competency-based-assessment.md` | 多元评量与历程档案 → 评优中「社会活动 / 实践 / 志愿服务」类证据怎么组织 |
-| `vendor/VENDOR.md` | 底座溯源与许可证合规 |
+| `skills/office-layer/SKILL.md` | **文件产出唯一通道**，命令用法与四条铁律 |
+| `skills/office-layer/scripts/docx_kit.py` | `md` 出记录表/帮扶方案/推荐意见；`spec` 出带**人工确认位**的表单；`inspect` 自检 |
+| `skills/office-layer/scripts/xlsx_kit.py` | `build` 出台账/依据矩阵/审批台账；`inspect` 自检 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | **三级问题分级**（`blocked` / `needs-review` / `advisory`）直接复用为本技能的红线等级 |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 机制：intake 一次性问完 |
+| `skills/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | **谈心谈话的提问主干**：一次只问一个、区分事实/解释/判断/目标、只问可能改变结论的问题 |
+| `skills/education-skills/edu-learning-analytics/references/student-profiling.md` | 学情三/四维度（认知·情意·社会）用于谈话前的背景梳理；其**伦理节**（数据保护、用于支持而非标签、避免偏见固化）本技能全盘遵守 |
+| `skills/education-skills/edu-learning-analytics/references/learning-analytics.md` | 预警指标与风险分级的思路（高/中/低风险 → 本技能映射为严重/重点/一般预警） |
+| `skills/education-skills/edu-learning-analytics/references/peer-assessment.md` | 量规（rubric）与去标识化、品质保证的思路 → 评奖评优的「依据矩阵」与反同质化写法 |
+| `skills/education-skills/edu-learning-analytics/references/competency-based-assessment.md` | 多元评量与历程档案 → 评优中「社会活动 / 实践 / 志愿服务」类证据怎么组织 |
+| `THIRD_PARTY_NOTICES.md` | 底座溯源与许可证合规 |
 
 > **底座使用边界**：`student-profiling.md` 里出现的**焦虑量表、自我效能量表、心理测验**等工具，
 > 本技能**一律不使用**。它只用来提供「学情该从哪几个维度看」的框架；
@@ -82,12 +82,12 @@ description: "高校班主任 / 学业导师 / 本科生导师的学生事务与
 ### 环境准备（首次使用必做，已实测）
 
 ```bash
-bash vendor/office-layer/bootstrap.sh          # 创建 vendor/office-layer/.venv 并装依赖
-PY="vendor/office-layer/.venv/bin/python"
+bash skills/office-layer/bootstrap.sh          # 创建 skills/office-layer/.venv 并装依赖
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限环境需可写缓存目录
 ```
 
-工作目录固定在包根：所有 `vendor/...` 路径都是相对包根写的，换目录会找不到文件。
+工作目录固定在包根：所有 `skills/...` 底座路径都是相对包根写的，换目录会找不到文件。
 
 ## 前置信息收集（intake，一次性问完）
 
@@ -193,7 +193,7 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限环境需�
 #### 1.5 命令（已实测）
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 # ① 预警名单（xlsx）
@@ -205,14 +205,14 @@ cat > 预警名单.json <<'EOF'
   "widths": [6,12,18,8,12,22,16,10,12,10,12,26,18,14,16,10,12]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 预警名单.json --out 学业预警名单.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 学业预警名单.xlsx        # 自检
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 预警名单.json --out 学业预警名单.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 学业预警名单.xlsx        # 自检
 
 # ② 帮扶方案（先写 md 再转 docx）
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 帮扶方案_S001.md --out 学业帮扶方案_S001.docx \
     --title "学业帮扶方案（初稿）"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 学业帮扶方案_S001.docx   # 自检
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 学业帮扶方案_S001.docx   # 自检
 ```
 
 ### 阶段二 · 谈心谈话
@@ -250,7 +250,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 学业帮扶方案_S001
 
 #### 2.4 提问技巧：引导学生自己说，而不是审问
 
-主干用 `vendor/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md`：
+主干用 `skills/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md`：
 **一次只问一个问题**，根据回答决定下一问；先分清学生说的哪部分是
 「可验证的事实」、哪部分是「他的解释」、哪部分是「价值判断」、哪部分是「他想达成的目标」；
 **只问可能改变结论的问题**，信息够了就停，不必凑数。
@@ -278,7 +278,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 学业帮扶方案_S001
 **六个必备栏目**（学校有模板用学校模板；没有用下面这份，已实测可生成）：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 cat > 记录表.json <<'EOF'
@@ -303,8 +303,8 @@ cat > 记录表.json <<'EOF'
   {"placeholder": "【待教师确认：本记录是否需按学校要求报送辅导员 / 录入学生事务系统；如需上报，学生已被告知的范围是 ____】"}
  ]}
 EOF
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec 记录表.json --out 谈心谈话记录表.docx
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 谈心谈话记录表.docx      # 自检：应为 3 个表格
+$PY skills/office-layer/scripts/docx_kit.py spec --spec 记录表.json --out 谈心谈话记录表.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 谈心谈话记录表.docx      # 自检：应为 3 个表格
 ```
 
 #### 2.6 记录用词纪律：只记事实与观察
@@ -444,7 +444,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 谈心谈话记录表.d
 | 缺失项 | 逐条列出 | —— |
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 cat > 依据矩阵.json <<'EOF'
@@ -455,8 +455,8 @@ cat > 依据矩阵.json <<'EOF'
   "widths": [12,22,10,12,10,10,12,14,34,22,24,12,16,22,18,34]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 依据矩阵.json --out 评奖评优依据矩阵.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 评奖评优依据矩阵.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 依据矩阵.json --out 评奖评优依据矩阵.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 评奖评优依据矩阵.xlsx
 ```
 
 #### 3.2 推荐意见的结构（六段，每段都有证据支撑）
@@ -493,10 +493,10 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 评奖评优依据矩�
 
 ```bash
 # 推荐意见（先写 md，再转 docx）
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 推荐意见_X奖学金_S001.md --out 推荐意见_X奖学金_S001.docx \
     --title "【待补：奖项全称】推荐意见"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 推荐意见_X奖学金_S001.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 推荐意见_X奖学金_S001.docx
 ```
 
 ### 阶段四 · 请假与缓考审批
@@ -555,7 +555,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 推荐意见_X奖学金
 #### 4.4 台账与模板（已实测）
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 cat > 请假台账.json <<'EOF'
@@ -566,8 +566,8 @@ cat > 请假台账.json <<'EOF'
   "widths": [6,12,18,10,26,20,8,26,22,12,12,18,16,14,20]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 请假台账.json --out 请假审批台账.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 请假审批台账.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 请假台账.json --out 请假审批台账.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 请假审批台账.xlsx
 
 # 缓考申请单模板（带人工确认位）
 cat > 缓考申请单.json <<'EOF'
@@ -587,8 +587,8 @@ cat > 缓考申请单.json <<'EOF'
   {"placeholder": "【待教师确认：本生是否符合贵校缓考受理条件与时限；本单需经学院与教务部门签批后生效，AI 不代批、不代签】"}
  ]}
 EOF
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec 缓考申请单.json --out 缓考申请单.docx
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 缓考申请单.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec 缓考申请单.json --out 缓考申请单.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 缓考申请单.docx
 ```
 
 > **审批栏全部留空**。任何签名、盖章、日期、审批结论，AI 一律不填。
@@ -677,7 +677,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 缓考申请单.docx
 #### 5.6 记录与保密（本节专属纪律）
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 cat > 危机记录.json <<'EOF'
@@ -701,8 +701,8 @@ cat > 危机记录.json <<'EOF'
   {"placeholder": "【待教师确认：本记录按贵校规定报送至 ____（辅导员 / 学院 / 心理中心），报送范围 ____；本表不得放入班级公共台账，不得在群内发送】"}
  ]}
 EOF
-$PY vendor/office-layer/scripts/docx_kit.py spec --spec 危机记录.json --out 危机信号观察记录.docx
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 危机信号观察记录.docx
+$PY skills/office-layer/scripts/docx_kit.py spec --spec 危机记录.json --out 危机信号观察记录.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 危机信号观察记录.docx
 ```
 
 **四条记录纪律**：
@@ -794,7 +794,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 危机信号观察记�
 #### 7.1 班级学生台账（字段与敏感标注）
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 cat > 台账.json <<'EOF'
@@ -809,8 +809,8 @@ cat > 台账.json <<'EOF'
   "widths": [6,12,20,14,30,28,10,22,14,14]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 台账.json --out 班级学生台账.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 班级学生台账.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 台账.json --out 班级学生台账.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 班级学生台账.xlsx
 ```
 
 #### 7.2 台账的四条纪律
@@ -856,7 +856,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 班级学生台账.xlsx
 | `特殊情况跟踪表.xlsx` | 七 | 事由类别 / 已采取措施 / 转介情况 / 跟踪状态 | **是·高敏感** |
 | `班级情况统计.xlsx` | 七 | 五项聚合统计，**不点名** | 否 |
 
-所有文件产出**一律走 `vendor/office-layer/`**，禁止文本框拼表格、禁止手写 OOXML、
+所有文件产出**一律走 `skills/office-layer/`**，禁止文本框拼表格、禁止手写 OOXML、
 禁止拿 `.md` 当交付物（除非教师明确只要 Markdown）。
 
 **交付时必须附一句**：「这是初稿，请重点核对：预警等级与贵校门槛是否一致、
@@ -988,8 +988,8 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 班级学生台账.xlsx
 
 ### 通用
 
-- [ ] 引用的 `vendor/` 路径是否都用 `ls` 验证过存在
-- [ ] 所有 docx / xlsx 产出是否都走了 `vendor/office-layer/` 的脚本，并用 `inspect` 自检过
+- [ ] 引用的 底座路径是否都用 `ls` 验证过存在
+- [ ] 所有 docx / xlsx 产出是否都走了 `skills/office-layer/` 的脚本，并用 `inspect` 自检过
 - [ ] 学校有固定模板时是否**用了学校模板**（而不是本技能的默认栏目）
 - [ ] 缺信息处是否用 `【待补：……】` 占位并已列成向教师索要的清单
 - [ ] 是否告知教师：预警与帮扶的最终处置权在教师与辅导员，本技能只提供初稿与整理

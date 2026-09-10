@@ -5,12 +5,12 @@
 输入只要一个真实锚点：**本学期第 1 周周一**。其余日期由周次推算，
 节假日由教师提供的校历导入（本工具不内置任何年份的法定节假日安排）。
 
-    PY="vendor/office-layer/.venv/bin/python"
+    PY="skills/office-layer/.venv/bin/python"
     $PY skills/teaching-ops/scripts/term_calendar.py \\
         --start 2026-03-02 --weeks 18 --exam-weeks 17,18 \\
         --holidays 2026-04-06,2026-05-01 \\
         --spec 过程/倒排spec.json
-    $PY vendor/office-layer/scripts/xlsx_kit.py build \\
+    $PY skills/office-layer/scripts/xlsx_kit.py build \\
         --spec 过程/倒排spec.json --out 学期时间节点倒排表.xlsx
 
 **重要**：默认节点是高校教学运行的通行惯例，用于提醒「别漏事」，

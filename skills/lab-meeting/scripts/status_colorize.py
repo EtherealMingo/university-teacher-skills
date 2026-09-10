@@ -4,8 +4,8 @@
 
 流程（唯一通道，不许绕过）：
 
-    PY="vendor/office-layer/.venv/bin/python"
-    $PY vendor/office-layer/scripts/xlsx_kit.py build --spec 进度spec.json --out 进度跟踪表.xlsx
+    PY="skills/office-layer/.venv/bin/python"
+    $PY skills/office-layer/scripts/xlsx_kit.py build --spec 进度spec.json --out 进度跟踪表.xlsx
     $PY skills/lab-meeting/scripts/status_colorize.py \
         --in 进度跟踪表.xlsx --sheet 进度跟踪 --status-col 4
 
@@ -31,7 +31,7 @@ try:
     import openpyxl
     from openpyxl.styles import Alignment, Font, PatternFill
 except ImportError:
-    sys.exit("缺少 openpyxl：请用 vendor/office-layer/.venv/bin/python 运行本脚本")
+    sys.exit("缺少 openpyxl：请用 skills/office-layer/.venv/bin/python 运行本脚本")
 
 # 状态 → (底色, 字色)
 STATUS_MAP = {

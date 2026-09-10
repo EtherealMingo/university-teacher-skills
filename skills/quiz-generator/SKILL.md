@@ -27,7 +27,7 @@ description: "高校教师出题与测评辅助：按知识点清单规划题量
 | 已经有试卷，要审卷、出评分细则、考后成绩分析、归档 | `exam-pipeline`（本技能**下游**，见「交接协议」） |
 | 只是课堂上现场提问、要一条递进提问链、把互动记录算平时分 | `classroom-live` |
 | 要教案、课件、教学设计 | `lesson-plan` / `lecture-slides` |
-| 要的是课程知识结构图、术语表、FAQ | `learning-graph-generator` / `glossary-generator` / `faq-generator`（`vendor/ibook-skills/` 内） |
+| 要的是课程知识结构图、术语表、FAQ | `learning-graph-generator` / `glossary-generator` / `faq-generator`（均为本包 `skills/` 下的底座技能） |
 
 ## 底座（禁止重写）
 
@@ -35,29 +35,29 @@ description: "高校教师出题与测评辅助：按知识点清单规划题量
 
 | 路径 | 用途 | 本技能怎么用 |
 |---|---|---|
-| `vendor/ibook-skills/quiz-generator/SKILL.md` | **出题主干方法**：布鲁姆分布分档、概念优先级（Priority 1/2/3）、答案位置均衡、每题必带解析、题目 JSON 结构、质量评分与校验 10 条 | 直接照搬其**方法论与数据结构**，产出物换成中文试卷与 xlsx |
-| `vendor/ibook-skills/quiz-generator/references/distractor-writing-guide.md` | **干扰项写作指南**：四个质量维度（可信/有教学价值/能区分/公平）、四类误解型干扰项、四种构造法（相关概念/部分定义/程度差异/时序错位）、0–1 干扰项质量分、按布鲁姆层级举例、修订策略 | 阶段三写选择题时逐条对照，红线级引用 |
-| `vendor/ibook-skills/learning-graph-generator/` | 知识点依赖图生成，含 CIS（概念影响力）计算与 `validate-learning-graph.py` / `analyze-graph.py` | 教师给的是整门课大纲时，先用它把知识点抽成带依赖的清单，再据此分配题量 |
-| `vendor/ibook-skills/course-description-analyzer/` | 课程描述完整性校验 + **布鲁姆学习成果**抽取 | 阶段一抽取认知层次目标的依据 |
-| `vendor/ibook-skills/glossary-generator/SKILL.md` | ISO 11179 式术语定义（精确、简洁、非循环） | 名词解释、术语配对题、填空题答案的唯一性判据 |
-| `vendor/ibook-skills/faq-generator/` | 教材问答对 + 分类分级导出 JSON | 复习型题库的题干改写来源之一 |
-| `vendor/learning-education/study-skill/references/fsrs-spaced-repetition.md` | **FSRS 间隔重复协议**：D/S/R 三值、1–4 评分、`add`/`schedule`/`review`/`status` 命令、卡片存储路径、每次复习上限 3 条的混合复习模型 | 阶段七「题目转闪卡」直接按此协议执行 |
-| `vendor/learning-education/study-skill/scripts/fsrs/` | FSRS 调度器 **Go 源码**（`add/schedule/review/status`，输出 JSON）。⚠️ 仓库不含编译产物，需 Go ≥1.22 自行 `go build`；无 Go 时走阶段七的降级方案 | 闪卡排程 |
-| `vendor/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底式追问：区分「事实 / 解释 / 价值判断 / 目标」，只问能改变结论的问题，最多 6 问 | 论述题、案例分析题的**小问链**设计（由浅入深逐问逼出论证） |
-| `vendor/education-skills/學習分析/competency-based-assessment.md` | **双向细目表**范式（认知层次 × 内容维度 × 建议比例）、素养导向题型分类（情境选择题 / 非连续文本题 / 探究实作题 / 议题讨论题 / 跨领域整合题） | 阶段二细目表与情境题命制的结构模板 |
-| `vendor/education-skills/學習分析/peer-assessment.md` | 评分规准（Rubric）设计、评量者训练与标竿范例 | 阶段六评分要点的结构（但完整 rubric 归 `exam-pipeline`） |
-| `vendor/k12-teacher-skills/k12-check-for-understanding/SKILL.md` | **理解性检查（CFU）**：1–3 个精准形成性题目，干扰项**必须来自有据可查的学生常见错误**；「学生回答 → 下一步教学动作」的教师指引；学生版/教师版分离 | 随堂小测与「教学前摸底题」的命制纪律；干扰项来源的取证要求 |
-| `vendor/k12-teacher-skills/k12-check-for-understanding/references/verification.md` | 交付前验证协议 | 阶段四质量门的分层校验思路 |
-| `vendor/office-layer/` | **文件产出唯一通道**：`scripts/docx_kit.py`（`md` / `spec` / `comment` / `inspect`）、`scripts/xlsx_kit.py`（`build` / `analyze` / `inspect`）、`bootstrap.sh` | 试卷 docx、细目表 xlsx、审核批注 |
+| `skills/ibook-skills/question-writing/SKILL.md` | **出题主干方法**：布鲁姆分布分档、概念优先级（Priority 1/2/3）、答案位置均衡、每题必带解析、题目 JSON 结构、质量评分与校验 10 条 | 直接照搬其**方法论与数据结构**，产出物换成中文试卷与 xlsx |
+| `skills/ibook-skills/question-writing/references/distractor-writing-guide.md` | **干扰项写作指南**：四个质量维度（可信/有教学价值/能区分/公平）、四类误解型干扰项、四种构造法（相关概念/部分定义/程度差异/时序错位）、0–1 干扰项质量分、按布鲁姆层级举例、修订策略 | 阶段三写选择题时逐条对照，红线级引用 |
+| `skills/ibook-skills/learning-graph-generator/` | 知识点依赖图生成，含 CIS（概念影响力）计算与 `validate-learning-graph.py` / `analyze-graph.py` | 教师给的是整门课大纲时，先用它把知识点抽成带依赖的清单，再据此分配题量 |
+| `skills/ibook-skills/course-description-analyzer/` | 课程描述完整性校验 + **布鲁姆学习成果**抽取 | 阶段一抽取认知层次目标的依据 |
+| `skills/ibook-skills/glossary-generator/SKILL.md` | ISO 11179 式术语定义（精确、简洁、非循环） | 名词解释、术语配对题、填空题答案的唯一性判据 |
+| `skills/ibook-skills/faq-generator/` | 教材问答对 + 分类分级导出 JSON | 复习型题库的题干改写来源之一 |
+| `skills/learning-education/study-skill/references/fsrs-spaced-repetition.md` | **FSRS 间隔重复协议**：D/S/R 三值、1–4 评分、`add`/`schedule`/`review`/`status` 命令、卡片存储路径、每次复习上限 3 条的混合复习模型 | 阶段七「题目转闪卡」直接按此协议执行 |
+| `skills/learning-education/study-skill/scripts/fsrs/` | FSRS 调度器 **Go 源码**（`add/schedule/review/status`，输出 JSON）。⚠️ 仓库不含编译产物，需 Go ≥1.22 自行 `go build`；无 Go 时走阶段七的降级方案 | 闪卡排程 |
+| `skills/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底式追问：区分「事实 / 解释 / 价值判断 / 目标」，只问能改变结论的问题，最多 6 问 | 论述题、案例分析题的**小问链**设计（由浅入深逐问逼出论证） |
+| `skills/education-skills/edu-learning-analytics/references/competency-based-assessment.md` | **双向细目表**范式（认知层次 × 内容维度 × 建议比例）、素养导向题型分类（情境选择题 / 非连续文本题 / 探究实作题 / 议题讨论题 / 跨领域整合题） | 阶段二细目表与情境题命制的结构模板 |
+| `skills/education-skills/edu-learning-analytics/references/peer-assessment.md` | 评分规准（Rubric）设计、评量者训练与标竿范例 | 阶段六评分要点的结构（但完整 rubric 归 `exam-pipeline`） |
+| `skills/k12-teacher-skills/k12-check-for-understanding/SKILL.md` | **理解性检查（CFU）**：1–3 个精准形成性题目，干扰项**必须来自有据可查的学生常见错误**；「学生回答 → 下一步教学动作」的教师指引；学生版/教师版分离 | 随堂小测与「教学前摸底题」的命制纪律；干扰项来源的取证要求 |
+| `skills/k12-teacher-skills/k12-check-for-understanding/references/verification.md` | 交付前验证协议 | 阶段四质量门的分层校验思路 |
+| `skills/office-layer/` | **文件产出唯一通道**：`scripts/docx_kit.py`（`md` / `spec` / `comment` / `inspect`）、`scripts/xlsx_kit.py`（`build` / `analyze` / `inspect`）、`bootstrap.sh` | 试卷 docx、细目表 xlsx、审核批注 |
 
-**许可证注意**：`vendor/ibook-skills/` 上游仓库**无 LICENSE 文件**（见 `vendor/VENDOR.md`），依法默认保留全部权利。
+**许可证注意**：`question-writing` 等 ibook 系列底座的上游仓库**无 LICENSE 文件**（见 `THIRD_PARTY_NOTICES.md`），依法默认保留全部权利。
 因此本技能**只借鉴其方法论思路，不整段复制其英文原文、模板文本或代码**进任何交付物；交付物一律用中文重写。
 
 **环境准备**（`.venv` 尚未创建时）：
 
 ```bash
-bash vendor/office-layer/bootstrap.sh
-PY="vendor/office-layer/.venv/bin/python"
+bash skills/office-layer/bootstrap.sh
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限环境必需
 ```
 
@@ -93,11 +93,11 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限环境必�
 
 - **输入**：无。
 - **动作**：
-  1. `ls vendor/office-layer/scripts/` 与 `ls vendor/office-layer/.venv/bin/python`，确认产出通道可用；缺 `.venv` 先跑 `bootstrap.sh`。
-  2. `ls vendor/ibook-skills/quiz-generator/references/`，确认干扰项指南在位。
+  1. `ls skills/office-layer/scripts/` 与 `ls skills/office-layer/.venv/bin/python`，确认产出通道可用；缺 `.venv` 先跑 `bootstrap.sh`。
+  2. `ls skills/ibook-skills/question-writing/references/`，确认干扰项指南在位。
   3. 建工作目录 `quiz-<课程名简写>-<日期>/`，过程文件全放这里。
 - **输出**：可用环境 + 工作目录。
-- **退出条件**：`docx_kit.py`、`xlsx_kit.py` 存在；`vendor/office-layer/.venv/bin/python` 可执行（`--help` 有输出）。
+- **退出条件**：`docx_kit.py`、`xlsx_kit.py` 存在；`skills/office-layer/.venv/bin/python` 可执行（`--help` 有输出）。
 
 ### 阶段一 · 知识点清单化
 
@@ -325,7 +325,7 @@ python3 quiz_audit.py 题库.json "识记:20,理解:30,应用:30,分析:20" 知�
      - **换可选性**：A 卷单选 → B 卷多选**不允许**（题型变了就不是同格）；应保持题型不变。
      - **换干扰项但不换错误概念**：两卷同一题考的学生误区应来自同一组常见错误（如都考「把合力当某一个力」）。
   3. **选项乱序**（若教师要求）：每道选择题独立打乱选项位置，用脚本或手工重排后**逐题核对答案字母同步更新**。
-     答案位置分布 A/B/C/D 各占 25%±5%（沿用 `vendor/ibook-skills/quiz-generator/SKILL.md` 的答案均衡要求），
+     答案位置分布 A/B/C/D 各占 25%±5%（沿用 `skills/ibook-skills/question-writing/SKILL.md` 的答案均衡要求），
      不得出现连续 3 题同字母、不得 A-B-A-B 循环。
   4. **等价性校验**（四步，全部留痕）：
      - ① 两卷各跑一遍 `quiz_audit.py`，层次分布、题型分布、答案位置分布逐项对照，偏差超表即不合格。
@@ -370,7 +370,7 @@ python3 quiz_audit.py 题库.json "识记:20,理解:30,应用:30,分析:20" 知�
      **遮挡原则**：一张卡只问一件事，正面不能出现答案线索，背面必须能在 20 秒内读完。
      判断题的卡正面**不要保留原句**（原句含答案），改成「X 与 Y 的关系是什么」。
 
-  2. 卡片加入 FSRS，按 `vendor/learning-education/study-skill/references/fsrs-spaced-repetition.md` 的协议执行。
+  2. 卡片加入 FSRS，按 `skills/learning-education/study-skill/references/fsrs-spaced-repetition.md` 的协议执行。
 
      > ⚠️ **先做前置检查**：上游 `scripts/fsrs/` 里是 **Go 源码**（`go.mod` / `cmd/` / `internal/`），
      > 其 `.gitignore` 忽略了编译产物 `/fsrs`，**仓库并不附带可执行文件**。
@@ -378,7 +378,7 @@ python3 quiz_audit.py 题库.json "识记:20,理解:30,应用:30,分析:20" 知�
 
      ```bash
      # 前置检查：二进制在不在？没在就尝试构建
-     FSRS_DIR="vendor/learning-education/study-skill/scripts/fsrs"
+     FSRS_DIR="skills/learning-education/study-skill/scripts/fsrs"
      FSRS_BIN="$FSRS_DIR/fsrs"
      if [ ! -x "$FSRS_BIN" ]; then
        if command -v go >/dev/null 2>&1; then
@@ -421,23 +421,23 @@ python3 quiz_audit.py 题库.json "识记:20,理解:30,应用:30,分析:20" 知�
 - **动作**：
 
   ```bash
-  PY="vendor/office-layer/.venv/bin/python"
+  PY="skills/office-layer/.venv/bin/python"
 
   # 试卷（Markdown 草稿 → docx；卷头用 Markdown 表格写「题号/一/二/三/总分」得分栏）
-  $PY vendor/office-layer/scripts/docx_kit.py md \
+  $PY skills/office-layer/scripts/docx_kit.py md \
       --in 试卷A.md --out 试卷A.docx \
       --title "【待补：学校名】20XX—20XX学年第一学期《【待补：课程名】》期末考试试卷（A卷）"
-  $PY vendor/office-layer/scripts/docx_kit.py inspect --in 试卷A.docx
+  $PY skills/office-layer/scripts/docx_kit.py inspect --in 试卷A.docx
 
   # 参考答案与评分要点
-  $PY vendor/office-layer/scripts/docx_kit.py md --in 参考答案A.md --out 参考答案与评分要点A.docx
+  $PY skills/office-layer/scripts/docx_kit.py md --in 参考答案A.md --out 参考答案与评分要点A.docx
 
   # 需要页眉页脚 / 密封线说明 / 人工确认位的《命题说明与审核单》走 spec
-  $PY vendor/office-layer/scripts/docx_kit.py spec --spec 命题说明.json --out 命题说明与审核单.docx
+  $PY skills/office-layer/scripts/docx_kit.py spec --spec 命题说明.json --out 命题说明与审核单.docx
 
   # 双向细目表 / 覆盖矩阵 / 难度预估 / 答案位置校验 / AB卷对照（多工作表 + 原生图表）
-  $PY vendor/office-layer/scripts/xlsx_kit.py build --spec 细目表.json --out 双向细目表.xlsx
-  $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 双向细目表.xlsx
+  $PY skills/office-layer/scripts/xlsx_kit.py build --spec 细目表.json --out 双向细目表.xlsx
+  $PY skills/office-layer/scripts/xlsx_kit.py inspect --in 双向细目表.xlsx
   ```
 
   细目表 spec 结构（`xlsx_kit.py build` 支持 `sheets[].{name,header,rows,freeze,widths,chart}`）：
@@ -666,7 +666,7 @@ python3 quiz_audit.py 题库.json "识记:20,理解:30,应用:30,分析:20" 知�
 
 ### 1. 干扰项设计
 
-直接按 `vendor/ibook-skills/quiz-generator/references/distractor-writing-guide.md` 执行，落到本技能的纪律：
+直接按 `skills/ibook-skills/question-writing/references/distractor-writing-guide.md` 执行，落到本技能的纪律：
 
 **干扰项必须有来源。** 每写一个干扰项，回答一句「它对应哪条学生常见错误」。
 来源优先级（沿用 `k12-check-for-understanding` 对"有据可查的常见错误"的要求）：
@@ -804,8 +804,8 @@ P_预估 = 基础难度系数（按层次） − 结构惩罚项
 ④ 教师给的讲义/材料正文 → 按小节抽知识点（抽完必须回读确认，且标注"由材料自动抽取"）
 ```
 
-③④ 两种情况下，用 `vendor/ibook-skills/learning-graph-generator/` 的思路建知识点依赖，
-并用 `vendor/ibook-skills/course-description-analyzer/` 抽取布鲁姆层次的学习成果；
+③④ 两种情况下，用 `skills/ibook-skills/learning-graph-generator/` 的思路建知识点依赖，
+并用 `skills/ibook-skills/course-description-analyzer/` 抽取布鲁姆层次的学习成果；
 若教师只给一章，不必生成全图。
 
 ### 2. 从知识点清单到题量的算法
@@ -912,7 +912,7 @@ P_预估 = 基础难度系数（按层次） − 结构惩罚项
 
 ## 复习型题库与闪卡（引用 FSRS）
 
-沿用 `vendor/learning-education/study-skill/` 的 FSRS 间隔重复体系，把题目变成可长期复习的卡片。
+沿用 `skills/learning-education/study-skill/` 的 FSRS 间隔重复体系，把题目变成可长期复习的卡片。
 
 ### 1. 为什么不是"把题目存成题库"就够了
 
@@ -949,7 +949,7 @@ P_预估 = 基础难度系数（按层次） − 结构惩罚项
 > 本机亦无 Go 工具链。用之前先做前置检查，跑不通就走**手工排程降级方案**（见阶段七）。
 
 ```bash
-FSRS_DIR="vendor/learning-education/study-skill/scripts/fsrs"
+FSRS_DIR="skills/learning-education/study-skill/scripts/fsrs"
 FSRS_BIN="$FSRS_DIR/fsrs"
 [ -x "$FSRS_BIN" ] || { command -v go >/dev/null 2>&1 \
   && (cd "$FSRS_DIR" && go build -o fsrs ./cmd/...) \
@@ -1127,7 +1127,7 @@ handoff/
 
 ## 产出物
 
-全部 docx / xlsx 一律走 `vendor/office-layer/`，禁止手写 OOXML、禁止用文本框拼表格、禁止只交 Markdown。
+全部 docx / xlsx 一律走 `skills/office-layer/`，禁止手写 OOXML、禁止用文本框拼表格、禁止只交 Markdown。
 
 | 文件 | 通道 | 内容 |
 |---|---|---|
@@ -1184,7 +1184,7 @@ handoff/
 7. **不虚报质量门结论。** `quiz_audit.py` 的原始输出必须留档；有未处理问题项时**不得交付**，
    也不得把「未通过」写成「基本通过」。
 8. **A/B 卷不得以「同一套题换序」冒充。** 见「A/B 卷生成」的禁止条款。
-9. **只抄袭方法论，不抄袭文本。** `vendor/ibook-skills/` 无 LICENSE 文件（见 `vendor/VENDOR.md`），
+9. **只抄袭方法论，不抄袭文本。** ibook 系列底座（`question-writing` 等）的上游仓库无 LICENSE 文件（见 `THIRD_PARTY_NOTICES.md`），
    禁止把其英文原文、模板、代码整段搬进交付物；一切交付物用中文重写。
 10. **敏感数据本地处理。** 如果教师提供了含学号/姓名/成绩的错例材料，只在本机处理，
     不写入交付物、不外传；任务结束后提醒教师删除中间文件。
@@ -1236,7 +1236,7 @@ handoff/
 - [ ] 若 FSRS 二进制不可用：已走降级方案出 `复习包/闪卡排程表.xlsx`，且交付说明明确写了「按 FSRS 口径手工排程，非自动调度」
 
 **产出**
-- [ ] 所有 docx/xlsx 由 `vendor/office-layer/` 生成，且都跑过 `inspect` 读回核对
+- [ ] 所有 docx/xlsx 由 `skills/office-layer/` 生成，且都跑过 `inspect` 读回核对
 - [ ] 试卷 docx 内无答案、无解析、无得分点残留
 - [ ] 题号连续无跳号；跨页未把题目劈成两半；主观题留足作答空间
 - [ ] 三类占位（`【待补：…】` / `【待教师确认：…】` / `【待补：依据出处】`）已全部列进交付说明

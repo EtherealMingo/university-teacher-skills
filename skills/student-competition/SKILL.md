@@ -23,7 +23,7 @@ description: "Triggers: 「指导学生做大创」「挑战杯怎么带」「�
 | 中期报告怎么写、进度落后怎么答 | **本技能** | 过程管理 |
 | 结题报告结构、成果认定、经费决算、票据 | **本技能** | 结题管理 |
 | 路演 PPT 结构、评委追问演练 | **本技能** | 答辩训练 |
-| 结题材料要成一份装订稿、要按模板排版 | 本技能出内容 → `vendor/office-layer/` 出文件 | 文件产出唯一通道 |
+| 结题材料要成一份装订稿、要按模板排版 | 本技能出内容 → `skills/office-layer/` 出文件 | 文件产出唯一通道 |
 
 ### 交接协议（双向，必须显式执行）
 
@@ -61,19 +61,19 @@ description: "Triggers: 「指导学生做大创」「挑战杯怎么带」「�
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/awesome-benzi/workflows/student-innovation/WORKFLOW.md` | **大创主底座**：创新训练/创业训练/创业实践的论证图、M1–M7 栏目映射、事实台账要求、导师与学生边界 |
-| `vendor/awesome-benzi/workflows/challenge-cup/WORKFLOW.md` | **挑战杯与创青春主底座**：三类赛道各自的论证链（调查类/科技类/创业类），赛道不明先锁定赛道 |
-| `vendor/awesome-benzi/workflows/innovation-competition/WORKFLOW.md` | 中国国际大学生创新大赛：需求→验证→竞争边界→运营财务的论证链 |
-| `vendor/awesome-benzi/WORKFLOW.md` | 七阶段总纲（阶段三事实与一次性问题、阶段六独立核验） |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 一次性提问机制、入口材料清单 |
-| `vendor/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级：已验证 / 正在验证 / 未来计划三分，禁止把计划写成既有 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | 内容门与错误规则，结题与答辩材料交付前过一遍 |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | AI 味治理，学生材料最容易写出一股「高大上但空」的腔调 |
-| `vendor/office-layer/` | **文件产出唯一通道**（docx / pptx / xlsx） |
-| `vendor/education-skills/教學設計/project-based-learning.md` | 项目式学习思路：怎么把「做一个项目」变成「学生真的学到东西」 |
-| `vendor/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底提问法，阶段一引导学生自己找选题的核心工具 |
-| `vendor/learning-education/thinking-toolkit/methods/11-talent-discovery.md` | 从学生已有经历/擅长中挖选题线索 |
-| `vendor/education-skills/學習分析/` | 需要做学生贡献/参与度的事实时可参考（**不用于打分排名，打分留人工确认位**） |
+| `skills/awesome-benzi/workflows/student-innovation/WORKFLOW.md` | **大创主底座**：创新训练/创业训练/创业实践的论证图、M1–M7 栏目映射、事实台账要求、导师与学生边界 |
+| `skills/awesome-benzi/workflows/challenge-cup/WORKFLOW.md` | **挑战杯与创青春主底座**：三类赛道各自的论证链（调查类/科技类/创业类），赛道不明先锁定赛道 |
+| `skills/awesome-benzi/workflows/innovation-competition/WORKFLOW.md` | 中国国际大学生创新大赛：需求→验证→竞争边界→运营财务的论证链 |
+| `skills/awesome-benzi/WORKFLOW.md` | 七阶段总纲（阶段三事实与一次性问题、阶段六独立核验） |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 一次性提问机制、入口材料清单 |
+| `skills/awesome-benzi/references/EVIDENCE_MODEL.md` | 事实分级：已验证 / 正在验证 / 未来计划三分，禁止把计划写成既有 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | 内容门与错误规则，结题与答辩材料交付前过一遍 |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | AI 味治理，学生材料最容易写出一股「高大上但空」的腔调 |
+| `skills/office-layer/` | **文件产出唯一通道**（docx / pptx / xlsx） |
+| `skills/education-skills/edu-teaching-design/references/project-based-learning.md` | 项目式学习思路：怎么把「做一个项目」变成「学生真的学到东西」 |
+| `skills/learning-education/thinking-toolkit/methods/01-socratic-inquiry.md` | 苏格拉底提问法，阶段一引导学生自己找选题的核心工具 |
+| `skills/learning-education/thinking-toolkit/methods/11-talent-discovery.md` | 从学生已有经历/擅长中挖选题线索 |
+| `skills/education-skills/edu-learning-analytics/` | 需要做学生贡献/参与度的事实时可参考（**不用于打分排名，打分留人工确认位**） |
 
 选工作流：大创三类 → `student-innovation`；挑战杯与创青春 → `challenge-cup`；
 中国国际大学生创新大赛 → `innovation-competition`。**一次只加载一个**，赛道不明就先问清赛道，不要混用三套评价逻辑。
@@ -139,10 +139,10 @@ description: "Triggers: 「指导学生做大创」「挑战杯怎么带」「�
    得分 ≥18 且无单项 ≤2 → 进入阶段二；否则**回上一轮继续提问**，不要靠导师硬压一个题下去。
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
-$PY vendor/office-layer/scripts/xlsx_kit.py build \
+PY="skills/office-layer/.venv/bin/python"
+$PY skills/office-layer/scripts/xlsx_kit.py build \
     --spec 选题评估表.spec.json --out 选题评估表_初稿.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 选题评估表_初稿.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 选题评估表_初稿.xlsx
 ```
 
 4. **写「为什么不能直接给题目」的说明**给学生看（导师口径统一，避免学生以为导师偷懒）：
@@ -188,7 +188,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 选题评估表_初稿.
    - 补充：**轮值主持例会**（每人轮流当一次会议主持并写纪要），浮着的人当两次主持就藏不住了。
 
 ```bash
-$PY vendor/office-layer/scripts/xlsx_kit.py build \
+$PY skills/office-layer/scripts/xlsx_kit.py build \
     --spec 分工责任矩阵.spec.json --out 分工责任矩阵.xlsx
 ```
 
@@ -245,9 +245,9 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build \
 学生已知晓「正文由自己写、AI 与导师只做批注和提问」。
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 导师补充内容清单.md --out 导师补充内容清单.docx --title "导师需补内容清单"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 导师补充内容清单.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 导师补充内容清单.docx
 ```
 
 ---
@@ -281,7 +281,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 导师补充内容清�
 3. **周报 / 月报模板**（用 office-layer 出成 Word，学生直接填）：
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 周报模板.md --out 团队周报模板.docx --title "团队周报"
 ```
 
@@ -345,13 +345,13 @@ $PY vendor/office-layer/scripts/docx_kit.py md \
 进度偏差已量化并给出调整方案；学生能不看稿完成四段式应答。
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 中期报告_初稿.md --out 中期报告_初稿.docx --title "中期检查报告"
 # 导师在初稿上写原生批注后回给学生
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 中期报告_初稿.docx --out 中期报告_导师批注.docx \
     --comments 中期批注.json --author "指导教师"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 中期报告_导师批注.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 中期报告_导师批注.docx
 ```
 
 批注 JSON（`anchor` 必须与正文逐字一致，含标点，否则退出码 2）：
@@ -394,7 +394,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 中期报告_导师批�
    | 获奖 | 获奖证书、赛事名称与级别 | **未获奖就写未获奖，绝不虚构** |
 
 ```bash
-$PY vendor/office-layer/scripts/xlsx_kit.py build \
+$PY skills/office-layer/scripts/xlsx_kit.py build \
     --spec 成果认定清单.spec.json --out 成果认定清单.xlsx
 ```
 
@@ -406,7 +406,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build \
    - 提醒学生：**从第一笔支出起就建票据台账、当月清**，绝不允许「先垫着、年底补票」。
 
 ```bash
-$PY vendor/office-layer/scripts/xlsx_kit.py build \
+$PY skills/office-layer/scripts/xlsx_kit.py build \
     --spec 经费决算表.spec.json --out 经费决算表.xlsx
 ```
 
@@ -451,11 +451,11 @@ $PY vendor/office-layer/scripts/xlsx_kit.py build \
    | 12 | 经费与致谢 | 决算口径与结题报告一致 |
 
 ```bash
-$PY vendor/office-layer/scripts/pptx_kit.py build \
+$PY skills/office-layer/scripts/pptx_kit.py build \
     --spec 路演PPT.spec.json --out 路演PPT.pptx
-$PY vendor/office-layer/scripts/pptx_kit.py notes \
+$PY skills/office-layer/scripts/pptx_kit.py notes \
     --in 路演PPT.pptx --notes 逐页讲稿.json --out 路演PPT_含备注.pptx
-$PY vendor/office-layer/scripts/pptx_kit.py inspect --in 路演PPT_含备注.pptx
+$PY skills/office-layer/scripts/pptx_kit.py inspect --in 路演PPT_含备注.pptx
 ```
 
 规格片段：
@@ -531,7 +531,7 @@ $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 路演PPT_含备注.ppt
 | `结题报告_初稿.docx` + `成果认定清单.xlsx` + `经费决算表.xlsx` | 六 | 结题全套 |
 | `路演PPT.pptx`（+含备注版）+ `评委提问应答卡.md` | 七 | 答辩全套 |
 
-所有 docx / pptx / xlsx 一律走 `vendor/office-layer/`，生成后用 `inspect` 读回自检。
+所有 docx / pptx / xlsx 一律走 `skills/office-layer/`，生成后用 `inspect` 读回自检。
 **不生成 Markdown 当交付物**（除非教师明确只要 Markdown）。
 
 ## 红线
@@ -565,8 +565,8 @@ $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 路演PPT_含备注.ppt
 - [ ] 经费是否逐笔可核、票据是否合规、是否提示留票与当月清
 - [ ] 未完成/未达标项是否如实写明，是否给学生失了口径
 - [ ] 所有未知事实是否都是 `【待补：…】` 而不是被模型补全
-- [ ] 引用到的 `vendor/` 路径是否**真实存在**（`ls` 验证过，不是凭记忆）
-- [ ] 文件产出是否全部走 `vendor/office-layer/`，并 `inspect` 自检过
+- [ ] 引用到的 底座路径是否**真实存在**（`ls` 验证过，不是凭记忆）
+- [ ] 文件产出是否全部走 `skills/office-layer/`，并 `inspect` 自检过
 - [ ] 路演 PPT 是否 `inspect` 过且无 `overdense`；页数与时长是否实测达标
 - [ ] 评价性内容是否留了 `【待教师确认：…】`
 - [ ] 交付说明是否写明「初稿，请重点核对 X/Y/Z」以及「含学生个人信息，请注意保管」

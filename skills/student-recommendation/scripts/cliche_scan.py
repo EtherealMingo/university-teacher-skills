@@ -9,7 +9,7 @@
 只读输入文件，不改动任何草稿。输出为 Markdown 报告（可选再走 office-layer 转 DOCX）。
 
 用法：
-    PY=vendor/office-layer/.venv/bin/python
+    PY=skills/office-layer/.venv/bin/python
     $PY skills/student-recommendation/scripts/cliche_scan.py \
         推荐信_李明.md 推荐信_王芳.md 推荐信_张野.md \
         --out 套话与雷同报告.md

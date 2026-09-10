@@ -48,16 +48,16 @@ description: "高校教师会议纪要与公文写作：把教研会、系务会
    名单、人数、缺席、议题、决议**只能来自**录音、转写、教师笔记或教师口述；
    缺什么就写 `【待补：…】`，**绝不按「一般教研会都这么开」补全**。
 
-## 底座（vendor-first，禁止重写）
+## 底座（复用优先，禁止重写）
 
 | 路径（已 `ls` 验证存在） | 用途 |
 |---|---|
-| `vendor/office-layer/` | **文件产出唯一通道**。`scripts/docx_kit.py`（纪要/通知/总结/发言稿）、`scripts/xlsx_kit.py`（任务分工表/值班表/工作安排表）、`scripts/pptx_kit.py`（汇报稿） |
-| `vendor/office-layer/SKILL.md` | 三个 kit 的用法、故障排查、铁律 |
-| `vendor/awesome-benzi/references/LANGUAGE_MODEL.md` | **本技能最关键的底座**：AI 味治理口径。公文里最该删的套话直接引它的条号 |
-| `vendor/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 一次性提问机制（`IN-QUESTION-002/004`），本技能 intake 与占位纪律的依据 |
-| `vendor/awesome-benzi/references/QUALITY_GATES.md` | 问题三级分级 `blocked`/`needs-review`/`advisory`（`QG-ISSUE-002/003`）、事实冲突阻断（`QG-CONTENT-003`）、风格门（`QG-STYLE-001`） |
-| `vendor/VENDOR.md` | 上游溯源与许可证合规 |
+| `skills/office-layer/` | **文件产出唯一通道**。`scripts/docx_kit.py`（纪要/通知/总结/发言稿）、`scripts/xlsx_kit.py`（任务分工表/值班表/工作安排表）、`scripts/pptx_kit.py`（汇报稿） |
+| `skills/office-layer/SKILL.md` | 三个 kit 的用法、故障排查、铁律 |
+| `skills/awesome-benzi/references/LANGUAGE_MODEL.md` | **本技能最关键的底座**：AI 味治理口径。公文里最该删的套话直接引它的条号 |
+| `skills/awesome-benzi/references/INPUT_MODEL.md` | `question-batch` 一次性提问机制（`IN-QUESTION-002/004`），本技能 intake 与占位纪律的依据 |
+| `skills/awesome-benzi/references/QUALITY_GATES.md` | 问题三级分级 `blocked`/`needs-review`/`advisory`（`QG-ISSUE-002/003`）、事实冲突阻断（`QG-CONTENT-003`）、风格门（`QG-STYLE-001`） |
+| `THIRD_PARTY_NOTICES.md` | 上游溯源与许可证合规 |
 | `skills/meeting-notices/scripts/task_gate.py` | 本技能自建的**薄自检壳**（纯标准库），只做机械检查，不重写任何 kit 能力 |
 
 ### 从 LANGUAGE_MODEL.md 直接引用的公文口径（照抄，不要另立一套）
@@ -222,7 +222,7 @@ description: "高校教师会议纪要与公文写作：把教研会、系务会
 **命令**（先机械自检，再落盘成表）：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
 # 1) 纪律自检：任务表缺责任人/截止、决议里混进模糊表态、套话，一次全扫出来
 $PY skills/meeting-notices/scripts/task_gate.py --in 教研会纪要.md --out 纪要自检报告.md
@@ -240,8 +240,8 @@ cat > 任务分工spec.json <<'EOF'
    "widths": [6, 30, 12, 12, 14, 26, 10]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 任务分工spec.json --out 会议任务分工表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 会议任务分工表.xlsx   # 自检：行数/列数
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 任务分工spec.json --out 会议任务分工表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 会议任务分工表.xlsx   # 自检：行数/列数
 ```
 
 **退出条件**：`task_gate.py` 报 `blocked=0`；任务表每行四要素齐全；
@@ -305,21 +305,21 @@ xlsx 已 `inspect` 且行列数与预期一致；责任人范围与教师确认�
 **落盘命令**：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
 # 1) Markdown → DOCX（唯一产出通道）
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 教研会纪要.md --out 教研会纪要_20251112.docx --title "××学院教研会会议纪要"
 
 # 2) 自检：读回段落/表格/字数，确认结构没丢
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 教研会纪要_20251112.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 教研会纪要_20251112.docx
 
 # 3) 需要给某位老师定向提示时，写 Word 原生批注（可选）
 cat > 批注.json <<'EOF'
 [{"anchor": "提交课程思政案例清单",
   "text": "请与李老师对齐案例格式，避免与上学期重复。"}]
 EOF
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 教研会纪要_20251112.docx --out 教研会纪要_20251112_批注.docx \
     --comments 批注.json --author "主持人"
 #    anchor 必须与正文逐字一致；未命中会以退出码 2 结束，不要忽略
@@ -387,8 +387,8 @@ $PY vendor/office-layer/scripts/docx_kit.py comment \
 **落盘**：
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md --in 会议通知.md --out 会议通知_20251120.docx --title "关于召开教研会议的通知"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 会议通知_20251120.docx
+$PY skills/office-layer/scripts/docx_kit.py md --in 会议通知.md --out 会议通知_20251120.docx --title "关于召开教研会议的通知"
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 会议通知_20251120.docx
 ```
 
 **退出条件**：七要素齐全可答「谁、何时、何地、做什么、带什么、找谁」；参会范围明确；
@@ -453,8 +453,8 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 会议通知_20251120.d
 
 ```bash
 $PY skills/meeting-notices/scripts/task_gate.py --in 学期工作总结.md --out 总结自检报告.md
-$PY vendor/office-layer/scripts/docx_kit.py md --in 学期工作总结.md --out 学期工作总结.docx --title "20××—20××学年第一学期工作总结"
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 学期工作总结.docx
+$PY skills/office-layer/scripts/docx_kit.py md --in 学期工作总结.md --out 学期工作总结.docx --title "20××—20××学年第一学期工作总结"
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 学期工作总结.docx
 ```
 
 **退出条件**：四节齐全；所有数字有来源或占位；无禁用开头；套话已按清单清理；
@@ -515,7 +515,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 学期工作总结.docx
 **配 PPT 时**（`pptx_kit.py`，幻灯片用要点、发言稿写全文，两者不要互相复制）：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 cat > 汇报spec.json <<'EOF'
 {"meta": {"title": "本学期教研工作总结", "subtitle": "课程组 · 2025 秋季学期", "presenter": "【待补：汇报人】"},
  "slides": [
@@ -527,8 +527,8 @@ cat > 汇报spec.json <<'EOF'
       {"text": "实验演示常态化（赵老师，第 4 周前）", "level": 0}],
    "notes": "讲 40 秒。每件事都落到人和时间，不讲空话。"}]}
 EOF
-$PY vendor/office-layer/scripts/pptx_kit.py build --spec 汇报spec.json --out 汇报稿.pptx
-$PY vendor/office-layer/scripts/pptx_kit.py inspect --in 汇报稿.pptx
+$PY skills/office-layer/scripts/pptx_kit.py build --spec 汇报spec.json --out 汇报稿.pptx
+$PY skills/office-layer/scripts/pptx_kit.py inspect --in 汇报稿.pptx
 #   overdense（单页正文 >220 字符）是提示拆页，不是错误 —— 但必须拆
 ```
 
@@ -560,7 +560,7 @@ $PY vendor/office-layer/scripts/pptx_kit.py inspect --in 汇报稿.pptx
 **命令**：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 
 cat > 值班spec.json <<'EOF'
 {"sheets": [
@@ -574,8 +574,8 @@ cat > 值班spec.json <<'EOF'
    "widths": [14, 8, 10, 12, 16, 16, 12, 16]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 值班spec.json --out 教研室值班表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 教研室值班表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 值班spec.json --out 教研室值班表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 教研室值班表.xlsx
 ```
 
 需要「每人值班次数」统计图时，在同一 spec 里加第二个 sheet + `chart` 字段
@@ -655,7 +655,7 @@ xlsx 已 `inspect`；教师确认排班（**排班是人的安排，必须教师
 交付前逐项过（前面是机器能查的，后面是只有人能判断的）：
 
 - [ ] `description` 里至少 4 句教师真实会说的触发短语（写个教研会纪要 / 起草个调课通知 / 写学期工作总结 / 整理会议任务分工）
-- [ ] 引用的 `vendor/` 路径**都用 `ls` 验证过真实存在**
+- [ ] 引用的 底座路径**都用 `ls` 验证过真实存在**
 - [ ] intake 的 8 项**一次性问完**，没有边做边问；未答项已转 `【待补：…】`
 - [ ] **参会人、缺席人、人数 100% 来自教师材料**，无一个编造姓名
 - [ ] 每条决议都能追溯到记录出处；**没有一条决议是从「讨论意见」升格来的**

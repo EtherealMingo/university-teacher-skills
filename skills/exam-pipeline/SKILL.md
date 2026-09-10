@@ -31,19 +31,19 @@ description: "高校期末试卷后半程全流程辅助：试卷审核（A/B �
 
 | 路径 | 用途 |
 |---|---|
-| `vendor/office-layer/SKILL.md` | **文件产出唯一通道**，四条命令的用法与铁律 |
-| `vendor/office-layer/scripts/xlsx_kit.py` | **`analyze` 已实现成绩分析**：得分率/区分度/分数段/偏度峰度 + 原生图表；`build` 出归档表格 |
-| `vendor/office-layer/scripts/docx_kit.py` | `md` 出 Word；`comment` 写 **Word 原生批注**（试卷审核意见直接批在卷面上）；`spec` 出带人工确认位的排版稿；`inspect` 自检 |
-| `vendor/ibook-skills/quiz-generator/` | 上游出题能力，**阶段一与之衔接**；其题目格式即本技能的审核输入 |
-| `vendor/ibook-skills/quiz-generator/references/distractor-writing-guide.md` | 干扰项质量四条标准（可信性/教育价值/区分性/公平性），审选择题时直接引用 |
-| `vendor/education-skills/學習分析/` | `learning-analytics.md`（学习分析口径）、`competency-based-assessment.md`（能力本位评量）、`peer-assessment.md`（量规思路） |
-| `vendor/k12-teacher-skills/k12-check-for-understanding/` | 检查理解的设计思路，审「题目是否真在考理解而非背记」时参考 |
+| `skills/office-layer/SKILL.md` | **文件产出唯一通道**，四条命令的用法与铁律 |
+| `skills/office-layer/scripts/xlsx_kit.py` | **`analyze` 已实现成绩分析**：得分率/区分度/分数段/偏度峰度 + 原生图表；`build` 出归档表格 |
+| `skills/office-layer/scripts/docx_kit.py` | `md` 出 Word；`comment` 写 **Word 原生批注**（试卷审核意见直接批在卷面上）；`spec` 出带人工确认位的排版稿；`inspect` 自检 |
+| `skills/ibook-skills/question-writing/` | 上游出题能力，**阶段一与之衔接**；其题目格式即本技能的审核输入 |
+| `skills/ibook-skills/question-writing/references/distractor-writing-guide.md` | 干扰项质量四条标准（可信性/教育价值/区分性/公平性），审选择题时直接引用 |
+| `skills/education-skills/edu-learning-analytics/` | `learning-analytics.md`（学习分析口径）、`competency-based-assessment.md`（能力本位评量）、`peer-assessment.md`（量规思路） |
+| `skills/k12-teacher-skills/k12-check-for-understanding/` | 检查理解的设计思路，审「题目是否真在考理解而非背记」时参考 |
 
 **环境准备（首次使用必做，已实测）**：
 
 ```bash
-bash vendor/office-layer/bootstrap.sh     # 创建 vendor/office-layer/.venv 并装依赖
-PY="vendor/office-layer/.venv/bin/python"
+bash skills/office-layer/bootstrap.sh     # 创建 skills/office-layer/.venv 并装依赖
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限环境必须有可写缓存目录
 ```
 
@@ -170,11 +170,11 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限环境必�
 把每条意见写成批注 JSON，锚点用**试卷正文里的原文片段**（逐字一致），批注直接钉在卷面上：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 # 1) 先把试卷（md 稿）转成 docx
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 试卷A.md --out 试卷A_待审.docx --title "2025-2026学年第一学期期末考试试卷（A卷）"
 
 # 2) 写审核批注（anchor 必须是正文里逐字存在的片段）
@@ -188,12 +188,12 @@ cat > 审核意见.json <<'EOF'
    "text": "【审核·需修改】开放题未给评分要点。本技能阶段二将补出要点框架，请教师确认【待教师确认：要点及其分值】。"}
 ]
 EOF
-$PY vendor/office-layer/scripts/docx_kit.py comment \
+$PY skills/office-layer/scripts/docx_kit.py comment \
     --in 试卷A_待审.docx --out 试卷A_审核意见.docx \
     --comments 审核意见.json --author "试卷审核"
 
 # 3) 自检：确认批注真的落盘了
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 试卷A_审核意见.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 试卷A_审核意见.docx
 ```
 
 **实测注意（踩过的坑）**：`anchor` 必须匹配 docx **渲染后**的正文文本。
@@ -262,10 +262,10 @@ Markdown 里写成有序列表 `2. 计算题 已知……` 时，`2. ` 会被渲
 #### 命令与参数含义
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
-$PY vendor/office-layer/scripts/xlsx_kit.py analyze \
+$PY skills/office-layer/scripts/xlsx_kit.py analyze \
     --in scores.xlsx --out analysis.xlsx \
     --id-col 1 --first-q-col 3 \
     --full-marks '[10,10,15,15,10,20,10,10]'
@@ -410,12 +410,12 @@ JSON:  --full-marks '[10,10,15,15,10,20,10,10]'
 
 ```bash
 # 报告正文（先写 md，再转 docx）
-$PY vendor/office-layer/scripts/docx_kit.py md \
+$PY skills/office-layer/scripts/docx_kit.py md \
     --in 试卷分析报告.md --out 试卷分析报告.docx \
     --title "2025-2026学年第一学期《XX》期末试卷分析报告"
 
 # 自检：读回段落/表格/字数
-$PY vendor/office-layer/scripts/docx_kit.py inspect --in 试卷分析报告.docx
+$PY skills/office-layer/scripts/docx_kit.py inspect --in 试卷分析报告.docx
 ```
 
 ### 阶段四 · 归档材料
@@ -428,7 +428,7 @@ $PY vendor/office-layer/scripts/docx_kit.py inspect --in 试卷分析报告.docx
 #### 材料 1 · 试卷审批表（docx）
 
 ```bash
-$PY vendor/office-layer/scripts/docx_kit.py md --in 试卷审批表.md --out 试卷审批表.docx --title "试卷审批表"
+$PY skills/office-layer/scripts/docx_kit.py md --in 试卷审批表.md --out 试卷审批表.docx --title "试卷审批表"
 ```
 
 栏目：课程名称 / 课程代码 / 开课单位 / 学期 / 授课对象（专业·年级·班级）/ 考试形式（闭卷·开卷·机考）/
@@ -455,8 +455,8 @@ cat > 平时分依据表.json <<'EOF'
    "widths": [14,10,10,10,12,14,10,14,10,10,20]}
 ]}
 EOF
-$PY vendor/office-layer/scripts/xlsx_kit.py build --spec 平时分依据表.json --out 平时分依据表.xlsx
-$PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 平时分依据表.xlsx     # 自检
+$PY skills/office-layer/scripts/xlsx_kit.py build --spec 平时分依据表.json --out 平时分依据表.xlsx
+$PY skills/office-layer/scripts/xlsx_kit.py inspect --in 平时分依据表.xlsx     # 自检
 ```
 
 栏目说明：各分项标题里的括号写满分值；`折算比例` 指平时分占总评的比例（如 30%）；
@@ -491,7 +491,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py inspect --in 平时分依据表.xlsx
 把原表转成「匿名 ID + 各题得分」的表，再做分析：
 
 ```bash
-PY="vendor/office-layer/.venv/bin/python"
+PY="skills/office-layer/.venv/bin/python"
 export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 
 # 步骤 1：匿名化。id_col=学号列，first_q_col=第一题得分列
@@ -512,7 +512,7 @@ print(f"脱敏完成：{out}（{ns.max_row - 1} 行，姓名与学号列已剔�
 PY
 
 # 步骤 2：用脱敏表分析（注意 first-q-col 变成了 2，因为只剩「匿名ID + 各题」两段）
-$PY vendor/office-layer/scripts/xlsx_kit.py analyze \
+$PY skills/office-layer/scripts/xlsx_kit.py analyze \
     --in 成绩表_脱敏.xlsx --out 成绩分析.xlsx \
     --id-col 1 --first-q-col 2 \
     --full-marks '[10,10,15,15,10,20,10,10]'
@@ -555,7 +555,7 @@ $PY vendor/office-layer/scripts/xlsx_kit.py analyze \
 | `成绩登记表.xlsx` | 四 | 学生成绩登记（若教师需要） | **是** |
 | `归档材料清单.xlsx` | 四 | 9 项材料的完整性核对表 + 个人信息标注 | 否 |
 
-所有文件产出**一律走 `vendor/office-layer/`**，禁止文本框拼表格、禁止手写 OOXML、
+所有文件产出**一律走 `skills/office-layer/`**，禁止文本框拼表格、禁止手写 OOXML、
 禁止拿 `.md` 当交付物（除非教师明确只要 Markdown）。
 
 ## 红线
@@ -609,8 +609,8 @@ $PY vendor/office-layer/scripts/xlsx_kit.py analyze \
 - [ ] 含个人信息的交付物是否都带了「请注意保管」提示
 
 **通用**
-- [ ] 引用的 `vendor/` 路径是否都用 `ls` 验证过存在
-- [ ] 所有文件产出是否都走了 `vendor/office-layer/` 的脚本
+- [ ] 引用的 底座路径是否都用 `ls` 验证过存在
+- [ ] 所有文件产出是否都走了 `skills/office-layer/` 的脚本
 - [ ] 是否给出了中间文件删除清单
 - [ ] 交付时是否明确说了「这是初稿，请重点核对 X/Y/Z」
   （特别是：参考答案、分值分配、问题试题处理方式、平时分权重）

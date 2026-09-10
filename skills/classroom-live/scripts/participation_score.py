@@ -11,12 +11,12 @@ participation_score — 课堂互动与平时分计算（自建，无上游可�
   score     记录表 + 规则 → 平时分依据表.spec.json（+ 追溯明细 CSV + 待核清单 MD）
 
 用法：
-  PY=vendor/office-layer/.venv/bin/python
+  PY=skills/office-layer/.venv/bin/python
   $PY skills/classroom-live/scripts/participation_score.py template \\
       --out 记录表模板.spec.json --rules-out 平时分规则.json --course "数据结构"
   $PY skills/classroom-live/scripts/participation_score.py score \\
       --records 课堂互动记录.xlsx --rules 平时分规则.json --roster 名单.csv --outdir ./平时分
-  $PY vendor/office-layer/scripts/xlsx_kit.py build --spec 平时分/平时分依据表.spec.json \\
+  $PY skills/office-layer/scripts/xlsx_kit.py build --spec 平时分/平时分依据表.spec.json \\
       --out 平时分依据表.xlsx
 
 设计原则（对应 CONVENTIONS.md，改动前先读）：
@@ -146,7 +146,7 @@ def read_table(path: Path, sheet: str | None = None) -> tuple[list[list], str]:
         try:
             import openpyxl
         except ImportError:
-            sys.exit("缺少 openpyxl：请用 vendor/office-layer/.venv/bin/python 运行本脚本")
+            sys.exit("缺少 openpyxl：请用 skills/office-layer/.venv/bin/python 运行本脚本")
         wb = openpyxl.load_workbook(str(path), data_only=True)
         if sheet and sheet not in wb.sheetnames:
             return [], sheet
@@ -661,7 +661,7 @@ def cmd_score(a) -> int:
         "alert_md": str(md_path),
         "weights": rules["weights"],
         "note": "stdout 不打印学生姓名；后续请用 xlsx_kit build 出表，并在本地核对",
-        "next": f'vendor/office-layer/.venv/bin/python vendor/office-layer/scripts/xlsx_kit.py '
+        "next": f'skills/office-layer/.venv/bin/python skills/office-layer/scripts/xlsx_kit.py '
                 f'build --spec {spec_path} --out 平时分依据表.xlsx',
     }, ensure_ascii=False, indent=2))
     return 0
@@ -708,7 +708,7 @@ def cmd_template(a) -> int:
     out.write_text(json.dumps(_template_spec(a.course), ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps({
         "spec": str(out),
-        "next": f'vendor/office-layer/.venv/bin/python vendor/office-layer/scripts/xlsx_kit.py '
+        "next": f'skills/office-layer/.venv/bin/python skills/office-layer/scripts/xlsx_kit.py '
                 f'build --spec {out} --out 课堂互动记录表.xlsx',
     }, ensure_ascii=False, indent=2))
     if a.rules_out:

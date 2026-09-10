@@ -26,17 +26,20 @@ SOFTWARE.
 
 本 MIT 许可**仅覆盖本项目的原创部分**，即：
 
-- 根目录 `SKILL.md`、`CONVENTIONS.md`、`README.md`、`ROADMAP.md`、`verify.py`
-- `vendor/office-layer/`（自建的中文文档产出层）
-- `skills/` 目录下全部子技能及其脚本
-- `vendor/VENDOR.md` 与 `THIRD_PARTY_NOTICES.md`
+- 根目录 `SKILL.md`、`CONVENTIONS.md`、`README.md`、`ROADMAP.md`、`START-HERE.md`、
+  `verify.py`、`install.sh` 与 `THIRD_PARTY_NOTICES.md`
+- `skills/office-layer/`（自建的中文文档产出层）
+- `skills/` 目录下的 22 个主技能及其脚本
 
-**不覆盖** `vendor/` 下由第三方提供的目录。这些内容各自遵循其原许可证，
+**不覆盖** `skills/` 下由第三方提供的 26 个底座技能目录。这些内容各自遵循其原许可证，
 其中两处含额外限制：
 
-1. `vendor/ibook-skills/` —— 上游**无许可证文件**，默认保留全部权利，本项目**未获授权收录**。
-2. `vendor/learning-education/thinking-toolkit/` —— **CC BY-NC-SA 4.0**，
+1. ibook 系列底座（`skills/ibook-skills/question-writing/`、`skills/ibook-skills/learning-graph-generator/`、
+   `skills/ibook-skills/glossary-generator/`、`skills/ibook-skills/faq-generator/`、
+   `skills/ibook-skills/course-description-analyzer/`）—— 上游**无许可证文件**，默认保留全部权利，
+   本项目**未获授权收录**。
+2. `skills/learning-education/thinking-toolkit/` —— **CC BY-NC-SA 4.0**，
    禁止商业使用且要求相同方式共享。
 
 完整清单与合规说明见 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。
-如需用于商业场景，请先删除上述两个目录并自行取得授权。
+如需用于商业场景，请先删除上述目录并自行取得授权。
