@@ -116,9 +116,21 @@ cd university-teacher-skills && bash install.sh
 | 4 | **软链**到各 agent 技能目录（软链指向同一份，venv 不重复占空间） |
 | 5 | 跑 `verify.py` 完整性自检 |
 
-自动探测的技能目录：`~/.claude/skills`、`~/.codex/skills`、`~/.agents/skills`、
-`~/.cc-switch/skills`、`~/.cursor/skills`、`~/.trae-cn/skills`、`~/.kimi-code/skills`、
-`~/.junie/skills`、`~/.lingma/skills`、`~/.lmstudio/skills`、`~/Doubao/skills`、`~/skills`
+自动探测的技能目录（存在才装）：
+
+| 客户端 | 技能目录 |
+|---|---|
+| 千问办公 QwenWork | `~/.qwenworkcn/skills` |
+| Kimi Code | `~/.kimi-code/skills` |
+| 跨工具共享（多个客户端共同扫描） | `~/.agents/skills` |
+| Claude Code | `~/.claude/skills` |
+| Codex | `~/.codex/skills` |
+| Cursor | `~/.cursor/skills` |
+| 其他（CC-Switch / Trae / Lingma / Junie / LM Studio / 豆包 / 自定义） | `~/.cc-switch/skills`、`~/.trae-cn/skills`、`~/.lingma/skills`、`~/.junie/skills`、`~/.lmstudio/skills`、`~/Doubao/skills`、`~/skills` |
+
+> 国产客户端（千问办公、Kimi、豆包）均已支持技能。
+> 不确定路径时，**直接问你的 AI「你的技能目录在哪」**即可。
+> 不懂这些概念的话，先看 [《从这里开始：给老师的第一课》](START-HERE.md)。
 
 脚本是**幂等**的：重复运行只同步代码、保留已装依赖，不会重新下载 105 MB。
 

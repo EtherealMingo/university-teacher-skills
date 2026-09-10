@@ -24,14 +24,16 @@ SKILL_DIR_NAME="university-teacher"
 
 DEFAULT_PREFIX="${HOME}/.local/share/university-teacher-skills"
 # 常见 agent 技能目录（存在才会被安装）
+# 前几个是国产客户端的技能目录，均已在各产品官方文档中确认为 SKILL.md 扫描路径
 CANDIDATE_DIRS=(
-  "${HOME}/.claude/skills"
-  "${HOME}/.codex/skills"
-  "${HOME}/.agents/skills"
+  "${HOME}/.qwenworkcn/skills"      # 千问办公 QwenWork
+  "${HOME}/.kimi-code/skills"       # Kimi Code
+  "${HOME}/.agents/skills"          # 跨工具共享目录（Kimi Code 等多个客户端共同扫描）
+  "${HOME}/.claude/skills"          # Claude Code
+  "${HOME}/.codex/skills"           # Codex
+  "${HOME}/.cursor/skills"          # Cursor
   "${HOME}/.cc-switch/skills"
-  "${HOME}/.cursor/skills"
   "${HOME}/.trae-cn/skills"
-  "${HOME}/.kimi-code/skills"
   "${HOME}/.junie/skills"
   "${HOME}/.lingma/skills"
   "${HOME}/.lmstudio/skills"
