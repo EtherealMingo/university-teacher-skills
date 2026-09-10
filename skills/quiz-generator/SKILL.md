@@ -97,7 +97,7 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限环境必�
   2. `ls vendor/ibook-skills/quiz-generator/references/`，确认干扰项指南在位。
   3. 建工作目录 `quiz-<课程名简写>-<日期>/`，过程文件全放这里。
 - **输出**：可用环境 + 工作目录。
-- **退出条件**：`docx_kit.py`、`xlsx_kit.py` 存在；`.venv/bin/python` 可执行（`--help` 有输出）。
+- **退出条件**：`docx_kit.py`、`xlsx_kit.py` 存在；`vendor/office-layer/.venv/bin/python` 可执行（`--help` 有输出）。
 
 ### 阶段一 · 知识点清单化
 

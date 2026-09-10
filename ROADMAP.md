@@ -112,6 +112,7 @@ paper-to-slides、research-assistant、grant-proposal），但本机上并无对
 
 | 脚本 | 用途 |
 |---|---|
+| `install.sh` | 自举安装：取源 → 落盘 → 建依赖 → 软链到各 agent 技能目录 → 自检。幂等，支持 `--uninstall` |
 | `verify.py` | 包完整性自检（结构 / frontmatter / vendor 路径真实性 / 纪律 / 冒烟） |
 
 ### 本轮实测发现的缺陷（已修复）

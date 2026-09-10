@@ -15,12 +15,36 @@ description: "高校教师工作全流程 AI 提效总控。覆盖教学、科�
 | `CONVENTIONS.md` | **开发与使用宪法**：vendor-first、不虚构、人工确认位、敏感数据 |
 | `vendor/VENDOR.md` | 上游底座溯源与**许可证合规说明** |
 | `vendor/office-layer/SKILL.md` | **文件产出唯一通道**（docx/pptx/xlsx/pdf） |
+| `README.md` | 场景全景（学期时间轴、按角色、14 个技能详解） |
 
-首次使用先装依赖：
+## 环境自检与自举安装
+
+**每次开始工作前先跑一次环境自检**，缺依赖就装：
 
 ```bash
+# 自检：确认依赖与包完整性
+python3 verify.py
+
+# 若报缺依赖（docx/pptx/openpyxl），装一次即可
 bash vendor/office-layer/bootstrap.sh
 ```
+
+**如果本技能包只被部分安装或路径不对**（例如 `vendor/office-layer/scripts/` 不存在），
+用自带安装脚本自举到正确位置：
+
+```bash
+# 自动探测各 agent 技能目录并软链（幂等，重复运行安全）
+bash install.sh
+
+# 或从零拉取（本包公开）
+curl -fsSL https://raw.githubusercontent.com/EtherealMingo/university-teacher-skills/main/install.sh | bash
+```
+
+安装脚本会完成：取源 → 落到 `~/.local/share/university-teacher-skills` → 建 venv 装依赖
+→ 软链到各 agent 技能目录 → 跑 `verify.py` 自检。
+
+> **执行任何命令前，先 `cd` 到本包根目录。** 全部 `vendor/...` 路径都是相对包根写的，
+> 换目录执行会找不到文件。
 
 ## 路由表
 
