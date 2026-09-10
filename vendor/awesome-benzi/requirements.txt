@@ -1,0 +1,14 @@
+# Runtime dependencies for the awesome-benzi scripts.
+# Install:  pip install -r requirements.txt
+# External binaries (not pip-installable) are detected at runtime:
+#   LibreOffice (soffice)  - optional render review (DOCX -> PDF)
+#   Poppler (pdftoppm)     - optional render review (PDF -> PNG)
+#   Tesseract              - optional local OCR for scanned PDFs
+# Word COM recovery and Windows OCR need no extra package on Windows
+# (pywin32 is optional and preferred over the PowerShell fallback).
+
+python-docx>=1.1.0
+Pillow>=10.0.0
+pypdf>=4.0.0
+pdfplumber>=0.11.0
+pywin32>=306; sys_platform == "win32"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Awesome Benzi"
+  short_description: "高校项目书有界恢复、证据驱动写作与可验证DOCX交付"
+  default_prompt: "Use $awesome-benzi to process the supplied project materials with bounded recovery, evidence-driven structured reasoning, and verified editable DOCX delivery."

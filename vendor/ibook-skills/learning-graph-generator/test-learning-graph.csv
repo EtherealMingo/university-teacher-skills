@@ -1,0 +1,6 @@
+ConceptID,ConceptLabel,Dependencies,TaxonomyID
+1,Introduction to Testing,,FOUND
+2,Basic Concepts,1,DEF
+3,Core Principles,1|2,CORE
+4,Intermediate Topics,2|3,INTER
+5,Advanced Techniques,3|4,ADV

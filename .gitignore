@@ -1,0 +1,23 @@
+# 虚拟环境是可再生产物，由 vendor/office-layer/bootstrap.sh 生成，不要提交/分发
+# 排除后包体积从 ~214M 降到 ~5M
+.venv/
+vendor/office-layer/.venv/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# matplotlib 缓存（受限环境需写到 /tmp）
+.mplcache/
+mplcache/
+
+# 运行期产物
+*.log
+.DS_Store
+
+# 教师使用过程中产生的中间文件（不要误提交学生数据）
+*.tmp
+~$*.docx
+~$*.pptx
+~$*.xlsx
