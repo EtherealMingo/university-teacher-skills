@@ -1,0 +1,367 @@
+pageType: content
+background:
+  type: solid
+  color: "$paper"
+elements:
+  # ---------- 顶部品牌行 ----------
+  - elementId: top-rule
+    elementType: shape
+    bounds: [40, 56, 640, 2]
+    shapeName: rect
+    fill: {type: solid, color: "$ink"}
+  - elementId: brand
+    elementType: text
+    bounds: [40, 26, 480, 20]
+    content:
+      fontSize: 12
+      letterSpacing: 2
+      color: "$ink"
+      wrap: false
+      align: [left, middle]
+      text: 高校教师 AI 提效技能包 · UNIVERSITY TEACHER SKILLS
+  - elementId: brand-right
+    elementType: text
+    bounds: [420, 26, 260, 20]
+    content:
+      fontSize: 12
+      color: "$inkSoft"
+      wrap: false
+      align: [right, middle]
+      text: 内测邀请 · 2026 秋
+
+  # ---------- 标题区 ----------
+  - elementId: kicker-square
+    elementType: shape
+    bounds: [40, 98, 10, 10]
+    shapeName: rect
+    fill: {type: solid, color: "$red"}
+  - elementId: kicker
+    elementType: text
+    bounds: [60, 90, 420, 24]
+    content:
+      fontSize: 14
+      bold: true
+      color: "$red"
+      wrap: false
+      align: [left, middle]
+      text: 写给每一位老师的 AI 工作搭子
+  - elementId: headline
+    elementType: text
+    bounds: [40, 122, 640, 172]
+    content:
+      align: [left, top]
+      text: |
+        <p><span style="font-size:62px; font-family:思源宋体; color:$ink;"><strong>把重复劳动</strong></span></p>
+        <p style="margin-top:8px"><span style="font-size:62px; font-family:思源宋体; color:$ink;"><strong>交给</strong></span><span style="font-size:62px; font-family:得意黑; color:$red;"> AI </span><span style="font-size:62px; font-family:思源宋体; color:$ink;"><strong>打草稿</strong></span></p>
+  - elementId: slogan
+    elementType: text
+    bounds: [40, 306, 640, 34]
+    content:
+      fontSize: 23
+      fontFamily: 得意黑
+      color: "$ink"
+      wrap: false
+      align: [left, middle]
+      text: 22 类高频工作 AI 出初稿，您只做判断与补全
+
+  # ---------- 五大场景列表 ----------
+  - elementId: sec-square
+    elementType: shape
+    bounds: [40, 379, 8, 8]
+    shapeName: rect
+    fill: {type: solid, color: "$red"}
+  - elementId: sec-head
+    elementType: text
+    bounds: [58, 370, 340, 24]
+    content:
+      fontSize: 16
+      bold: true
+      color: "$ink"
+      wrap: false
+      align: [left, middle]
+      text: 五大场景 · 22 项子技能
+
+  # 行 1 教学
+  - elementId: r1-icon
+    elementType: icon
+    bounds: [40, 422, 22, 22]
+    iconName: "fas:chalkboard-user"
+    fill: {type: solid, color: "$ink"}
+  - elementId: r1-title
+    elementType: text
+    bounds: [76, 414, 320, 26]
+    content: {fontSize: 18, bold: true, color: "$ink", wrap: false, align: [left, middle], text: 教学}
+  - elementId: r1-desc
+    elementType: text
+    bounds: [76, 442, 380, 20]
+    content: {fontSize: 12.5, color: "$inkSoft", wrap: false, align: [left, middle], text: 教案课件 · 出题审卷 · 课堂互动 · 成绩分析}
+  - elementId: r1-rule
+    elementType: shape
+    bounds: [40, 472, 400, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$rule"}
+
+  # 行 2 科研
+  - elementId: r2-icon
+    elementType: icon
+    bounds: [40, 494, 22, 22]
+    iconName: "fas:flask"
+    fill: {type: solid, color: "$ink"}
+  - elementId: r2-title
+    elementType: text
+    bounds: [76, 486, 320, 26]
+    content: {fontSize: 18, bold: true, color: "$ink", wrap: false, align: [left, middle], text: 科研}
+  - elementId: r2-desc
+    elementType: text
+    bounds: [76, 514, 380, 20]
+    content: {fontSize: 12.5, color: "$inkSoft", wrap: false, align: [left, middle], text: 申报本子 · 期刊审稿 · 文献综述 · 研究设计}
+  - elementId: r2-rule
+    elementType: shape
+    bounds: [40, 544, 400, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$rule"}
+
+  # 行 3 指导
+  - elementId: r3-icon
+    elementType: icon
+    bounds: [40, 566, 22, 22]
+    iconName: "fas:user-graduate"
+    fill: {type: solid, color: "$ink"}
+  - elementId: r3-title
+    elementType: text
+    bounds: [76, 558, 320, 26]
+    content: {fontSize: 18, bold: true, color: "$ink", wrap: false, align: [left, middle], text: 指导}
+  - elementId: r3-desc
+    elementType: text
+    bounds: [76, 586, 380, 20]
+    content: {fontSize: 12.5, color: "$inkSoft", wrap: false, align: [left, middle], text: 论文批注 · 组会派工 · 大创挑战杯 · 谈心谈话}
+  - elementId: r3-rule
+    elementType: shape
+    bounds: [40, 616, 400, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$rule"}
+
+  # 行 4 行政
+  - elementId: r4-icon
+    elementType: icon
+    bounds: [40, 638, 22, 22]
+    iconName: "fas:file-signature"
+    fill: {type: solid, color: "$ink"}
+  - elementId: r4-title
+    elementType: text
+    bounds: [76, 630, 320, 26]
+    content: {fontSize: 18, bold: true, color: "$ink", wrap: false, align: [left, middle], text: 行政}
+  - elementId: r4-desc
+    elementType: text
+    bounds: [76, 658, 380, 20]
+    content: {fontSize: 12.5, color: "$inkSoft", wrap: false, align: [left, middle], text: 工作量统计 · 排课监考 · 纪要通知 · 推荐信函}
+  - elementId: r4-rule
+    elementType: shape
+    bounds: [40, 688, 400, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$rule"}
+
+  # 行 5 考核与对外
+  - elementId: r5-icon
+    elementType: icon
+    bounds: [40, 710, 22, 22]
+    iconName: "fas:award"
+    fill: {type: solid, color: "$ink"}
+  - elementId: r5-title
+    elementType: text
+    bounds: [76, 702, 320, 26]
+    content: {fontSize: 18, bold: true, color: "$ink", wrap: false, align: [left, middle], text: 考核与对外}
+  - elementId: r5-desc
+    elementType: text
+    bounds: [76, 730, 380, 20]
+    content: {fontSize: 12.5, color: "$inkSoft", wrap: false, align: [left, middle], text: 年度述职 · 职称材料 · 科普讲座 · 成果归档}
+
+  # ---------- 右侧视觉：文稿 + 巨型 22 + 初稿红章 ----------
+  - elementId: big22
+    elementType: text
+    bounds: [396, 428, 294, 272]
+    content:
+      fontSize: 220
+      fontFamily: 思源宋体
+      bold: true
+      color: "#E2D5B6"
+      wrap: false
+      align: [center, middle]
+      text: "22"
+  - elementId: paper-1
+    elementType: shape
+    bounds: [450, 432, 165, 112]
+    shapeName: rect
+    rotation: -6
+    fill: {type: solid, color: "#FFFDF8"}
+    border: {style: solid, width: 1, color: "#C9BFA9"}
+  - elementId: paper-2
+    elementType: shape
+    bounds: [462, 410, 165, 112]
+    shapeName: rect
+    rotation: 5
+    fill: {type: solid, color: "#F7F2E6"}
+    border: {style: solid, width: 1, color: "#C9BFA9"}
+  - elementId: paper-3
+    elementType: shape
+    bounds: [472, 390, 165, 112]
+    shapeName: rect
+    rotation: -2
+    fill: {type: solid, color: "#FFFFFF"}
+    border: {style: solid, width: 1, color: "#C9BFA9"}
+  - elementId: paper-line-1
+    elementType: shape
+    bounds: [490, 412, 96, 4]
+    shapeName: rect
+    rotation: -2
+    fill: {type: solid, color: "$rule"}
+  - elementId: paper-line-2
+    elementType: shape
+    bounds: [490, 424, 122, 4]
+    shapeName: rect
+    rotation: -2
+    fill: {type: solid, color: "$rule"}
+  - elementId: paper-line-3
+    elementType: shape
+    bounds: [490, 436, 78, 4]
+    shapeName: rect
+    rotation: -2
+    fill: {type: solid, color: "$rule"}
+  - elementId: seal
+    elementType: shape
+    bounds: [566, 502, 74, 74]
+    shapeName: ellipse
+    fill: {type: solid, color: "$red"}
+  - elementId: seal-text
+    elementType: text
+    bounds: [566, 502, 74, 74]
+    content:
+      fontSize: 20
+      bold: true
+      color: "#FFFFFF"
+      wrap: false
+      align: [center, middle]
+      text: 初稿
+  - elementId: art-caption
+    elementType: text
+    bounds: [400, 722, 280, 20]
+    content:
+      fontSize: 12
+      color: "$inkSoft"
+      wrap: false
+      align: [center, middle]
+      text: 独立工作流 · 随叫随到 · 可单独调用
+
+  # ---------- 三条铁律墨绿横带 ----------
+  - elementId: band
+    elementType: shape
+    bounds: [0, 806, 720, 122]
+    shapeName: rect
+    fill: {type: solid, color: "$ink"}
+  - elementId: b1-icon
+    elementType: icon
+    bounds: [48, 832, 20, 20]
+    iconName: "fas:shield-halved"
+    fill: {type: solid, color: "$gold"}
+  - elementId: b1-title
+    elementType: text
+    bounds: [76, 828, 140, 24]
+    content: {fontSize: 16, bold: true, color: "#FFFFFF", wrap: false, align: [left, middle], text: 不虚构}
+  - elementId: b1-desc
+    elementType: text
+    bounds: [48, 858, 176, 48]
+    content: {fontSize: 11, color: "$bandText", lineHeight: 1.5, align: [left, top], text: 学生数据不生成，事实缺处一律标注待补}
+  - elementId: b2-icon
+    elementType: icon
+    bounds: [272, 832, 20, 20]
+    iconName: "fas:pen-to-square"
+    fill: {type: solid, color: "$gold"}
+  - elementId: b2-title
+    elementType: text
+    bounds: [300, 828, 140, 24]
+    content: {fontSize: 16, bold: true, color: "#FFFFFF", wrap: false, align: [left, middle], text: 只出初稿}
+  - elementId: b2-desc
+    elementType: text
+    bounds: [272, 858, 176, 48]
+    content: {fontSize: 11, color: "$bandText", lineHeight: 1.5, align: [left, top], text: 评价与打分留人工确认位，AI 不给终稿}
+  - elementId: b3-icon
+    elementType: icon
+    bounds: [496, 832, 20, 20]
+    iconName: "fas:file-word"
+    fill: {type: solid, color: "$gold"}
+  - elementId: b3-title
+    elementType: text
+    bounds: [524, 828, 140, 24]
+    content: {fontSize: 16, bold: true, color: "#FFFFFF", wrap: false, align: [left, middle], text: 标准交付}
+  - elementId: b3-desc
+    elementType: text
+    bounds: [496, 858, 176, 48]
+    content: {fontSize: 11, color: "$bandText", lineHeight: 1.5, align: [left, top], text: Word、PPT、Excel 成品文件，拿来即改}
+
+  # ---------- 安装方式 ----------
+  - elementId: install-square
+    elementType: shape
+    bounds: [40, 977, 8, 8]
+    shapeName: rect
+    fill: {type: solid, color: "$red"}
+  - elementId: install-label
+    elementType: text
+    bounds: [58, 968, 500, 24]
+    content:
+      fontSize: 18
+      bold: true
+      color: "$ink"
+      wrap: false
+      align: [left, middle]
+      text: 一条命令，装进您的 AI 助手
+  - elementId: code-bg
+    elementType: shape
+    bounds: [40, 1004, 640, 78]
+    shapeName: rect
+    fill: {type: solid, color: "$ink"}
+  - elementId: code-text
+    elementType: text
+    bounds: [60, 1004, 600, 78]
+    content:
+      fontSize: 12
+      fontFamily: JetBrains Mono
+      color: "$codeText"
+      lineHeight: 1.7
+      align: [left, middle]
+      text: |
+        <p>$ curl -fsSL https://raw.githubusercontent.com/EtherealMingo/</p>
+        <p>  university-teacher-skills/main/install.sh | bash</p>
+  - elementId: install-note
+    elementType: text
+    bounds: [40, 1098, 640, 20]
+    content:
+      fontSize: 13
+      color: "$inkSoft"
+      wrap: false
+      align: [left, middle]
+      text: 自动落盘 · 安装依赖 · 跑通自检；子技能随叫随到，无需先学习
+
+  # ---------- 页脚 ----------
+  - elementId: footer-rule
+    elementType: shape
+    bounds: [40, 1168, 640, 1]
+    shapeName: rect
+    fill: {type: solid, color: "#C9BFA9"}
+  - elementId: footer-left
+    elementType: text
+    bounds: [40, 1184, 430, 18]
+    content: {fontSize: 11.5, color: "$inkSoft", wrap: false, align: [left, middle], text: 成绩学号只在本机分析 · 任务结束请删除中间文件}
+  - elementId: footer-right
+    elementType: text
+    bounds: [420, 1184, 260, 18]
+    content: {fontSize: 11.5, color: "$inkSoft", wrap: false, align: [right, middle], text: university-teacher-skills · 开源可验}
+  - elementId: bottom-tagline
+    elementType: text
+    bounds: [0, 1216, 720, 28]
+    content:
+      fontSize: 18
+      fontFamily: 得意黑
+      color: "$red"
+      wrap: false
+      align: [center, middle]
+      text: AI 打草稿 · 老师做判断

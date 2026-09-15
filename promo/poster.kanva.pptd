@@ -1,0 +1,23 @@
+version: v2
+title: 高校教师 AI 提效技能包 · 推广海报
+size: [720, 1280]
+customFonts:
+  - family: 思源宋体
+    src: "https://statics.kimi.ai/neo-design-static/p-font/思源宋体.ttf"
+  - family: 得意黑
+    src: "https://statics.kimi.ai/neo-design-static/p-font/得意黑.ttf"
+  - family: JetBrains Mono
+    src: "https://fonts.googleapis.com/css2?family=JetBrains+Mono"
+theme:
+  colors:
+    paper: "#F6F1E7"
+    ink: "#24332B"
+    inkSoft: "#5A6B60"
+    red: "#BE3A2B"
+    gold: "#D9A441"
+    rule: "#DCD2BE"
+    big22: "#E9E0CB"
+    bandText: "#C7D2C9"
+    codeText: "#F2EDE2"
+pages:
+  - pages/1_poster.page
