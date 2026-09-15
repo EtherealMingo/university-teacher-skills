@@ -343,7 +343,22 @@ def inspect(path):
 
 # ---------------------------------------------------------------- spec 构建
 def build_from_spec(spec, out_path):
-    """spec: {title, sections:[{heading, level, paras:[], table:{header,rows}, placeholder:bool}]}"""
+    """spec: {title, sections:[{heading, level, paras:[], table:{header,rows}, placeholder:str}]}
+    placeholder 为「人工确认位」的占位文本（字符串），不是布尔开关。"""
+    if not isinstance(spec, dict):
+        raise SystemExit("spec 必须是 JSON 对象（{title, sections:[...]}），"
+                         f"当前类型 {type(spec).__name__}")
+    if not isinstance(spec.get("sections"), list) or not spec["sections"]:
+        raise SystemExit("spec 缺少非空的 sections 数组 —— 未生成任何内容，"
+                         "拒绝产出空文档。请检查 spec 字段名（heading/paras/table/placeholder）。")
+    for i, sec in enumerate(spec["sections"], 1):
+        if not isinstance(sec, dict):
+            raise SystemExit(f"sections 第 {i} 项必须是对象，当前类型 {type(sec).__name__}")
+        ph = sec.get("placeholder")
+        if ph is not None and not isinstance(ph, str):
+            raise SystemExit(f"sections 第 {i} 项的 placeholder 必须是字符串（占位文本），"
+                             f"当前值 {ph!r} —— 若想开启占位请直接写占位文字，"
+                             f"如 \"【人工确认位：请教师核对】\"")
     doc = Document()
     _style_base(doc)
     for s in doc.sections:

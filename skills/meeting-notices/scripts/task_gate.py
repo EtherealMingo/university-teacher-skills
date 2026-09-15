@@ -50,6 +50,7 @@ VAGUE = ["建议", "可以考虑", "研究一下", "研究研究", "酌情", "�
 
 # 三、任务表判定
 TASK_HEADER_HINTS = ["责任人", "负责", "承办"]
+TASK_TEXT_HINTS = ["任务", "事项", "工作", "举措"]
 DUE_HEADER_HINTS = ["截止", "完成时间", "时间节点", "期限", "deadline"]
 CHECK_HEADER_HINTS = ["验收", "衡量标准", "交付物", "完成标志"]
 DECISION_SECTION_HINTS = ["决议", "决定", "议定", "形成的事项", "结论"]
@@ -105,6 +106,7 @@ def check(text: str):
         pi = col_index(hdr, TASK_HEADER_HINTS)
         di = col_index(hdr, DUE_HEADER_HINTS)
         ci = col_index(hdr, CHECK_HEADER_HINTS)
+        ti = col_index(hdr, TASK_TEXT_HINTS)
         if di is None:
             blocked.append(f"第 {tb['start']} 行的任务表**没有「截止时间」列** —— "
                            f"没有截止时间的任务等于没有任务，必须补列。")
@@ -112,10 +114,12 @@ def check(text: str):
             review.append(f"第 {tb['start']} 行的任务表没有「验收方式/衡量标准」列，"
                           f"建议补上，否则无法判断做没做。")
         for n, row in enumerate(tb["rows"], 1):
+            label = (row[ti].strip() if (ti is not None and ti < len(row)) else
+                     (row[0] if row else "?"))
             owner = row[pi].strip() if (pi is not None and pi < len(row)) else ""
             if pi is not None and (not owner or owner in EMPTY_CELL
                                    or PLACEHOLDER_RE.search(owner)):
-                blocked.append(f"任务表第 {n} 行「{row[0] if row else '?'}」："
+                blocked.append(f"任务表第 {n} 行「{label}」："
                                f"**责任人缺失或为占位**，必须填到人（姓名或岗位），不得写「相关老师」。")
             elif owner in VAGUE_OWNER or any(v in owner for v in VAGUE_OWNER):
                 blocked.append(f"任务表第 {n} 行责任人写的是「{owner}」—— 这不是人，"
@@ -123,11 +127,11 @@ def check(text: str):
             if di is not None:
                 due = row[di].strip() if di < len(row) else ""
                 if not due or due in EMPTY_CELL:
-                    blocked.append(f"任务表第 {n} 行「{row[0] if row else '?'}」：**截止时间空缺**。")
+                    blocked.append(f"任务表第 {n} 行「{label}」：**截止时间空缺**。")
                 elif not DATE_RE.search(due) and not PLACEHOLDER_RE.search(due):
                     review.append(f"任务表第 {n} 行截止时间「{due}」不是可核对日期"
                                   f"（应写 2025-11-20 或「11月20日」或「第12周」）。")
-            first = row[0] if row else ""
+            first = row[ti].strip() if (ti is not None and ti < len(row)) else ""
             if first and len(first) <= 6 and not re.search(r"[做完成提交整理组织落实拟定修订汇总]",
                                                            first):
                 advisory.append(f"任务表第 {n} 行事项「{first}」看不出动作，"
