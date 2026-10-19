@@ -1,6 +1,6 @@
 ---
 name: university-teacher
-description: "高校教师工作全流程 AI 提效总控。覆盖教学、科研、指导、行政事务、考核五大场景共 22 个子技能：教案与课件、出题与试卷分析、论文指导与答辩、项目申报、期刊审稿、教学竞赛、研究生组会、学生竞赛与双创指导、学生事务与谈心谈话、实习实训、行政填报与迎检、会议纪要与通知、教学运行排期、学术通信、推荐信与证明、科普讲座、年度考核与职称材料。当教师说「帮我备课」「出一套题」「看看这篇论文」「写个本子」「指导学生做大创」「写封推荐信」「算教学工作量」「写个调课申请」时使用，总控会路由到对应子技能。Triggers: 备课、教案、课件、出题、试卷分析、成绩分析、论文指导、开题、答辩、申报书、本子、审稿、职称、述职、组会、科普、平时分、大创、挑战杯、推荐信、谈心谈话、实习、工作量、纪要、调课、监考、教材、邀请函。"
+description: "高校教师工作全流程 AI 提效总控。覆盖教学、科研、指导、行政事务、考核五大场景共 22 个子技能：教案与课件、出题与试卷分析、论文指导与答辩、项目申报、期刊审稿、教学竞赛、研究生组会、学生竞赛与双创指导、学生事务与谈心谈话、实习实训、行政填报与迎检、会议纪要与通知、教学运行排期、学术通信、推荐信与证明、科普讲座、年度考核与职称材料。当教师说「帮我备课」「出一套题」「看看这篇论文」「写个本子」「指导学生做大创」「写封推荐信」「算教学工作量」「写个调课申请」时使用，总控会路由到对应子技能。Triggers: 备课、教案、课件、出题、试卷分析、成绩分析、论文指导、开题、答辩、申报书、本子、审稿、职称、述职、组会、科普、平时分、大创、挑战杯、推荐信、谈心谈话、实习、工作量、纪要、调课、监考、教材、智能教材、在线教材、课程网站、邀请函。"
 ---
 
 # 高校教师 AI 提效技能包 · 总控
@@ -107,6 +107,12 @@ curl -fsSL https://raw.githubusercontent.com/EtherealMingo/university-teacher-sk
 |---|---|---|
 | [`annual-review`](skills/annual-review/SKILL.md) | 「写年度述职」「整理职称材料」「教学成果奖」 | `skills/awesome-benzi/` 派生 |
 | [`science-outreach`](skills/science-outreach/SKILL.md) | 「做个科普 PPT」「给中学生讲我的研究」「科普讲座怎么准备」「把研究讲给外行听」 | 独立底座：`skills/office-layer/`（pptx）+ `skills/slides-polish/` + `skills/learning-education/thinking-toolkit/`（类比讲解）+ `skills/education-skills/edu-rural-education/`（受众适配）。与 `lecture-slides` 是**不同**的风格体系，见其文档的风格对照表 |
+
+### 直达底座（无对应主技能的特殊场景）
+
+| 教师会说 | 直达 |
+|---|---|
+| 「做一本智能教材」「把这门课做成在线教材」「搭个课程网站」「给教材加术语表 / FAQ / 学习图谱」「生成章节内容」 | `skills/ibook-skills/` 工具链，顺序：`course-description-analyzer`（课程描述）→ `learning-graph-generator`（概念图谱）→ `chapter-content-generator`（章节正文，CIS 分配篇幅）→ `question-writing` / `glossary-generator` / `faq-generator`（题目/术语/FAQ）→ `book-installer`（MkDocs 站点搭建与 41 项功能安装） |
 
 ## 三条全局铁律
 

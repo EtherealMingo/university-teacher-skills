@@ -3,14 +3,20 @@
 """
 verify.py — 技能包完整性自检
 
-对应 CONVENTIONS.md 第 8 节的验收清单，把「靠记忆检查」变成「跑一遍」：
-  1. 22 个主技能 + 28 个底座技能的目录与 SKILL.md 是否齐全
+对应 CONVENTIONS.md 第 7、8 节的验收清单，把「靠记忆检查」变成「跑一遍」：
+  1. skills/ 下所有技能目录自动发现（主技能/底座按布局约定分类，不再硬编码清单）
   2. frontmatter 是否有 name / description，description 是否有 Triggers 与足够触发短语
+  2b. 主技能是否具备 CONVENTIONS §7 规定的必备章节（何时使用/intake/工作流/底座/产出物/红线/自检）
   3. SKILL.md 里引用的 skills/ 底座路径是否真实存在（防止凭记忆写路径）
   3b. $BK_HOME/skills/... 这类上游套件内引用能否解析到 skills/ibook-skills/ 下的真实文件
   4. 文件产出是否走了 office-layer（主技能）
   5. 是否声明了「不虚构」与「人工确认位」纪律（主技能）
   6. office-layer 的三个脚本能否正常拉起
+
+布局约定（自动发现的分类依据）：
+  - 技能 = skills/ 下任何含 SKILL.md 的目录
+  - 底座 = 位于套件目录（SUITE_DIRS）内的技能，或 INDEPENDENT_FOUNDATION 点名的顶层技能
+  - 主技能 = 其余顶层技能
 
 用法：python3 verify.py [--root .]
 退出码：0 全部通过；1 有 FAIL。
@@ -23,55 +29,32 @@ import subprocess
 import sys
 from pathlib import Path
 
-# 22 个面向教师场景的主技能（总控路由的对象）
-EXPECTED_MAIN = [
-    # 教学
-    "lesson-plan", "lecture-slides", "quiz-generator",
-    "exam-pipeline", "classroom-live", "teaching-contest",
-    # 科研
-    "research-assistant", "grant-proposal", "paper-to-slides", "peer-review",
-    # 指导（含学生工作）
-    "thesis-supervisor", "lab-meeting", "student-competition",
-    "student-affairs", "internship-practice",
-    # 行政事务
-    "admin-reporting", "meeting-notices", "teaching-ops",
-    "academic-correspondence", "student-recommendation",
-    # 考核与对外
-    "annual-review", "science-outreach",
-]
+# 套件目录：同一上游的一套底座收进一个目录（目录自身不含 SKILL.md）
+SUITE_DIRS = (
+    "education-skills", "empirical-research", "ibook-skills",
+    "k12-teacher-skills", "learning-education",
+)
 
-# 28 个底座技能（自 vendor/ 迁入并中文化；2026-09-10 起按上游套件嵌套为 5 个目录，
-# 4 个独立件保持平铺；2026-10-19 补录 ibook-skills 的 book-installer 与
-# chapter-content-generator，闭合 $BK_HOME 引用）。相对 skills/ 的路径。
-EXPECTED_FOUNDATION = [
-    # 自建文件产出层
-    "office-layer",
-    # 申报书写作引擎
-    "awesome-benzi",
-    # 论文拆解与课件视觉
-    "paper-analyst", "slides-polish",
-    # 实证研究（empirical-research）
-    "empirical-research/econ-audit", "empirical-research/data-dictionary",
-    "empirical-research/lit-review",
-    # 智能教材工具链（ibook-skills）
-    "ibook-skills/question-writing", "ibook-skills/learning-graph-generator",
-    "ibook-skills/glossary-generator",
-    "ibook-skills/faq-generator", "ibook-skills/course-description-analyzer",
-    "ibook-skills/book-installer", "ibook-skills/chapter-content-generator",
-    # K-12 教学法（Anthropic，k12-teacher-skills）
-    "k12-teacher-skills/k12-lesson-plan-creation",
-    "k12-teacher-skills/k12-lesson-differentiation",
-    "k12-teacher-skills/k12-lesson-prep",
-    "k12-teacher-skills/k12-check-for-understanding",
-    # 教育方法库（education-skills，台湾课纲，已译简体）
-    "education-skills/edu-teaching-design", "education-skills/edu-learning-analytics",
-    "education-skills/edu-rural-education",
-    "education-skills/edu-research-methods", "education-skills/edu-math-tech-education",
-    "education-skills/edu-ai-tools", "education-skills/edu-ict-integration",
-    # 学习方法（learning-education）
-    "learning-education/study-skill", "learning-education/thinking-toolkit",
-    "learning-education/learning-paths",
-]
+# 独立底座件：顶层平铺但不是主技能
+INDEPENDENT_FOUNDATION = (
+    "office-layer", "awesome-benzi", "paper-analyst", "slides-polish",
+)
+
+
+def discover_skills(skill_dir: Path):
+    """自动发现 skills/ 下全部技能，返回 (主技能列表, 底座列表)，元素为相对 skills/ 的路径。"""
+    mains, foundations = [], []
+    for f in sorted(skill_dir.rglob("SKILL.md")):
+        rel = f.parent.relative_to(skill_dir).as_posix()
+        parts = rel.split("/")
+        if len(parts) > 1:
+            # 套件目录内的技能一律是底座
+            foundations.append(rel)
+        elif parts[0] in INDEPENDENT_FOUNDATION:
+            foundations.append(rel)
+        else:
+            mains.append(rel)
+    return mains, foundations
 
 OK, FAIL, WARN = "\033[32mOK\033[0m", "\033[31mFAIL\033[0m", "\033[33mWARN\033[0m"
 results = {"ok": 0, "fail": 0, "warn": 0}
@@ -133,6 +116,18 @@ def main():
         (ok if (root / f).exists() else fail)(f"{f} {'存在' if (root/f).exists() else '缺失'}")
 
     skill_dir = root / "skills"
+    EXPECTED_MAIN, EXPECTED_FOUNDATION = discover_skills(skill_dir)
+
+    # CONVENTIONS §7 规定的主技能必备章节（宽松匹配常见同义写法）
+    REQUIRED_SECTIONS = {
+        "何时使用": r"^#{1,4}\s.*(何时使用|何时用|适用场景|使用场景|何时触发)",
+        "intake 前置信息收集": r"^#{1,4}\s.*(前置信息|信息收集|intake)",
+        "工作流": r"^#{1,4}\s.*(工作流|流程|阶段一|执行步骤)",
+        "底座": r"^#{1,4}\s.*底座",
+        "产出物": r"^#{1,4}\s.*(产出物|产出|交付物)",
+        "红线": r"^#{1,4}\s.*红线",
+        "自检清单": r"^#{1,4}\s.*(自检|检查清单|自查|核对清单)",
+    }
 
     def check_skill(name, discipline):
         # name 是相对 skills/ 的路径（底座可能在套件子目录里，
@@ -175,11 +170,25 @@ def main():
                 warn(f"{name}: 未见「不虚构 / 不编造」纪律表述")
         return True
 
-    print("\n[2] 22 个主技能")
+    print(f"\n[2] {len(EXPECTED_MAIN)} 个主技能（自动发现）")
     for name in EXPECTED_MAIN:
         check_skill(name, discipline=True)
 
-    print(f"\n[3] {len(EXPECTED_FOUNDATION)} 个底座技能")
+    # ---------- 2b. 主技能结构完备性（CONVENTIONS §7） ----------
+    print("\n[2b] 主技能必备章节（CONVENTIONS §7）")
+    for name in EXPECTED_MAIN:
+        f = skill_dir / name / "SKILL.md"
+        if not f.exists():
+            continue
+        text = f.read_text(encoding="utf-8")
+        missing = [label for label, pat in REQUIRED_SECTIONS.items()
+                   if not re.search(pat, text, re.MULTILINE)]
+        if missing:
+            warn(f"{name}: 缺章节 {missing}")
+        else:
+            ok(f"{name} 章节齐全")
+
+    print(f"\n[3] {len(EXPECTED_FOUNDATION)} 个底座技能（自动发现）")
     for name in EXPECTED_FOUNDATION:
         check_skill(name, discipline=False)
 
