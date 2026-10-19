@@ -1,0 +1,318 @@
+:root {
+    --bg: #f7f9fc;
+    --slide-bg: #ffffff;
+    --ink: #1a2236;
+    --muted: #5c6b85;
+    --accent: #2f6fd8;
+    --accent-warm: #e0803f;
+    --border: #d9e1ee;
+    --shadow: 0 4px 24px rgba(20, 40, 80, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+#app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+}
+
+#slide-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    position: relative;
+}
+
+.mascot {
+    position: absolute;
+    bottom: calc(12px - 10%);
+    left: 12px;
+    width: 96px;
+    height: auto;
+    pointer-events: none;
+    opacity: 0.92;
+    filter: drop-shadow(0 2px 6px rgba(20, 40, 80, 0.15));
+    z-index: 5;
+}
+
+.mascot.celebration {
+    width: 140px;
+    opacity: 1;
+}
+
+@media (max-width: 720px) {
+    .mascot { width: 64px; bottom: calc(8px - 10%); left: 8px; }
+    .mascot.celebration { width: 96px; }
+}
+
+.slide {
+    width: 100%;
+    max-width: 960px;
+    aspect-ratio: 16 / 9;
+    max-height: 100%;
+    background: var(--slide-bg);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 48px 64px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.slide h1 {
+    font-size: 2.4rem;
+    margin: 0 0 0.4em 0;
+    color: var(--ink);
+    line-height: 1.15;
+}
+
+.slide h2 {
+    font-size: 1.9rem;
+    margin: 0 0 0.6em 0;
+    color: var(--accent);
+    line-height: 1.2;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.3em;
+}
+
+.slide h3 { font-size: 1.4rem; color: var(--accent); }
+.slide h4 { font-size: 1.15rem; color: var(--muted); }
+
+.slide p,
+.slide li {
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--ink);
+}
+
+.slide ul, .slide ol {
+    padding-left: 1.4em;
+    margin: 0.6em 0;
+}
+
+.slide li { margin: 0.3em 0; }
+
+.slide strong { color: var(--ink); }
+.slide em { color: var(--muted); }
+
+.slide code {
+    background: #eef2f9;
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    font-size: 0.95em;
+    color: var(--accent);
+}
+
+.slide pre {
+    background: #eef2f9;
+    padding: 0.8em 1em;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.95rem;
+}
+
+.slide pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--ink);
+}
+
+.slide blockquote {
+    border-left: 4px solid var(--accent-warm);
+    margin: 0.8em 0;
+    padding: 0.2em 1em;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+.slide table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.6em 0;
+    font-size: 1rem;
+}
+
+.slide th, .slide td {
+    border: 1px solid var(--border);
+    padding: 0.5em 0.8em;
+    text-align: left;
+}
+
+.slide th {
+    background: #eef2f9;
+    color: var(--ink);
+}
+
+.slide hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0.8em 0;
+}
+
+.slide a { color: var(--accent); }
+
+.slide.title-slide {
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #eef4ff 0%, #ffffff 100%);
+}
+
+.slide.title-slide h1 {
+    font-size: 3rem;
+    color: var(--accent);
+}
+
+#controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 8px;
+}
+
+.spacer { flex: 0 0 24px; }
+
+.ctrl-btn {
+    background: var(--slide-bg);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-size: 1.3rem;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    min-width: 44px;
+    min-height: 36px;
+    line-height: 1;
+}
+
+.ctrl-btn:hover {
+    background: #eef4ff;
+    border-color: var(--accent);
+}
+
+.ctrl-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#counter {
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    font-size: 0.95rem;
+    min-width: 70px;
+    text-align: center;
+}
+
+#progress {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.25s ease;
+}
+
+.empty-state {
+    max-width: 640px;
+    text-align: center;
+    padding: 32px;
+    background: var(--slide-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.empty-state pre {
+    background: #eef2f9;
+    padding: 0.8em 1em;
+    border-radius: 6px;
+    text-align: left;
+    overflow-x: auto;
+}
+
+.empty-state .hint {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.toc {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 340px;
+    max-height: calc(100vh - 120px);
+    background: var(--slide-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 12px 16px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.toc-header h3 { margin: 0; font-size: 1.1rem; }
+
+.toc ol {
+    padding-left: 1.6em;
+    margin: 0;
+}
+
+.toc li {
+    cursor: pointer;
+    padding: 4px 0;
+    color: var(--ink);
+    font-size: 0.95rem;
+}
+
+.toc li:hover { color: var(--accent); }
+.toc li.active { color: var(--accent); font-weight: 600; }
+
+#viewer-version {
+    position: fixed;
+    bottom: 6px;
+    right: 10px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+
+:fullscreen #app,
+:-webkit-full-screen #app { background: var(--bg); }
+
+@media (max-width: 720px) {
+    #app { padding: 8px; gap: 8px; }
+    .slide { padding: 24px 28px; }
+    .slide h1 { font-size: 1.7rem; }
+    .slide h2 { font-size: 1.4rem; }
+    .slide p, .slide li { font-size: 1rem; }
+}

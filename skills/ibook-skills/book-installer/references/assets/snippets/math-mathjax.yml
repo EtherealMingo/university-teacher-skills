@@ -1,0 +1,22 @@
+# MathJax Support for MkDocs Material
+# Copy this section into your mkdocs.yml
+#
+# Prerequisite files:
+#   - Copy mathjax-config.js to docs/javascripts/mathjax-config.js
+
+# Add to markdown_extensions:
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+# Add to extra_javascript:
+extra_javascript:
+  - javascripts/mathjax-config.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+# Usage examples:
+# Inline math:  \( E = mc^2 \)
+# Display math:
+# \[
+# \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+# \]

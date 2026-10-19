@@ -1,0 +1,170 @@
+/* Quiz Styling for MkDocs Material
+ * Add to mkdocs.yml: extra_css: [css/quiz.css]
+ */
+
+/* Quiz Container */
+.quiz-question {
+  background: var(--md-code-bg-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--md-primary-fg-color);
+}
+
+.quiz-question p:first-child {
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+/* Quiz Options */
+.quiz-option {
+  display: block;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  background: var(--md-default-bg-color);
+  border: 2px solid var(--md-default-fg-color--lighter);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.quiz-option::before {
+  content: '';
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--md-default-fg-color--lighter);
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  border-color: var(--md-accent-fg-color);
+  background: rgba(var(--md-accent-fg-color--rgb), 0.05);
+}
+
+.quiz-option:hover::before {
+  border-color: var(--md-accent-fg-color);
+}
+
+.quiz-option.selected {
+  border-color: var(--md-accent-fg-color);
+  background: rgba(var(--md-accent-fg-color--rgb), 0.1);
+}
+
+.quiz-option.selected::before {
+  background: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+}
+
+.quiz-option.correct {
+  border-color: #00c853;
+  background: rgba(0, 200, 83, 0.1);
+}
+
+.quiz-option.correct::before {
+  background: #00c853;
+  border-color: #00c853;
+}
+
+.quiz-option.incorrect {
+  border-color: #ff5252;
+  background: rgba(255, 82, 82, 0.1);
+}
+
+.quiz-option.incorrect::before {
+  background: #ff5252;
+  border-color: #ff5252;
+}
+
+/* Quiz Feedback */
+.quiz-feedback {
+  display: none;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.quiz-feedback.correct {
+  display: block;
+  background: rgba(0, 200, 83, 0.15);
+  color: #00c853;
+  border: 1px solid rgba(0, 200, 83, 0.3);
+}
+
+.quiz-feedback.incorrect {
+  display: block;
+  background: rgba(255, 82, 82, 0.15);
+  color: #ff5252;
+  border: 1px solid rgba(255, 82, 82, 0.3);
+}
+
+/* Quiz Explanation */
+.quiz-explanation {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--md-admonition-bg-color);
+  border-radius: 6px;
+  border-left: 4px solid var(--md-accent-fg-color);
+}
+
+.quiz-explanation.show {
+  display: block;
+}
+
+/* Multiple Choice Letters */
+.quiz-option[data-letter]::after {
+  content: attr(data-letter);
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.quiz-option[data-letter]::before {
+  display: none;
+}
+
+/* Quiz Progress */
+.quiz-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--md-code-bg-color);
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.quiz-score {
+  font-weight: 600;
+  color: var(--md-primary-fg-color);
+}
+
+/* Reset Button */
+.quiz-reset {
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  background: var(--md-default-fg-color--lighter);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.2s;
+}
+
+.quiz-reset:hover {
+  background: var(--md-default-fg-color--light);
+}

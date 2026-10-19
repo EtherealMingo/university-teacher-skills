@@ -1,0 +1,102 @@
+/* GLightbox Custom Styling for MkDocs Material
+ * Add to mkdocs.yml: extra_css: [css/glightbox-custom.css]
+ * Requires: pip install mkdocs-glightbox
+ */
+
+/* Override default GLightbox styling to match Material theme */
+
+/* Lightbox background */
+.glightbox-container .gslide {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+/* Close button */
+.glightbox-clean .gclose,
+.glightbox-modern .gclose {
+  background: var(--md-primary-fg-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glightbox-clean .gclose svg,
+.glightbox-modern .gclose svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Navigation arrows */
+.glightbox-clean .gnext,
+.glightbox-clean .gprev,
+.glightbox-modern .gnext,
+.glightbox-modern .gprev {
+  background: var(--md-primary-fg-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+/* Caption styling */
+.glightbox-clean .gslide-description,
+.glightbox-modern .gslide-description {
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font-family: var(--md-text-font-family);
+}
+
+.gslide-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--md-default-fg-color);
+}
+
+/* Image styling in lightbox */
+.gslide-image img {
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Zoom indicator on images */
+.md-typeset img:not(.off-glb):not(.twemoji):not([src*="shields.io"]) {
+  cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.md-typeset img:not(.off-glb):not(.twemoji):not([src*="shields.io"]):hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Add zoom icon indicator */
+.md-typeset figure:not(.off-glb) {
+  position: relative;
+}
+
+.md-typeset figure:not(.off-glb)::after {
+  content: '🔍';
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.md-typeset figure:not(.off-glb):hover::after {
+  opacity: 0.7;
+}
+
+/* Counter for multiple images */
+.glightbox-clean .gslide-outer .gslide-image + .gslide-description .gslide-title::before {
+  content: attr(data-index) ' / ' attr(data-total) ' — ';
+  opacity: 0.7;
+}
+
+/* Loading spinner */
+.gloader {
+  border-color: var(--md-primary-fg-color) transparent transparent transparent;
+}

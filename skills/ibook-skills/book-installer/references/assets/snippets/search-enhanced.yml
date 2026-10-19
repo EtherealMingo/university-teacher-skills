@@ -1,0 +1,34 @@
+# Enhanced Search for MkDocs Material
+# Copy these sections into your mkdocs.yml
+
+# Add to plugins:
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+      # pipeline:
+      #   - stemmer        # Enable word stemming
+      #   - stopWordFilter # Filter common words
+      #   - trimmer        # Trim whitespace
+
+# Add to theme.features:
+theme:
+  name: material
+  features:
+    - search.suggest    # Search suggestions as you type
+    - search.highlight  # Highlight search terms on page
+    - search.share      # Share search results via URL
+
+# Optional: Boost certain pages in search
+# Add to page frontmatter:
+# ---
+# search:
+#   boost: 2  # Higher = more prominent in results
+# ---
+
+# Optional: Exclude page from search
+# Add to page frontmatter:
+# ---
+# search:
+#   exclude: true
+# ---

@@ -1,0 +1,42 @@
+# Image Zoom (GLightbox) for MkDocs Material
+# Copy these sections into your mkdocs.yml
+#
+# Prerequisites:
+#   pip install mkdocs-glightbox
+
+# Add to plugins:
+plugins:
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+      auto_caption: false
+      caption_position: bottom
+      skip_classes:
+        - no-lightbox
+        - off-glb
+
+# Optional: Custom styling
+# Add custom-glightbox.css to docs/css/ and reference in extra_css
+# extra_css:
+#   - css/glightbox-custom.css
+
+# Usage:
+# All images are zoomable by default. Click to open in lightbox.
+#
+# To exclude specific images from zoom:
+# ![Image](path/to/image.png){ .off-glb }
+#
+# Or use class in HTML:
+# <img src="path/to/image.png" class="no-lightbox">
+#
+# Add caption to image:
+# <figure>
+#   <img src="path/to/image.png" alt="Description">
+#   <figcaption>This caption appears in the lightbox</figcaption>
+# </figure>

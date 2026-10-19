@@ -1,0 +1,24 @@
+# KaTeX Support for MkDocs Material (faster than MathJax)
+# Copy this section into your mkdocs.yml
+#
+# Prerequisite files:
+#   - Copy katex-config.js to docs/javascripts/katex-config.js
+
+# Add to markdown_extensions:
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+# Add to extra_javascript:
+extra_javascript:
+  - javascripts/katex-config.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+# Add to extra_css:
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css
+
+# Usage examples:
+# Inline math:  $E = mc^2$ or \( E = mc^2 \)
+# Display math: $$\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$$

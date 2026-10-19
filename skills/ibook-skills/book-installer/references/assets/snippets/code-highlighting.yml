@@ -1,0 +1,49 @@
+# Code Syntax Highlighting for MkDocs Material
+# Copy these sections into your mkdocs.yml
+
+# Add to theme.features:
+theme:
+  name: material
+  features:
+    - content.code.copy      # Copy button on code blocks
+    - content.code.select    # Select all code
+    - content.code.annotate  # Code annotations
+
+# Add to markdown_extensions:
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      use_pygments: true
+      auto_title: true        # Show language name
+      linenums: false         # Line numbers (enable per block with ```python linenums="1")
+  - pymdownx.inlinehilite     # Inline code highlighting
+  - pymdownx.snippets         # Include external files
+  - pymdownx.superfences      # Nested code blocks
+
+# Usage examples:
+#
+# Basic code block:
+# ```python
+# def hello():
+#     print("Hello, World!")
+# ```
+#
+# With line numbers:
+# ```python linenums="1"
+# def hello():
+#     print("Hello, World!")
+# ```
+#
+# Highlight specific lines:
+# ```python hl_lines="2 3"
+# def hello():
+#     message = "Hello"
+#     print(message)
+# ```
+#
+# Inline code: The `print()` function outputs text.
+#
+# Include external file:
+# --8<-- "path/to/file.py"

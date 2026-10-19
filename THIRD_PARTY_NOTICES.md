@@ -1,13 +1,14 @@
 # 第三方组件声明（Third-Party Notices）
 
-本仓库的第三方开源内容位于 `skills/` 目录下的 26 个**底座技能**中
+本仓库的第三方开源内容位于 `skills/` 目录下的 28 个**底座技能**中
 （2026-09-10 由 `vendor/` 目录迁入，文档已全部译为简体中文；同日起按上游套件
 嵌套为 `education-skills/`、`empirical-research/`、`ibook-skills/`、
 `k12-teacher-skills/`、`learning-education/` 五个套件目录，`awesome-benzi`、
-`paper-analyst`、`slides-polish` 三个独立件平铺）。
+`paper-analyst`、`slides-polish` 三个独立件平铺；
+2026-10-19 补录 `ibook-skills/` 的 `book-installer` 与 `chapter-content-generator` 两件）。
 以下逐个列出**来源、版本、许可证与合规状态**。
 
-复现日期：2026-09-10。所有 commit 为当日上游 `HEAD`（浅克隆）。
+复现日期：2026-09-10（补录两件为 2026-10-19）。所有 commit 为当日上游 `HEAD`（浅克隆）。
 
 ---
 
@@ -15,11 +16,12 @@
 
 1. **ibook 系列底座无许可证文件。**
    上游仓库 [dmccreary/ibook-skills](https://github.com/dmccreary/ibook-skills) 根目录**没有 `LICENSE`**，
-   依法默认**保留全部权利**（all rights reserved）。涉及本仓库 5 个目录：
+   依法默认**保留全部权利**（all rights reserved）。涉及本仓库 7 个目录：
    `skills/ibook-skills/question-writing/`（上游原名 `quiz-generator`）、`skills/ibook-skills/learning-graph-generator/`、
-   `skills/ibook-skills/glossary-generator/`、`skills/ibook-skills/faq-generator/`、`skills/ibook-skills/course-description-analyzer/`。
-   本仓库收录其内容的副本**未获授权**（其中 quiz-generator 的 SKILL.md frontmatter 自称
-   CC BY-NC 4.0，但仓库无 LICENSE，按无许可证处理）。
+   `skills/ibook-skills/glossary-generator/`、`skills/ibook-skills/faq-generator/`、`skills/ibook-skills/course-description-analyzer/`、
+   `skills/ibook-skills/book-installer/`、`skills/ibook-skills/chapter-content-generator/`。
+   本仓库收录其内容的副本**未获授权**（其中 quiz-generator 与 chapter-content-generator 的
+   SKILL.md frontmatter 自称 CC BY-NC 4.0，但仓库无 LICENSE，按无许可证处理）。
    若你要复用、分发或商用这部分内容，**请先联系原作者取得许可**。
 
 2. **`skills/learning-education/thinking-toolkit/` 使用 CC BY-NC-SA 4.0。**
@@ -43,7 +45,7 @@
 | `skills/learning-education/learning-paths/` | [TovTechOrg/Tov-learn](https://github.com/TovTechOrg/Tov-learn) @ `e09edae` | MIT | ✅ |
 | `skills/empirical-research/econ-audit/`、`skills/empirical-research/data-dictionary/`、`skills/empirical-research/lit-review/` | [eabeam/econ-skills](https://github.com/eabeam/econ-skills) @ `1b0238d` | CC BY 4.0 | ✅ 需署名（本文件即为署名） |
 | `skills/learning-education/thinking-toolkit/` | [Rogers-F/thinking-toolkit](https://github.com/Rogers-F/thinking-toolkit) @ `5a8dd95` | **CC BY-NC-SA 4.0** | ⚠️ 见上 |
-| `skills/ibook-skills/question-writing/` 等 5 个 ibook 目录 | [dmccreary/ibook-skills](https://github.com/dmccreary/ibook-skills) | **无许可证** | ⚠️ 见上 |
+| `skills/ibook-skills/` 7 个 ibook 目录 | [dmccreary/ibook-skills](https://github.com/dmccreary/ibook-skills) | **无许可证** | ⚠️ 见上 |
 | `skills/office-layer/` | 本仓库自建，非第三方 | 见根目录 `LICENSE` | ✅ |
 
 目录对照：
@@ -53,8 +55,9 @@
   （对应上游繁体中文目录：教學設計、學習分析、偏鄉教育、研究方法、數學科技教育、AI工具應用、ICT科技融入）
 - **k12-\***（4 个，位于 `skills/k12-teacher-skills/`）：`k12-lesson-plan-creation`、
   `k12-lesson-differentiation`、`k12-lesson-prep`、`k12-check-for-understanding`
-- **ibook 五件**（位于 `skills/ibook-skills/`）：`question-writing`（上游原名 `quiz-generator`）、
-  `learning-graph-generator`、`glossary-generator`、`faq-generator`、`course-description-analyzer`
+- **ibook 七件**（位于 `skills/ibook-skills/`）：`question-writing`（上游原名 `quiz-generator`）、
+  `learning-graph-generator`、`glossary-generator`、`faq-generator`、`course-description-analyzer`，
+  以及 2026-10-19 补录的 `book-installer`、`chapter-content-generator`
 
 原 `learning-education` 由三个上游合成（原计划只给了「苏格拉底问答、闪卡、学习路径」
 三个能力名，未给仓库，故按能力逐个寻找相似项目收录）：
@@ -108,6 +111,22 @@
 
 ## 对上游内容做过的修改
 
+### 补录 ibook 两件（2026-10-19）
+
+- 动因：首批五件内含 `$BK_HOME/skills/book-installer/...` 与
+  `$BK_HOME/skills/chapter-content-generator/...` 共 5 处引用，所指技能当时未收录，
+  引用悬空。按「只升级不降级」原则补录这两件，闭合套件内引用。
+- 处理与首批一致：frontmatter `description` 中文化并补 Triggers；删除
+  `chapter-content-generator` frontmatter 中上游自称的 `license: CC BY-NC 4.0` 字段；
+  两个 `SKILL.md` 及被直接引用的 `references/blooms-taxonomy.md`、
+  `references/mkdocs-nav-editing.md` 译为简体中文；代码、脚本、YAML 片段与
+  路由匹配关键词保持原文。
+- **暂存原文的部分**：`book-installer/references/`（除 mkdocs-nav-editing.md）、
+  `chapter-content-generator/references/`（除 blooms-taxonomy.md）与
+  `assets/` 模板本批次保留英文原文，后续批次翻译。
+- 同日在 `verify.py` 新增 [4b] 检查：把所有 `.md` 中的 `$BK_HOME/skills/...`
+  引用映射到 `skills/ibook-skills/` 逐一验证，防止此类悬空复发。
+
 ### 迁移与翻译（2026-09-10，最大的一次内容改动）
 
 - 全部底座从 `vendor/` 迁入 `skills/`，成为与主技能同构的一等技能目录
@@ -134,7 +153,7 @@
 | 位置 | 修改 | 原因 |
 |---|---|---|
 | `edu-*` 七目录 | 只取上游 `skills/` 目录，舍去其 `tools/*.html` 网页版 | 网页版与本包 CLI 工作流无关 |
-| ibook 五件 | 只取 ROADMAP 点名的 5 个 skill | 上游另有 25 个成书流程 skill，超出高校教师场景 |
+| ibook 首批五件 | 只取 ROADMAP 点名的 5 个 skill | 上游另有 25 个成书流程 skill，超出高校教师场景；2026-10-19 因套件内引用悬空补录 `book-installer`、`chapter-content-generator` 两件，其余仍超出范围 |
 | `k12-*` 四目录 | 只取 `plugin/skills/` 下 4 个 skill | 舍去 evals 与 plugin 清单 |
 | `skills/learning-education/learning-paths/` | 只取命令层文档，未收录其 9MB 课程素材 | 原仓库为希伯来文，且课程素材超出范围 |
 | 各主技能 | 见 `skills/` 下 22 个主技能 `SKILL.md` 的「底座」一节 | 编排逻辑为本项目自写 |

@@ -4,9 +4,10 @@
 verify.py — 技能包完整性自检
 
 对应 CONVENTIONS.md 第 8 节的验收清单，把「靠记忆检查」变成「跑一遍」：
-  1. 22 个主技能 + 26 个底座技能的目录与 SKILL.md 是否齐全
+  1. 22 个主技能 + 28 个底座技能的目录与 SKILL.md 是否齐全
   2. frontmatter 是否有 name / description，description 是否有 Triggers 与足够触发短语
   3. SKILL.md 里引用的 skills/ 底座路径是否真实存在（防止凭记忆写路径）
+  3b. $BK_HOME/skills/... 这类上游套件内引用能否解析到 skills/ibook-skills/ 下的真实文件
   4. 文件产出是否走了 office-layer（主技能）
   5. 是否声明了「不虚构」与「人工确认位」纪律（主技能）
   6. office-layer 的三个脚本能否正常拉起
@@ -39,8 +40,9 @@ EXPECTED_MAIN = [
     "annual-review", "science-outreach",
 ]
 
-# 26 个底座技能（自 vendor/ 迁入并中文化；2026-09-10 起按上游套件嵌套为 5 个目录，
-# 4 个独立件保持平铺）。相对 skills/ 的路径。
+# 28 个底座技能（自 vendor/ 迁入并中文化；2026-09-10 起按上游套件嵌套为 5 个目录，
+# 4 个独立件保持平铺；2026-10-19 补录 ibook-skills 的 book-installer 与
+# chapter-content-generator，闭合 $BK_HOME 引用）。相对 skills/ 的路径。
 EXPECTED_FOUNDATION = [
     # 自建文件产出层
     "office-layer",
@@ -55,6 +57,7 @@ EXPECTED_FOUNDATION = [
     "ibook-skills/question-writing", "ibook-skills/learning-graph-generator",
     "ibook-skills/glossary-generator",
     "ibook-skills/faq-generator", "ibook-skills/course-description-analyzer",
+    "ibook-skills/book-installer", "ibook-skills/chapter-content-generator",
     # K-12 教学法（Anthropic，k12-teacher-skills）
     "k12-teacher-skills/k12-lesson-plan-creation",
     "k12-teacher-skills/k12-lesson-differentiation",
@@ -176,7 +179,7 @@ def main():
     for name in EXPECTED_MAIN:
         check_skill(name, discipline=True)
 
-    print("\n[3] 26 个底座技能")
+    print(f"\n[3] {len(EXPECTED_FOUNDATION)} 个底座技能")
     for name in EXPECTED_FOUNDATION:
         check_skill(name, discipline=False)
 
@@ -206,6 +209,37 @@ def main():
                 fail(f"{name} 引用了不存在的路径：{r}")
     else:
         ok("所有技能引用的 skills/ 底座路径均真实存在")
+
+    # ---------- 4b. $BK_HOME 套件内引用真实性 ----------
+    # ibook-skills 套件内部用 $BK_HOME/skills/<子路径> 互相引用（上游生态约定）。
+    # 在本仓库中 $BK_HOME/skills 映射到 skills/ibook-skills/；套件成员缺收时
+    # 这些引用会静默悬空（2026-10-19 曾因此缺收 book-installer 等两件）。
+    # 扫描所有技能目录下的 .md（含 references/），逐一解析验证。
+    print("\n[4b] 上游套件内引用（$BK_HOME/skills/...）解析")
+    BK_PREFIX = "$BK_HOME/skills/"
+    bk_map_root = skill_dir / "ibook-skills"
+    bk_bad = {}
+    bk_count = 0
+    bk_re = re.compile(r"\$BK_HOME/skills/[\w\-./]+", re.UNICODE)
+    for name in EXPECTED_MAIN + EXPECTED_FOUNDATION:
+        d = skill_dir / name
+        if not d.is_dir():
+            continue
+        for md in d.rglob("*.md"):
+            for m in bk_re.finditer(md.read_text(encoding="utf-8")):
+                ref = m.group(0).rstrip(".,;:`)】」").rstrip("/")
+                rel = ref[len(BK_PREFIX):]
+                if not rel or ".." in rel:
+                    continue
+                bk_count += 1
+                if not (bk_map_root / rel).exists():
+                    bk_bad.setdefault(f"{name}/{md.relative_to(d)}", []).append(ref)
+    if bk_bad:
+        for where, refs in bk_bad.items():
+            for r in sorted(set(refs)):
+                fail(f"{where} 的 $BK_HOME 引用悬空：{r}（映射 skills/ibook-skills/ 后不存在）")
+    else:
+        ok(f"所有 $BK_HOME 套件内引用均可解析（共 {bk_count} 处）")
 
     venv_py = root / "skills/office-layer/.venv/bin/python"
     if gen_refs:

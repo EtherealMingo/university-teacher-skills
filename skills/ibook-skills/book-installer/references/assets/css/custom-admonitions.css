@@ -1,0 +1,184 @@
+/* Custom Admonitions for MkDocs Material
+ * Add to mkdocs.yml: extra_css: [css/custom-admonitions.css]
+ */
+
+/* ==========================================================================
+   PROMPT ADMONITION - For copyable prompts and templates
+   ========================================================================== */
+
+:root {
+  --md-admonition-icon--prompt: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>');
+}
+
+.md-typeset .admonition.prompt,
+.md-typeset details.prompt {
+  border-color: #7c4dff;
+}
+
+.md-typeset .prompt > .admonition-title,
+.md-typeset .prompt > summary {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.md-typeset .prompt > .admonition-title::before,
+.md-typeset .prompt > summary::before {
+  background-color: #7c4dff;
+  -webkit-mask-image: var(--md-admonition-icon--prompt);
+  mask-image: var(--md-admonition-icon--prompt);
+}
+
+/* Copy button for prompt admonition */
+.admonition.prompt {
+  position: relative;
+}
+
+.admonition-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(124, 77, 255, 0.2);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #7c4dff;
+  transition: all 0.2s;
+}
+
+.admonition-copy-btn:hover {
+  background: rgba(124, 77, 255, 0.3);
+}
+
+.admonition-copy-btn.copied {
+  background: rgba(0, 200, 83, 0.2);
+  color: #00c853;
+}
+
+/* ==========================================================================
+   LEARNING OBJECTIVE ADMONITION
+   ========================================================================== */
+
+:root {
+  --md-admonition-icon--objective: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
+}
+
+.md-typeset .admonition.objective,
+.md-typeset details.objective {
+  border-color: #00bcd4;
+}
+
+.md-typeset .objective > .admonition-title,
+.md-typeset .objective > summary {
+  background-color: rgba(0, 188, 212, 0.1);
+}
+
+.md-typeset .objective > .admonition-title::before,
+.md-typeset .objective > summary::before {
+  background-color: #00bcd4;
+  -webkit-mask-image: var(--md-admonition-icon--objective);
+  mask-image: var(--md-admonition-icon--objective);
+}
+
+/* ==========================================================================
+   PREREQUISITE ADMONITION
+   ========================================================================== */
+
+:root {
+  --md-admonition-icon--prereq: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>');
+}
+
+.md-typeset .admonition.prereq,
+.md-typeset details.prereq {
+  border-color: #ff9800;
+}
+
+.md-typeset .prereq > .admonition-title,
+.md-typeset .prereq > summary {
+  background-color: rgba(255, 152, 0, 0.1);
+}
+
+.md-typeset .prereq > .admonition-title::before,
+.md-typeset .prereq > summary::before {
+  background-color: #ff9800;
+  -webkit-mask-image: var(--md-admonition-icon--prereq);
+  mask-image: var(--md-admonition-icon--prereq);
+}
+
+/* ==========================================================================
+   EXERCISE ADMONITION
+   ========================================================================== */
+
+:root {
+  --md-admonition-icon--exercise: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>');
+}
+
+.md-typeset .admonition.exercise,
+.md-typeset details.exercise {
+  border-color: #4caf50;
+}
+
+.md-typeset .exercise > .admonition-title,
+.md-typeset .exercise > summary {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.md-typeset .exercise > .admonition-title::before,
+.md-typeset .exercise > summary::before {
+  background-color: #4caf50;
+  -webkit-mask-image: var(--md-admonition-icon--exercise);
+  mask-image: var(--md-admonition-icon--exercise);
+}
+
+/* ==========================================================================
+   KEY CONCEPT ADMONITION
+   ========================================================================== */
+
+:root {
+  --md-admonition-icon--concept: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>');
+}
+
+.md-typeset .admonition.concept,
+.md-typeset details.concept {
+  border-color: #ffc107;
+}
+
+.md-typeset .concept > .admonition-title,
+.md-typeset .concept > summary {
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+.md-typeset .concept > .admonition-title::before,
+.md-typeset .concept > summary::before {
+  background-color: #ffc107;
+  -webkit-mask-image: var(--md-admonition-icon--concept);
+  mask-image: var(--md-admonition-icon--concept);
+}
+
+/* ==========================================================================
+   REFLECTION ADMONITION
+   ========================================================================== */
+
+:root {
+  --md-admonition-icon--reflection: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-4h2v2h-2zm1.61-9.96c-2.06-.3-3.88.97-4.43 2.79-.18.58.26 1.17.87 1.17h.2c.41 0 .74-.29.88-.67.32-.89 1.27-1.5 2.3-1.28.95.2 1.65 1.13 1.57 2.1-.1 1.34-1.62 1.63-2.45 2.88 0 .01-.01.01-.01.02-.01.02-.02.03-.03.05-.09.15-.18.32-.25.5-.01.03-.03.05-.04.08-.01.02-.01.04-.02.07-.12.34-.2.75-.2 1.25h2c0-.42.11-.77.28-1.07.02-.03.03-.06.05-.09.08-.14.18-.27.28-.39.01-.01.02-.03.03-.04.1-.12.21-.23.33-.34.96-.91 2.26-1.65 1.99-3.56-.24-1.74-1.61-3.21-3.35-3.47z"/></svg>');
+}
+
+.md-typeset .admonition.reflection,
+.md-typeset details.reflection {
+  border-color: #9c27b0;
+}
+
+.md-typeset .reflection > .admonition-title,
+.md-typeset .reflection > summary {
+  background-color: rgba(156, 39, 176, 0.1);
+}
+
+.md-typeset .reflection > .admonition-title::before,
+.md-typeset .reflection > summary::before {
+  background-color: #9c27b0;
+  -webkit-mask-image: var(--md-admonition-icon--reflection);
+  mask-image: var(--md-admonition-icon--reflection);
+}

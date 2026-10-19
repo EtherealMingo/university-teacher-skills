@@ -16,9 +16,9 @@ description: "高校教师工作全流程 AI 提效总控。覆盖教学、科�
 | `CONVENTIONS.md` | **开发与使用宪法**：底座复用、不虚构、人工确认位、敏感数据 |
 | `THIRD_PARTY_NOTICES.md` | 上游底座溯源与**许可证合规说明** |
 | `skills/office-layer/SKILL.md` | **文件产出唯一通道**（docx/pptx/xlsx/pdf） |
-| `README.md` | 场景全景（学期时间轴、按角色、22 个主技能 + 26 个底座技能详解） |
+| `README.md` | 场景全景（学期时间轴、按角色、22 个主技能 + 28 个底座技能详解） |
 
-> 底座技能（26 个，供主技能引用，也可单独使用）位于 `skills/` 下：同一上游的一套
+> 底座技能（28 个，供主技能引用，也可单独使用）位于 `skills/` 下：同一上游的一套
 > 收进一个套件目录（`education-skills/`、`empirical-research/`、`ibook-skills/`、
 > `k12-teacher-skills/`、`learning-education/`），独立件（`office-layer/`、
 > `awesome-benzi/`、`paper-analyst/`、`slides-polish/`）与主技能一样平铺。

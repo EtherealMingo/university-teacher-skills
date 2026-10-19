@@ -6,10 +6,11 @@
 ## 1. 底座复用（foundation-first）
 
 实现任何能力前，先查 `skills/` 下是否已有底座技能（上游溯源见 `THIRD_PARTY_NOTICES.md`）。
-底座技能共 26 个，按上游套件组织：独立件 `awesome-benzi`、`office-layer`、`paper-analyst`、
+底座技能共 28 个，按上游套件组织：独立件 `awesome-benzi`、`office-layer`、`paper-analyst`、
 `slides-polish` 平铺；其余收进五个套件目录 —— `empirical-research/`（`econ-audit`、
 `data-dictionary`、`lit-review`）、`ibook-skills/`（`question-writing`、`learning-graph-generator`、
-`glossary-generator`、`faq-generator`、`course-description-analyzer`）、
+`glossary-generator`、`faq-generator`、`course-description-analyzer`、`book-installer`、
+`chapter-content-generator`）、
 `learning-education/`（`study-skill`、`thinking-toolkit`、`learning-paths`）、
 `k12-teacher-skills/`（k12-* 四技能）、`education-skills/`（edu-* 七技能）。
 **有则引用，禁止重写。** 引用时在 SKILL.md 里写明：

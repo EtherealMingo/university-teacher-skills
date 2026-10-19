@@ -1,0 +1,43 @@
+# Custom Admonitions with Copy Button for MkDocs Material
+# Copy these sections into your mkdocs.yml
+#
+# Prerequisite files:
+#   - Copy copy-admonition.js to docs/javascripts/copy-admonition.js
+#   - Copy custom-admonitions.css to docs/css/custom-admonitions.css
+
+# Add to markdown_extensions:
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+# Add to extra_javascript:
+extra_javascript:
+  - javascripts/copy-admonition.js
+
+# Add to extra_css:
+extra_css:
+  - css/custom-admonitions.css
+
+# Available custom admonition types:
+#
+# !!! prompt "Prompt Title"
+#     Your copyable prompt text here.
+#     Users can click the Copy button to copy this content.
+#
+# !!! objective "Learning Objective"
+#     By the end of this section, you will be able to...
+#
+# !!! prereq "Prerequisites"
+#     Before starting, make sure you have...
+#
+# !!! exercise "Exercise 1"
+#     Complete the following exercise...
+#
+# !!! concept "Key Concept"
+#     An important concept to understand is...
+#
+# !!! reflection "Reflection Question"
+#     Think about how this applies to...
+#
+# The "prompt" admonition type includes a copy button automatically.

@@ -1,0 +1,60 @@
+# Mermaid Diagrams for MkDocs Material
+# Copy these sections into your mkdocs.yml
+
+# Add to markdown_extensions:
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+# Usage examples:
+#
+# Flowchart:
+# ```mermaid
+# graph LR
+#     A[Start] --> B{Decision}
+#     B -->|Yes| C[Action 1]
+#     B -->|No| D[Action 2]
+#     C --> E[End]
+#     D --> E
+# ```
+#
+# Sequence diagram:
+# ```mermaid
+# sequenceDiagram
+#     Alice->>Bob: Hello Bob!
+#     Bob-->>Alice: Hi Alice!
+# ```
+#
+# Class diagram:
+# ```mermaid
+# classDiagram
+#     Animal <|-- Duck
+#     Animal <|-- Fish
+#     Animal : +int age
+#     Animal : +String gender
+#     Animal: +isMammal()
+# ```
+#
+# State diagram:
+# ```mermaid
+# stateDiagram-v2
+#     [*] --> Still
+#     Still --> [*]
+#     Still --> Moving
+#     Moving --> Still
+#     Moving --> Crash
+#     Crash --> [*]
+# ```
+#
+# Gantt chart:
+# ```mermaid
+# gantt
+#     title Project Schedule
+#     dateFormat  YYYY-MM-DD
+#     section Planning
+#     Research        :a1, 2024-01-01, 30d
+#     Design          :a2, after a1, 20d
+# ```

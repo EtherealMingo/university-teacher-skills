@@ -1,0 +1,35 @@
+# Interactive Quizzes for MkDocs Material
+# Copy these sections into your mkdocs.yml
+#
+# Prerequisite files:
+#   - Copy quiz.js to docs/javascripts/quiz.js
+#   - Copy quiz.css to docs/css/quiz.css
+
+# Add to extra_javascript:
+extra_javascript:
+  - javascripts/quiz.js
+
+# Add to extra_css:
+extra_css:
+  - css/quiz.css
+
+# Usage in markdown:
+#
+# <div class="quiz-question" data-question-id="q1">
+#   <p><strong>What is the capital of France?</strong></p>
+#   <div class="quiz-option" data-correct="false">London</div>
+#   <div class="quiz-option" data-correct="true">Paris</div>
+#   <div class="quiz-option" data-correct="false">Berlin</div>
+#   <div class="quiz-option" data-correct="false">Madrid</div>
+#   <div class="quiz-feedback"></div>
+#   <div class="quiz-explanation">
+#     Paris is the capital and largest city of France.
+#   </div>
+# </div>
+#
+# Features:
+# - Click to select answer
+# - Immediate feedback (correct/incorrect)
+# - Shows explanation after answering
+# - Progress saved to localStorage
+# - Reset button for multiple questions

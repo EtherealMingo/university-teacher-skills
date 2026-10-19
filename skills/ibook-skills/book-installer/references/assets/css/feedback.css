@@ -1,0 +1,140 @@
+/* Simple Feedback Styling for MkDocs Material
+ * Add to mkdocs.yml: extra_css: [css/feedback.css]
+ */
+
+/* Feedback Container */
+.page-feedback {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--md-code-bg-color);
+  border-radius: 8px;
+  text-align: center;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.page-feedback p {
+  margin: 0 0 1rem 0;
+  font-weight: 500;
+  color: var(--md-default-fg-color--light);
+}
+
+/* Feedback Buttons */
+.feedback-btn {
+  padding: 0.6rem 1.25rem;
+  margin: 0 0.5rem;
+  border: 2px solid var(--md-primary-fg-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  background: transparent;
+  color: var(--md-primary-fg-color);
+  transition: all 0.2s ease;
+}
+
+.feedback-btn:hover {
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}
+
+.feedback-btn:active {
+  transform: scale(0.98);
+}
+
+.feedback-btn.yes:hover {
+  background: #00c853;
+  border-color: #00c853;
+}
+
+.feedback-btn.no:hover {
+  background: #ff5252;
+  border-color: #ff5252;
+}
+
+/* Thank You Message */
+.feedback-thanks {
+  display: none;
+  color: var(--md-accent-fg-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.feedback-thanks.show {
+  display: inline-block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Detailed Feedback Form (optional) */
+.feedback-form {
+  display: none;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.feedback-form.show {
+  display: block;
+}
+
+.feedback-form textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.75rem;
+  border: 2px solid var(--md-default-fg-color--lighter);
+  border-radius: 6px;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: var(--md-accent-fg-color);
+}
+
+.feedback-form button {
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.feedback-form button:hover {
+  opacity: 0.9;
+}
+
+/* Emoji Rating Scale (alternative) */
+.feedback-emoji {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.feedback-emoji button {
+  font-size: 2rem;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.feedback-emoji button:hover {
+  transform: scale(1.2);
+  border-color: var(--md-accent-fg-color);
+}
+
+.feedback-emoji button.selected {
+  background: var(--md-accent-fg-color--transparent);
+  border-color: var(--md-accent-fg-color);
+}

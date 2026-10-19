@@ -1,0 +1,41 @@
+# Giscus Comments (GitHub Discussions) for MkDocs Material
+# Copy these sections into your mkdocs.yml
+#
+# Prerequisites:
+#   1. Enable GitHub Discussions on your repository
+#   2. Install Giscus app: https://github.com/apps/giscus
+#   3. Configure at: https://giscus.app to get your repo_id and category_id
+#
+# Prerequisite files:
+#   - Copy giscus-loader.js to docs/javascripts/giscus-loader.js
+
+# Add to extra_javascript:
+extra_javascript:
+  - javascripts/giscus-loader.js
+
+# Add to extra (replace with your values from giscus.app):
+extra:
+  giscus:
+    repo: "username/repo-name"
+    repo_id: "R_xxxxxxxxxx"
+    category: "Announcements"
+    category_id: "DIC_xxxxxxxxxx"
+    mapping: "pathname"
+    strict: "0"
+    reactions_enabled: "1"
+    emit_metadata: "0"
+    input_position: "top"
+    theme: "preferred_color_scheme"
+    lang: "en"
+
+# Features:
+# - Comments powered by GitHub Discussions
+# - Supports reactions
+# - Theme matches site (light/dark)
+# - No database required - all data in GitHub
+# - Users sign in with GitHub to comment
+#
+# To disable comments on specific pages, add to frontmatter:
+# ---
+# comments: false
+# ---

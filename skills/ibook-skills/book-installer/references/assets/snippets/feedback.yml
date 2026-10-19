@@ -1,0 +1,26 @@
+# Simple Page Feedback for MkDocs Material
+# Copy these sections into your mkdocs.yml
+#
+# Prerequisite files:
+#   - Copy feedback.js to docs/javascripts/feedback.js
+#   - Copy feedback.css to docs/css/feedback.css
+
+# Add to extra_javascript:
+extra_javascript:
+  - javascripts/feedback.js
+
+# Add to extra_css:
+extra_css:
+  - css/feedback.css
+
+# Optional: Configure analytics endpoint
+# extra:
+#   feedback:
+#     endpoint: "https://your-analytics-endpoint.com/feedback"
+
+# Features:
+# - Thumbs up/down buttons at bottom of each page
+# - Optional comment form for negative feedback
+# - Integrates with Google Analytics if available
+# - Stores feedback in localStorage to prevent duplicates
+# - Can send to custom endpoint for data collection

@@ -26,7 +26,7 @@
   - [按角色看](#按角色看)
 - [22 个子技能详解](#22-个子技能详解)
   - [教学](#教学) · [科研](#科研) · [指导](#指导含学生工作) · [行政事务](#行政事务) · [考核与对外](#考核与对外)
-- [底座技能（26 个）](#底座技能26-个)
+- [底座技能（28 个）](#底座技能28-个)
 - [文件产出层](#文件产出层)
 - [三条铁律](#三条铁律)
 - [敏感数据](#敏感数据)
@@ -793,12 +793,13 @@ D≥0.4 优良 / 0.3–0.39 良好 / 0.2–0.29 尚可需修改 / <0.2 应淘汰
 
 ---
 
-## 底座技能（26 个）
+## 底座技能（28 个）
 
 主技能背后的方法库与工具层，位于 `skills/` 下、与主技能同构
 （`SKILL.md` + `references/` + `scripts/`），文档均为简体中文
-（英文与繁体中文上游已全部翻译，2026-09-10 自 `vendor/` 迁入）。
-同一上游的一套收进一个套件目录：`education-skills/`（7）、`ibook-skills/`（5）、
+（英文与繁体中文上游已全部翻译，2026-09-10 自 `vendor/` 迁入；
+2026-10-19 补录 `ibook-skills/` 两件，其 references/assets 部分文档暂存英文原文）。
+同一上游的一套收进一个套件目录：`education-skills/`（7）、`ibook-skills/`（7）、
 `k12-teacher-skills/`（4）、`empirical-research/`（3）、`learning-education/`（3）；
 独立件 `office-layer/`、`awesome-benzi/`、`paper-analyst/`、`slides-polish/` 平铺。
 教师一般不直接点名它们 —— 主技能会在需要时自动引用；也可以单独打开查阅。
@@ -830,6 +831,8 @@ D≥0.4 优良 / 0.3–0.39 良好 / 0.2–0.29 尚可需修改 / <0.2 应淘汰
 | `glossary-generator` | 按 ISO 11179 规范生成术语表（精确、简洁、非循环） |
 | `faq-generator` | 依据课程内容、学习图谱与术语表生成分类 FAQ |
 | `course-description-analyzer` | 校验/创建课程描述，按必备要素与布鲁姆学习成果打分 |
+| `book-installer` | 教材站点安装器：从零脚手架 + 41 项功能安装（公式、吉祥物、图谱查看器、度量报告），2026-10-19 补录 |
+| `chapter-content-generator` | 按学习图谱与概念影响力（CIS）逐概念分配篇幅预算，生成章节正文与 MicroSim 规格，2026-10-19 补录 |
 
 **K-12 教学法**（`skills/k12-teacher-skills/`，Anthropic，Apache-2.0）
 
@@ -929,13 +932,14 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache
 采用 MIT，详见 [LICENSE](LICENSE)。
 
 **底座技能**（`skills/` 下五个套件目录及 `awesome-benzi`、`paper-analyst`、
-`slides-polish` 三个独立件，共 26 个）源自上游开源项目，各自遵循其原许可证，
+`slides-polish` 三个独立件，共 28 个）源自上游开源项目，各自遵循其原许可证，
 完整清单见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。特别注意：
 
 - ⚠️ **未收录** Anthropic 官方 `docx`/`pptx`/`xlsx`/`pdf` —— 其为专有许可，
   禁止复制、创作衍生作品与分发。本包以自建 `skills/office-layer/` 替代。
 - ⚠️ ibook 系列底座（`question-writing`、`learning-graph-generator`、`glossary-generator`、
-  `faq-generator`、`course-description-analyzer`）的上游仓库**无 LICENSE 文件**，
+  `faq-generator`、`course-description-analyzer`、`book-installer`、
+  `chapter-content-generator`）的上游仓库**无 LICENSE 文件**，
   依法默认保留全部权利，仅供本机自用；对外分发前须取得作者授权。
 - ⚠️ `skills/learning-education/thinking-toolkit/` 为 **CC BY-NC-SA 4.0**：禁止商业使用，
   且要求相同方式共享。**商用前请先删除该目录。**

@@ -1,0 +1,27 @@
+# Social Media Cards for MkDocs Material
+# Copy these sections into your mkdocs.yml
+#
+# Prerequisites:
+#   pip install pillow cairosvg
+#   macOS: brew install cairo pango gdk-pixbuf libffi
+
+# Add to plugins:
+plugins:
+  - social:
+      cards: true
+      cards_layout_options:
+        background_color: "#4051b5"  # Your brand color
+        color: "#ffffff"             # Text color
+        font_family: Roboto
+
+# Alternative: Custom card layout
+# plugins:
+#   - social:
+#       cards_layout: default/variant
+#       cards_layout_options:
+#         background_image: layouts/background.png
+
+# The plugin automatically generates Open Graph images at:
+# /assets/images/social/{page-path}.png
+#
+# These are used for social media previews when sharing links.

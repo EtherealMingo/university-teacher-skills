@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Viewer</title>
+    <link rel="stylesheet" href="local.css">
+</head>
+<body>
+    <div id="app">
+        <div id="slide-stage">
+            <div id="slide" class="slide"></div>
+            <img id="mascot" class="mascot" src="../../img/mascot/neutral.png" alt="Bloom the elephant mascot" hidden>
+            <div id="empty-state" class="empty-state" hidden>
+                <h1>Slide Viewer</h1>
+                <p>Pass a <code>?src=</code> URL parameter pointing to a <code>slides.md</code> file.</p>
+                <p class="example">Example:</p>
+                <pre>main.html?src=../../chapters/01-foundations/slides/</pre>
+                <p class="hint">Point <code>src</code> at the rendered page URL (no <code>.md</code>). Slides are split on horizontal rules (<code>---</code>) in the source Markdown.</p>
+            </div>
+        </div>
+        <div id="controls">
+            <button id="first" class="ctrl-btn" title="First slide (Home)">&#x23EE;</button>
+            <button id="prev" class="ctrl-btn" title="Previous (←)">&lsaquo;</button>
+            <span id="counter">0 / 0</span>
+            <button id="next" class="ctrl-btn" title="Next (→)">&rsaquo;</button>
+            <button id="last" class="ctrl-btn" title="Last slide (End)">&#x23ED;</button>
+            <span class="spacer"></span>
+            <button id="fullscreen" class="ctrl-btn" title="Fullscreen (f)">&#x26F6;</button>
+            <button id="toc-btn" class="ctrl-btn" title="Table of contents (t)">&#9776;</button>
+        </div>
+        <div id="progress"><div id="progress-bar"></div></div>
+        <div id="toc" class="toc" hidden>
+            <div class="toc-header">
+                <h3>Contents</h3>
+                <button id="toc-close" class="ctrl-btn">&times;</button>
+            </div>
+            <ol id="toc-list"></ol>
+        </div>
+        <div id="viewer-version">v0.01</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -170,9 +170,10 @@ thinking-toolkit / learning-paths）；独立件 `office-layer`、`awesome-benzi
 
 跑 `python3 verify.py` 会逐项检查：
 
-- [x] 22 个主技能 + 26 个底座技能目录与 `SKILL.md` 齐全
+- [x] 22 个主技能 + 28 个底座技能目录与 `SKILL.md` 齐全（2026-10-19 补录 ibook 两件，闭合 `$BK_HOME` 悬空引用）
 - [x] frontmatter 含 `name` + `description`，description 带 Triggers 与 ≥3 个教师真实口语触发短语
 - [x] 所有引用的底座路径（`skills/` 下）**真实存在**（脚本自动比对，杜绝凭记忆写路径）
+- [x] `$BK_HOME/skills/...` 套件内引用全部可解析（verify.py [4b]，2026-10-19 新增）
 - [x] 每个子技能都指向 office-layer 产出通道
 - [x] 「不虚构」与「人工确认位」纪律已写入
 - [x] office-layer 三个脚本可正常拉起
@@ -184,4 +185,4 @@ thinking-toolkit / learning-paths）；独立件 `office-layer`、`awesome-benzi
 | 实时数据接入 | 对接教务系统导出格式，省去手工整理成绩表 |
 | 题库沉淀 | 把 `quiz-generator` 产出按课程/知识点归档，形成可复用题库 |
 | 模板库 | 收集各校评语模板、试卷审批表、职称评审表，做成 `templates/` |
-| 分发合规 | 对外分发前须处理 ibook 五件底座的无许可证问题与 `thinking-toolkit` 的 CC BY-NC-SA 限制（见 `THIRD_PARTY_NOTICES.md`） |
+| 分发合规 | 对外分发前须处理 ibook 七件底座的无许可证问题与 `thinking-toolkit` 的 CC BY-NC-SA 限制（见 `THIRD_PARTY_NOTICES.md`） |
