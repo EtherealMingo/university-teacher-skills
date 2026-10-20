@@ -231,7 +231,7 @@ description: "高校教师对外学术通信与联络的起草辅助：审稿邀
      {"heading": "二、回执",
       "no_indent": true,
       "table": {"header": ["项目", "内容"],
-                "rows": [["能否出席", "【待补】"], ["报告题目", "【待补】"]]},
+                "rows": [["能否出席", "【待补：出席与否】"], ["报告题目", "【待补：报告题目】"]]},
       "placeholder": "【待教师确认：专家费标准依据与发放方式】"}]}
   ```
 
@@ -828,13 +828,13 @@ and all page/line numbers refer to the revised manuscript (track-changed version
 
 Reviewer 1, Comment 2: "【引原文】"
 Response: We agree that 【待补：回应要点】. We have 【待补：具体改动】;
-the corresponding revision appears on Page 【待补】, Lines 【待补】
-(Section 【待补】, Figure/Table 【待补】).
+the corresponding revision appears on Page 【待补：页码】, Lines 【待补：行号】
+(Section 【待补：节号】, Figure/Table 【待补：图表号】).
 
 Reviewer 2, Comment 3: "【引原文】"
 Response: We appreciate this suggestion. After careful consideration we have
 not adopted it because 【待补：证据或边界】. We have clarified this point
-in the revised manuscript (Page 【待补】, Lines 【待补】).
+in the revised manuscript (Page 【待补：页码】, Lines 【待补：行号】).
 
 Sincerely,
 【待补：通讯作者姓名与单位】
