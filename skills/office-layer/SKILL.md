@@ -98,6 +98,8 @@ $PY .../xlsx_kit.py analyze --in scores.xlsx --out analysis.xlsx \
    AI 只出草稿，不直接给终稿。
 3. **敏感数据本地处理**：成绩、学号、身份证号等不得外传；分析完成后提醒教师脱敏或删除中间文件。
 4. **写完必须自检**：用 `inspect` 读回结构，确认段落数、批注数、表格数符合预期再交付。
+   xlsx 的 `inspect` 会同时报出每个工作表的 `charts` 与 `chart_titles` ——
+   spec 里写了 `chart` 而读回 `charts: 0`，就是图表没建上，别交付。
 
 ## 故障排查
 

@@ -259,10 +259,29 @@ def analyze_scores(src, out_path, sheet=None, full_marks=None,
             "out": str(out_path)}
 
 
+def _chart_titles(ws):
+    titles = []
+    for ch in getattr(ws, "_charts", []):
+        t = None
+        try:
+            if ch.title and ch.title.tx and ch.title.tx.rich:
+                t = "".join(r.t or "" for p in ch.title.tx.rich.p
+                            for r in (p.r or []))
+        except Exception:
+            t = None
+        titles.append(t)
+    return titles
+
+
 def inspect(path):
     wb = openpyxl.load_workbook(str(path), data_only=True)
-    return {name: {"rows": wb[name].max_row, "cols": wb[name].max_column}
-            for name in wb.sheetnames}
+    out = {}
+    for name in wb.sheetnames:
+        ws = wb[name]
+        titles = _chart_titles(ws)
+        out[name] = {"rows": ws.max_row, "cols": ws.max_column,
+                     "charts": len(titles), "chart_titles": titles}
+    return out
 
 
 def main():
