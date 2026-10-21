@@ -1,0 +1,51 @@
+{
+  "course": "概率论",
+  "questions": [
+    {
+      "id": "Q01",
+      "kp": "贝叶斯公式",
+      "kp_level": "核心",
+      "chapter": "第1章",
+      "type": "计算题",
+      "bloom": "应用",
+      "score": 10,
+      "est_difficulty": 0.6,
+      "stem": "某工厂有三条流水线，产量分别占 25%、35%、40%，次品率分别为 5%、4%、2%。从出厂产品中任取一件，求它是次品的概率。",
+      "answer": "0.0335",
+      "explanation": "全概率公式：0.25×0.05+0.35×0.04+0.40×0.02",
+      "source": "2024-2025-2 期中",
+      "review_status": "已审核"
+    },
+    {
+      "id": "Q02",
+      "kp": "贝叶斯公式",
+      "kp_level": "核心",
+      "chapter": "第1章",
+      "type": "计算题",
+      "bloom": "应用",
+      "score": 10,
+      "est_difficulty": 0.55,
+      "stem": "接上题条件，已知取到的一件是次品，求它来自第二条流水线的概率。",
+      "answer": "0.4179",
+      "explanation": "贝叶斯公式：0.35×0.04 / 0.0335",
+      "source": "2024-2025-2 期中",
+      "review_status": "已审核"
+    },
+    {
+      "id": "Q03",
+      "kp": "中心极限定理",
+      "kp_level": "重点",
+      "chapter": "第5章",
+      "type": "选择题",
+      "bloom": "理解",
+      "score": 4,
+      "est_difficulty": 0.7,
+      "stem": "设 X1,...,Xn 独立同分布，E(Xi)=μ，Var(Xi)=σ²>0，则当 n 充分大时，样本均值的分布近似为（　）。",
+      "options": {"A": "N(μ, σ²)", "B": "N(μ, σ²/n)", "C": "N(nμ, nσ²)", "D": "N(0,1)"},
+      "answer": "B",
+      "explanation": "独立同分布中心极限定理的标准化结果",
+      "source": "自编",
+      "review_status": "未审核"
+    }
+  ]
+}

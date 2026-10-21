@@ -1,0 +1,64 @@
+{
+  "course": "概率论",
+  "questions": [
+    {
+      "id": "Q02",
+      "kp": "贝叶斯公式",
+      "kp_level": "核心",
+      "chapter": "第1章",
+      "type": "计算题",
+      "bloom": "应用",
+      "score": 10,
+      "est_difficulty": 0.55,
+      "stem": " 接上题条件， 已知取到的一件是次品，\n求它来自第二条流水线的概率。 ",
+      "answer": "0.4179",
+      "explanation": "贝叶斯公式",
+      "source": "2025-2026-1 期末",
+      "review_status": "未审核"
+    },
+    {
+      "id": "Q03",
+      "kp": "大数定律",
+      "kp_level": "重点",
+      "chapter": "第5章",
+      "type": "判断题",
+      "bloom": "理解",
+      "score": 2,
+      "est_difficulty": 0.75,
+      "stem": "辛钦大数定律要求随机变量序列的方差存在且有界。（　）",
+      "answer": "错",
+      "explanation": "辛钦大数定律只需要独立同分布且期望存在，不要求方差存在",
+      "source": "自编",
+      "review_status": "未审核"
+    },
+    {
+      "id": "Q04",
+      "kp": "中心极限定理",
+      "kp_level": "重点",
+      "chapter": "第5章",
+      "type": "计算题",
+      "bloom": "应用",
+      "score": 10,
+      "est_difficulty": 0.5,
+      "stem": "某保险公司有 10000 个投保人，每人每年出险概率为 0.006，求一年出险人数超过 70 人的近似概率（用中心极限定理，Φ(1.67)=0.9525）。",
+      "answer": "1-Φ(1.67)≈0.0475",
+      "explanation": "X~B(10000,0.006)，用棣莫弗-拉普拉斯定理近似",
+      "source": "2025-2026-1 期末",
+      "review_status": "未审核"
+    },
+    {
+      "id": "Q05",
+      "kp": "条件概率",
+      "kp_level": "基础",
+      "chapter": "第1章",
+      "type": "填空题",
+      "bloom": "记忆",
+      "score": 3,
+      "est_difficulty": 0.8,
+      "stem": "P(A)=0.5，P(B|A)=0.4，则 P(AB)=____。",
+      "answer": "",
+      "source": "自编",
+      "review_status": "未审核"
+    }
+  ]
+}

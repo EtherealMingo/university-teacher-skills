@@ -88,6 +88,10 @@ export MPLCONFIGDIR=/tmp/mplcache && mkdir -p /tmp/mplcache   # 受限环境必�
 > **往年卷是最省事的锚点**：教师给了往年卷时，只取题型结构、题量配比、难度分布做锚点
 > （ intake 第 4/5/6 项可整行从往年卷读出），题干与数据必须全部改写（见红线 1）。
 > 给了往年卷就没有「题型配比怎么定」这个问题，直接问「照去年这套出，还是调结构」。
+>
+> **课程题库是第二省事的锚点**：本课程归档过题库（`题库/<课程名>/itembank.json`，见阶段十）时，
+> 出题前先 `search` 捞一遍可改写题——有实测难度（`actual_difficulty`）的题优先，
+> 比纯预估靠谱；淘汰题（`retired`）绝不复用。
 
 ## 工作流
 
@@ -478,6 +482,34 @@ python3 quiz_audit.py 题库.json "识记:20,理解:30,应用:30,分析:20" 知�
 - **输出**：`handoff/` 目录（含 `manifest.json`）。
 - **退出条件**：`manifest.json` 里每个文件路径都存在且非空；`questions` 数组条数 = 细目表题数；
   下游需要的字段没有空值（除显式标注 `【待补】` 的）。
+
+### 阶段十 · 题库归档与复用（itembank.py，强烈建议）
+
+- **输入**：通过质量门的 `题库.json`、intake 第 2 项课程名、当前学期标记。
+- **动作**：
+
+  ```bash
+  # 归档：题干哈希去重，重复/撞号/缺字段的题会列出来（退出码 2 = 有待人工项）
+  python3 skills/quiz-generator/scripts/itembank.py ingest \
+      --bank 题库 --course 概率论 --in 题库.json --term 2025-2026-1
+
+  # 复用检索：下次出题前先捞旧题（默认只出 active，--full 看完整题干选项）
+  python3 skills/quiz-generator/scripts/itembank.py search \
+      --bank 题库 --course 概率论 --kp 贝叶斯 --type 计算题
+
+  # 考后回流（对应「反向契约」）：淘汰 D<0.2 的题、回填实测难度 P
+  python3 skills/quiz-generator/scripts/itembank.py retire --bank 题库 --course 概率论 --ids Q03,Q07
+  python3 skills/quiz-generator/scripts/itembank.py calibrate --bank 题库 --course 概率论 --csv 实测难度.csv
+
+  # 总览：这门课攒了多少题、知识点分布、校准了多少
+  python3 skills/quiz-generator/scripts/itembank.py stats --bank 题库
+  ```
+
+  CSV 固定两列 `question_id,actual_p`（从 `exam-pipeline` 的 `试卷分析报告.xlsx` 抄出）；退出码 0 正常、
+  1 参数错、2 有待人工项（全部重复 / 缺字段 / 题号未命中），与包内其它质量门脚本口径一致。
+- **输出**：`题库/<课程名>/itembank.json`（schema `itembank/v1`，逐题带 `stem_hash/status/times_used/ingested_term`）。
+- **退出条件**：`ingest` 输出里 `rejected` 为空或已向教师说明原因；归档文件能被 `stats` 正常读出。
+- **跳过条件**：教师明确说「一次性用完即弃」（如涉密命题），则不归档，并在交付说明里注明。
 
 ## 题型设计参考（八种题型）
 
@@ -1125,11 +1157,11 @@ handoff/
 |---|---|
 | `审卷意见.json`（逐题：`question_id` / 问题类型 / 严重级别 / 修改建议） | 逐题修正后重出；把反复出现的问题类型写进本技能的使用说明 |
 | `评分细则A/B.docx`（含等级描述） | 归档；下次出同类主观题时参考等级描述写法 |
-| `试卷分析报告.xlsx`（逐题难度 P 实测、区分度 D、分数段分布） | **回填预估偏差**：把实测 P 写入题库 `actual_difficulty` 字段 |
-| `淘汰题清单`（D < 0.2 的题） | 从题库中标记淘汰，不再复用 |
+| `试卷分析报告.xlsx`（逐题难度 P 实测、区分度 D、分数段分布） | **回填预估偏差**：整理成 `question_id,actual_p` 两列 CSV，走 `itembank.py calibrate` 写回题库 `actual_difficulty` 字段 |
+| `淘汰题清单`（D < 0.2 的题） | 走 `itembank.py retire` 标记淘汰（保留在库、不再被 `search` 默认检出），绝不删除 |
 | `学生错因归类.md` | 成为下一年该知识点的干扰项来源（第一优先级证据） |
 
-回流后本技能要做的事（可选但强烈建议）：把 `actual_difficulty` 与 `est_difficulty` 的偏差统计出来，
+回流后本技能要做的事（可选但强烈建议）：`calibrate` 输出的 `mean_delta`（实测 − 预估的平均偏差）与逐题 `delta`，
 写进 `出题自检报告.md` 的「预估校准」小节——这是本技能唯一能让出题越来越准的机制。
 
 ### 5. 手工交接（`exam-pipeline` 未装时）

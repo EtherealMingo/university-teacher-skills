@@ -148,6 +148,7 @@ thinking-toolkit / learning-paths）；独立件 `office-layer`、`awesome-benzi
 | `desc_stats.py` | research-assistant | 描述统计与交叉表 | ✅ csv / xlsx 双输入路径 |
 | `dedup_merge.py` | annual-review | 成果去重归表 | ✅ 见下「已修复缺陷」 |
 | `word_gate.py` | annual-review | 述职字数门 | ✅ passed / blocked 两路径 |
+| `itembank.py` | quiz-generator | 题库归档与复用：题干哈希去重、撞号拦截、淘汰标记、实测难度回填与校准 | ✅ 两批归档（重复/撞号/缺字段分流）、calibrate 未命中告警、retire 后 search 默认隐藏、stats 总览，退出码 0/1/2 均验证 |
 
 ### 包级
 
@@ -164,6 +165,7 @@ thinking-toolkit / learning-paths）；独立件 `office-layer`、`awesome-benzi
 | `pptx_kit.py` 误用 `add_run(text)` | python-pptx 的 `add_run()` 不收文本参数，直接 TypeError | 增加 `_run()` helper，先建后赋 |
 | `dedup_merge.py` 编号键短路 | 「有收录号」与「无收录号」的同一条论文永远合不到一起——而隔年重复填报正由此产生 | 改为多候选键匹配（编号键 + 名称键），任一命中即合并并登记别名 |
 | `quiz-generator` 误把 FSRS 当现成命令 | 上游 `scripts/fsrs/` 只有 Go 源码、不含二进制，本机亦无 Go 工具链 | 文档补前置检查 + 手工排程降级方案，并强制在交付说明声明「非自动调度」 |
+| `itembank.py` 初版只按题干哈希判重（2026-10-21 冒烟发现） | 同学号不同题干的两道题同库共存：calibrate 字典覆盖只回填后入库那道，retire 又会两道一起淘汰，静默出错 | ingest 增加撞号拦截——题号已被占用且题干不同的题进 rejected，要求改号重入 |
 
 
 ## 4. 验收自检
@@ -182,7 +184,7 @@ thinking-toolkit / learning-paths）；独立件 `office-layer`、`awesome-benzi
 
 | 项 | 说明 |
 |---|---|
-| 实时数据接入 | 对接教务系统导出格式，省去手工整理成绩表 |
-| 题库沉淀 | 把 `quiz-generator` 产出按课程/知识点归档，形成可复用题库 |
-| 模板库 | 收集各校评语模板、试卷审批表、职称评审表，做成 `templates/` |
+| 实时数据接入 | 对接教务系统导出格式，省去手工整理成绩表。**暂缓**：手上没有真实教务导出样本，硬做是猜格式；拿到样本后先让 `xlsx_kit.py analyze` 吃通再谈自动对接 |
+| ~~题库沉淀~~ | ✅ 已完成（2026-10-21）：`skills/quiz-generator/scripts/itembank.py` 按课程归档（`题库/<课程名>/itembank.json`），题干哈希去重 + 撞号拦截 + retire/calibrate/stats，已接进 quiz-generator 阶段十与反向契约 |
+| ~~模板库~~ | ✅ 已完成（2026-10-21）：`templates/` 落点（卷头/审批表/评语/申报书/归档清单五个子目录）+ `templates/README.md` 使用规则 + `CONVENTIONS.md` 第 10 条约定 |
 | 分发合规 | 对外分发前须处理 ibook 七件底座的无许可证问题与 `thinking-toolkit` 的 CC BY-NC-SA 限制（见 `THIRD_PARTY_NOTICES.md`） |
